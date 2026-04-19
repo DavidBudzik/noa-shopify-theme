@@ -39,14 +39,14 @@
 
     <div class="site-actions">
       {% if settings.enable_search %}
-        <a class="site-action site-action--icon" href="{{ routes.search_url }}" aria-label="{{ settings.search_label | default: 'Search' }}">
+        <button class="site-action site-action--icon" type="button" data-open-search aria-label="{{ settings.search_label | default: 'Search' }}">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </a>
+        </button>
       {% endif %}
-      <a class="site-action site-action--icon cart-trigger" href="{{ routes.cart_url }}" aria-label="{{ 'templates.cart.cart' | t }}">
+      <button class="site-action site-action--icon cart-trigger" type="button" data-open-cart aria-label="{{ 'templates.cart.cart' | t }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="cart-badge" data-cart-count>{{ cart.item_count }}</span>
-      </a>
+      </button>
     </div>
   </div>
 

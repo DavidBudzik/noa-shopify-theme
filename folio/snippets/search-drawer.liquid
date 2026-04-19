@@ -1,0 +1,21 @@
+<aside class="search-drawer" id="searchDrawer" aria-label="Search" hidden>
+  <div class="drawer-header">
+    <h2 class="drawer-header__title">Search</h2>
+    <button class="drawer-close" type="button" id="searchDrawerClose" aria-label="Close search">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      </svg>
+    </button>
+  </div>
+  <label class="sr-only" for="searchInput">Search products</label>
+  <input
+    id="searchInput"
+    class="search-input"
+    type="search"
+    placeholder="Search products…"
+    autocomplete="off"
+    aria-label="Search products"
+  >
+  <div class="search-results" id="searchResults" aria-live="polite"></div>
+</aside>
+<div class="screen-overlay" id="screenOverlay" hidden></div>

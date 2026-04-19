@@ -828,7 +828,8 @@ a { color: inherit; text-underline-offset: 0.2em; }
   background: var(--ink);
   color: var(--white);
   padding: var(--section-y) var(--gutter);
-  max-width: none;
+  max-width: 85rem;
+  margin-inline: auto;
   gap: 2rem;
   align-items: stretch;
 }
@@ -1554,7 +1555,7 @@ a { color: inherit; text-underline-offset: 0.2em; }
   }
 }
 .product-page__main {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   background-size: cover;
   background-position: center;
   background-color: var(--surface, #efefef);
@@ -2678,3 +2679,347 @@ a { color: inherit; text-underline-offset: 0.2em; }
   margin: 0 0 0.5rem;
 }
 .cart-page__summary .button { width: 100%; justify-content: center; }
+
+/* ==========================================================================
+   Generic page layout (page.liquid, contact, faq, size-guide)
+   ========================================================================== */
+.noa-page {
+  width: 100%;
+  max-width: 85rem;
+  margin-inline: auto;
+  padding: var(--section-y) var(--gutter);
+}
+.noa-page__head {
+  margin-bottom: var(--stack);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2rem;
+}
+.noa-page__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.15;
+}
+.noa-page__body {
+  max-width: 72ch;
+}
+.noa-page__body p { margin: 0 0 1em; }
+
+/* ==========================================================================
+   Contact page layout
+   ========================================================================== */
+.noa-contact__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 800px) {
+  .noa-contact__grid {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.noa-contact__copy {
+  font-size: var(--fs-md);
+  color: var(--graphite);
+  line-height: 1.65;
+  margin: 0 0 1.5rem;
+}
+
+.noa-contact__details {
+  display: grid;
+  gap: 1rem;
+  font-size: var(--fs-sm);
+}
+.noa-contact__details dt {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 0.15rem;
+}
+.noa-contact__details dd {
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+.noa-contact__details a { color: var(--ink); text-underline-offset: 0.2em; }
+.noa-contact__details a:hover { color: var(--graphite); }
+
+.noa-contact__success {
+  font-size: var(--fs-md);
+  color: var(--graphite);
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface-soft);
+}
+.noa-contact__error {
+  font-size: var(--fs-sm);
+  color: #b00020;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Shared form elements (contact form)
+   ========================================================================== */
+.noa-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+.noa-form-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+.noa-form-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.875rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.noa-form-input:focus { border-color: var(--ink); }
+.noa-form-input::placeholder { color: var(--stone); }
+.noa-form-textarea {
+  height: auto;
+  padding: 0.75rem 0.875rem;
+  resize: vertical;
+  min-height: 9rem;
+}
+
+/* ==========================================================================
+   FAQ page
+   ========================================================================== */
+.noa-faq__intro {
+  max-width: 60ch;
+  font-size: var(--fs-md);
+  color: var(--graphite);
+  margin-bottom: var(--stack);
+  line-height: 1.65;
+}
+
+.noa-faq__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: var(--stack);
+}
+@media (min-width: 800px) {
+  .noa-faq__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+}
+
+.noa-faq__col { display: flex; flex-direction: column; }
+
+.noa-faq__section-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin: 0 0 0.75rem;
+}
+
+.noa-faq__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-top: var(--section-y);
+  border-top: 1px solid var(--rule);
+}
+.noa-faq__cta p {
+  font-size: var(--fs-md);
+  color: var(--graphite);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Size guide page
+   ========================================================================== */
+.noa-size-guide__intro {
+  max-width: 60ch;
+  font-size: var(--fs-md);
+  color: var(--graphite);
+  margin-bottom: var(--stack);
+  line-height: 1.65;
+}
+
+.noa-size-guide__sections {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--section-y) * 0.8);
+}
+
+.noa-size-guide__section {
+  border-top: 1px solid var(--rule);
+  padding-top: 2rem;
+}
+
+.noa-size-guide__section-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 1.5rem;
+}
+
+.noa-size-guide__method {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 700px) {
+  .noa-size-guide__method { grid-template-columns: 1fr 1fr; }
+}
+
+.noa-size-guide__method-title {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin: 0 0 0.75rem;
+}
+
+.noa-size-guide__steps {
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+  font-size: var(--fs-base);
+  color: var(--graphite);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.noa-size-guide__tip {
+  font-size: var(--fs-sm);
+  color: var(--stone);
+  border-left: 2px solid var(--gold);
+  padding-left: 0.875rem;
+  margin: 0;
+}
+
+.noa-size-guide__table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.noa-size-guide__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+.noa-size-guide__table th,
+.noa-size-guide__table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.noa-size-guide__table th {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  background: var(--surface-soft);
+  white-space: nowrap;
+}
+.noa-size-guide__table tbody tr:hover { background: var(--surface-soft); }
+
+/* Chain length visual list */
+.noa-size-guide__chain-lengths {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.noa-size-guide__chain-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.noa-size-guide__chain-len {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  min-width: 8rem;
+  flex-shrink: 0;
+}
+.noa-size-guide__chain-pos {
+  font-size: var(--fs-sm);
+  color: var(--graphite);
+}
+
+/* ==========================================================================
+   Materials section (folio/sections/materials.liquid)
+   ========================================================================== */
+.materials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-block: var(--section-y);
+  width: 100%;
+  max-width: 85rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@media (min-width: 700px) {
+  .materials-grid { grid-template-columns: repeat(3, 1fr); gap: 1.875rem; }
+}
+
+.material-card-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.material-card-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+.material-card-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 0.25rem;
+}
+.material-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.8rem + 0.6vw, 1.375rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.15;
+  margin: 0;
+}
