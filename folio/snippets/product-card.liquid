@@ -1,0 +1,45 @@
+{% liquid
+  assign current_product = product
+  assign current_variant = current_product.selected_or_first_available_variant
+  assign collection_title = collection_title | default: current_product.collections.first.title
+  assign badge_label = badge_label | default: current_product.metafields.custom.badge
+%}
+
+<article class="product-card">
+  <div class="product-card__media">
+    {% if current_product.featured_image != blank %}
+      <a class="product-card__art product-card__art--photo" href="{{ current_product.url }}" aria-label="Open {{ current_product.title }} details"
+        style="background-image:url('{{ current_product.featured_image | image_url: width: 900 }}');"></a>
+    {% else %}
+      <a class="product-card__art" href="{{ current_product.url }}" aria-label="Open {{ current_product.title }} details"></a>
+    {% endif %}
+
+    {% if badge_label != blank %}
+      <span class="product-card__badge">{{ badge_label }}</span>
+    {% endif %}
+
+    {% if current_variant != blank and current_variant.available %}
+      <form class="product-card__quick-form" data-product-form>
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button class="product-card__quick" type="submit">{{ settings.quick_add_label | default: 'Quick add' }}</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <div class="product-card__meta">
+    {% if collection_title != blank %}
+      <span class="product-card__collection">{{ collection_title }}</span>
+    {% endif %}
+    <h3 class="product-card__title"><a href="{{ current_product.url }}">{{ current_product.title }}</a></h3>
+    {% if current_product.metafields.custom.subtitle != blank %}
+      <span class="product-card__subtitle">{{ current_product.metafields.custom.subtitle }}</span>
+    {% endif %}
+    <span class="product-card__price">
+      {% if current_product.compare_at_price > current_product.price %}
+        <del>{{ current_product.compare_at_price | money }}</del>
+      {% endif %}
+      {{ current_product.price | money }}
+    </span>
+  </div>
+</article>

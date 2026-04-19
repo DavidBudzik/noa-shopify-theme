@@ -1,0 +1,44 @@
+<nav class="noa-breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>{{ collection.title }}</span>
+</nav>
+
+{% section 'collection-banner' %}
+
+<section class="product-index">
+  <div class="section-head section-head--plain">
+    <div>
+      <p class="section-kicker">Shop</p>
+      <h2 class="section-title">{{ collection.title }}</h2>
+    </div>
+  </div>
+
+  {% if collection.description != blank %}
+    <div class="rte collection-description">{{ collection.description }}</div>
+  {% endif %}
+
+  {% if collection.products_count > 0 %}
+    {% paginate collection.products by 12 %}
+      <div class="product-grid">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product, collection_title: collection.title, show_badge: forloop.first %}
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <nav class="pagination" aria-label="Pagination">
+          {% if paginate.previous %}
+            <a class="button button--text" href="{{ paginate.previous.url }}">← Previous</a>
+          {% endif %}
+          <span class="pagination__count">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {% if paginate.next %}
+            <a class="button button--text" href="{{ paginate.next.url }}">Next →</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    {% endpaginate %}
+  {% else %}
+    <p class="cart-empty">{{ 'collections.general.no_matches' | t }}</p>
+  {% endif %}
+</section>

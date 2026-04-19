@@ -1,0 +1,94 @@
+<section class="about-page">
+
+  <!-- Full-bleed hero -->
+  <div class="about-hero">
+    <div class="about-hero__media" {% if page.metafields.custom.hero_image != blank %}style="background-image: url('{{ page.metafields.custom.hero_image | image_url: width: 1800 }}')"{% endif %}></div>
+    <div class="about-hero__copy">
+      {% if settings.about_template_eyebrow != blank %}
+        <p class="section-kicker">{{ settings.about_template_eyebrow }}</p>
+      {% endif %}
+      <h1 class="about-hero__title">{{ page.title }}</h1>
+    </div>
+  </div>
+
+  <!-- Philosophy statement -->
+  {% if page.metafields.custom.quote != blank %}
+    <div class="about-statement">
+      <blockquote class="about-quote">{{ page.metafields.custom.quote }}</blockquote>
+      {% if page.metafields.custom.quote_attr != blank %}
+        <p class="about-statement__attr">{{ page.metafields.custom.quote_attr }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <!-- Maker story -->
+  <div class="about-story">
+    <div class="about-story__copy">
+      {% if settings.about_story_eyebrow != blank %}
+        <p class="section-kicker">{{ settings.about_story_eyebrow }}</p>
+      {% endif %}
+      {% if settings.about_story_heading != blank %}
+        <h2 class="section-title about-story__heading">{{ settings.about_story_heading }}</h2>
+      {% endif %}
+      <div class="about-story__body rte">
+        {{ page.content }}
+      </div>
+      {% if settings.about_cta_label != blank and settings.about_cta_link != blank %}
+        <a class="button button--text" href="{{ settings.about_cta_link }}">{{ settings.about_cta_label }}</a>
+      {% endif %}
+    </div>
+    <div class="about-story__visual" {% if page.metafields.custom.feature_image != blank %}style="background-image: url('{{ page.metafields.custom.feature_image | image_url: width: 1200 }}')"{% endif %}></div>
+  </div>
+
+  <!-- Materials -->
+  <div class="about-materials">
+    <div class="about-materials__inner">
+      <div class="about-materials__head">
+        <p class="section-kicker">{{ settings.about_materials_eyebrow | default: 'Materials' }}</p>
+        <h2 class="section-title">{{ settings.about_materials_heading | default: 'Sourced with care. Finished by hand.' }}</h2>
+      </div>
+      <div class="about-materials__grid">
+        <div class="about-material-card about-material-card--silver">
+          <div class="about-material-card__visual"></div>
+          <p class="about-material-card__num">01</p>
+          <h3 class="about-material-card__title">{{ settings.about_mat1_title | default: 'Sterling Silver 925' }}</h3>
+          <p class="about-material-card__desc">{{ settings.about_mat1_desc | default: 'Hard-wearing, bright, and oxidizes beautifully over time. The studio workhorse — used in most daily-wear and stacking pieces.' }}</p>
+        </div>
+        <div class="about-material-card about-material-card--brass">
+          <div class="about-material-card__visual"></div>
+          <p class="about-material-card__num">02</p>
+          <h3 class="about-material-card__title">{{ settings.about_mat2_title | default: 'Solid Brass' }}</h3>
+          <p class="about-material-card__desc">{{ settings.about_mat2_desc | default: 'Warm, heavy, and ages into a rich patina. Frequently paired with silver for contrast — a metal that tells stories.' }}</p>
+        </div>
+        <div class="about-material-card about-material-card--gold">
+          <div class="about-material-card__visual"></div>
+          <p class="about-material-card__num">03</p>
+          <h3 class="about-material-card__title">{{ settings.about_mat3_title | default: '14k Gold' }}</h3>
+          <p class="about-material-card__desc">{{ settings.about_mat3_desc | default: 'Reserved for heirloom-grade commissions. Pure, lasting, and made entirely to order with extended lead times.' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Find us — dark band -->
+  <div class="about-market">
+    <div class="about-market__inner">
+      <div class="about-market__copy">
+        {% if settings.about_market_eyebrow != blank %}
+          <p class="section-kicker">{{ settings.about_market_eyebrow }}</p>
+        {% endif %}
+        {% if settings.about_market_heading != blank %}
+          <h2 class="section-title section-title--light">{{ settings.about_market_heading }}</h2>
+        {% endif %}
+        {% if settings.about_market_body != blank %}
+          <p class="about-market__text">{{ settings.about_market_body }}</p>
+        {% endif %}
+        {% if settings.about_market_cta_label != blank and settings.about_market_cta_link != blank %}
+          <a class="button button--outline-light" href="{{ settings.about_market_cta_link }}">{{ settings.about_market_cta_label }}</a>
+        {% endif %}
+      </div>
+      <div class="about-market__visual" {% if page.metafields.custom.market_image != blank %}style="background-image: url('{{ page.metafields.custom.market_image | image_url: width: 1200 }}')"{% endif %}></div>
+    </div>
+  </div>
+
+</section>

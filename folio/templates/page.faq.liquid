@@ -1,0 +1,104 @@
+<section class="noa-page noa-faq">
+  <div class="noa-page__head">
+    <p class="section-kicker">Help centre</p>
+    <h1 class="noa-page__title">{{ page.title | default: 'FAQ' }}</h1>
+  </div>
+
+  {% if page.content != blank %}
+    <div class="noa-faq__intro rte">{{ page.content }}</div>
+  {% endif %}
+
+  <div class="noa-faq__grid">
+
+    <div class="noa-faq__col">
+      <p class="noa-faq__section-label">Orders &amp; Payment</p>
+      <details class="noa-accordion">
+        <summary>What payment methods do you accept?</summary>
+        <div class="noa-accordion__body">
+          <p>We accept all major credit and debit cards, PayPal, Apple Pay, and Google Pay. All transactions are secured with SSL encryption.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>Can I modify or cancel my order?</summary>
+        <div class="noa-accordion__body">
+          <p>Orders can be modified or cancelled within 12 hours of placement. After that, production may have begun. Contact us as soon as possible at {{ settings.contact_email | default: 'hello@noajewelry.com' }}.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>Do you offer gift packaging?</summary>
+        <div class="noa-accordion__body">
+          <p>Every order ships in our signature matte black box with tissue paper. We can add a handwritten note — just leave a message at checkout.</p>
+        </div>
+      </details>
+
+      <p class="noa-faq__section-label" style="margin-top:2rem;">Shipping</p>
+      <details class="noa-accordion">
+        <summary>How long does shipping take?</summary>
+        <div class="noa-accordion__body">
+          <p>Domestic (Israel): 3–5 business days. International: 7–14 business days depending on destination. Express options available at checkout.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>Do you ship worldwide?</summary>
+        <div class="noa-accordion__body">
+          <p>Yes, we ship to most countries. Free shipping on Israeli orders over ₪500. International shipping rates are calculated at checkout.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>How can I track my order?</summary>
+        <div class="noa-accordion__body">
+          <p>You'll receive a tracking number by email once your order ships. You can also track your order from your account page.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="noa-faq__col">
+      <p class="noa-faq__section-label">Products</p>
+      <details class="noa-accordion">
+        <summary>Are your pieces truly handmade?</summary>
+        <div class="noa-accordion__body">
+          <p>Yes. Every piece is hand-crafted in our Tel Aviv studio by Noa and a small team of artisans. We do not use mass production. Small variations in finish and patina are a natural part of the work.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>What metals do you use?</summary>
+        <div class="noa-accordion__body">
+          <p>We work primarily with sterling silver 925, solid brass, and copper. Select pieces use recycled 14k gold. All metals are ethically sourced.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>Can I request a custom piece?</summary>
+        <div class="noa-accordion__body">
+          <p>Absolutely. We love custom work — engravings, resizes, bespoke designs. <a href="{{ routes.root_url }}pages/contact" style="color:#1c1c1c;text-decoration:underline;">Contact us</a> with your idea and we'll follow up with a quote and timeline.</p>
+        </div>
+      </details>
+
+      <p class="noa-faq__section-label" style="margin-top:2rem;">Returns</p>
+      <details class="noa-accordion">
+        <summary>What is your return policy?</summary>
+        <div class="noa-accordion__body">
+          <p>We accept exchanges within 14 days for unworn items in original condition. Custom and engraved pieces are final sale. To start an exchange, contact us with your order number.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>What if my piece arrives damaged?</summary>
+        <div class="noa-accordion__body">
+          <p>In the rare event of damage during transit, please photograph the item and packaging and contact us within 48 hours. We'll make it right.</p>
+        </div>
+      </details>
+      <details class="noa-accordion">
+        <summary>Do you offer repairs?</summary>
+        <div class="noa-accordion__body">
+          <p>Yes. We stand behind our work. If a Noa piece requires repair, contact us and we'll assess — most repairs are free within one year of purchase.</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <div class="noa-faq__cta">
+    <p>Still have questions?</p>
+    <a class="noa-btn-cart" href="{{ routes.root_url }}pages/contact" style="display:inline-block;text-decoration:none;padding:15px 40px;">Contact us</a>
+  </div>
+
+</section>

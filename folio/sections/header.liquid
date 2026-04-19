@@ -1,0 +1,90 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" data-mobile-toggle>Menu</button>
+
+    <nav class="site-nav" aria-label="Primary">
+      {% if settings.main_menu != blank %}
+        {% for link in linklists[settings.main_menu].links %}
+          <a class="nav-link{% if link.active %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a class="nav-link{% if template.name == 'index' %} is-active{% endif %}" href="{{ routes.root_url }}">Home</a>
+        <a class="nav-link{% if template.name == 'collection' or template.name == 'product' %} is-active{% endif %}" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="nav-link{% if template.name == 'page.about' %} is-active{% endif %}" href="/pages/about">About</a>
+      {% endif %}
+    </nav>
+
+    <a class="brand-lockup" href="{{ routes.root_url }}" aria-label="{{ settings.brand_name | default: 'Noa' }} — home">
+      {% if settings.brand_logo != blank %}
+        {{
+          settings.brand_logo
+          | image_url: width: 320
+          | image_tag:
+            loading: 'eager',
+            widths: '160, 240, 320',
+            class: 'brand-logo',
+            alt: settings.brand_name
+        }}
+      {% else %}
+        <svg class="brand-logo" viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1c1c1c"/>
+          <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1c1c1c"/>
+          <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#1c1c1c"/>
+        </svg>
+      {% endif %}
+      {% if section.settings.show_tagline and settings.brand_tagline != blank %}
+        <span class="brand-tagline">{{ settings.brand_tagline }}</span>
+      {% endif %}
+    </a>
+
+    <div class="site-actions">
+      {% if settings.enable_search %}
+        <a class="site-action site-action--icon" href="{{ routes.search_url }}" aria-label="{{ settings.search_label | default: 'Search' }}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+      {% endif %}
+      <a class="site-action site-action--icon cart-trigger" href="{{ routes.cart_url }}" aria-label="{{ 'templates.cart.cart' | t }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    {% if settings.main_menu != blank %}
+      {% for link in linklists[settings.main_menu].links %}
+        <a class="mobile-link{% if link.active %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a class="mobile-link{% if template.name == 'index' %} is-active{% endif %}" href="{{ routes.root_url }}">Home</a>
+      <a class="mobile-link{% if template.name == 'collection' or template.name == 'product' %} is-active{% endif %}" href="{{ routes.all_products_collection_url }}">Shop</a>
+      <a class="mobile-link{% if template.name == 'page.about' %} is-active{% endif %}" href="/pages/about">About</a>
+    {% endif %}
+  </div>
+</header>
+
+<script>
+(function() {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
+  function onScroll() {
+    header.classList.toggle('is-scrolled', window.scrollY > 10);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_tagline",
+      "label": "Show brand tagline",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

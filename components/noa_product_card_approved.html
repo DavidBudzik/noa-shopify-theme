@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noa — Product Detail Page · Approved</title>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --graphite:    #1a1a18;
+  --charcoal:    #2c2c2a;
+  --slate:       #4a4a46;
+  --ash:         #6a6a64;
+  --stone:       #8a8a84;
+  --fog:         #a8a8a0;
+  --pebble:      #c8c8c0;
+  --dust:        #ddddd8;
+  --off-white:   #f7f6f4;
+  --stone-white: #efefeb;
+  --rule:        #e8e8e4;
+  --ember:       #c85c28;
+  --terracotta:  #e07840;
+  --gold:        #b89a6a;
+  --gold-rule:   #d4bc96;
+}
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  background: #ffffff;
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pdp {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+/* ── NAV ── */
+.pdp-nav {
+  padding: 18px 0 16px;
+  border-bottom: 0.5px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo svg { height: 16px; width: auto; display: block; }
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-link {
+  font-size: 9px; font-weight: 200; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--ash); cursor: pointer; text-decoration: none;
+}
+.nav-bag {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 9px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--off-white); background: var(--graphite);
+  border: none; padding: 8px 16px; border-radius: 2px; cursor: pointer;
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 0; border-bottom: 0.5px solid #f0f0ec;
+}
+.bc {
+  font-size: 10px; font-weight: 200; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fog); cursor: pointer;
+}
+.bc-active { color: var(--graphite); }
+.bc-sep { color: var(--dust); font-size: 10px; }
+
+/* ── GALLERY ── */
+.noa-gallery {
+  display: grid;
+  grid-template-columns: 1.18fr 1fr;
+  gap: 4px;
+  height: min(680px, 72vh);
+  max-height: 680px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.gallery-hero {
+  overflow: hidden; position: relative;
+  background: #f0efed;
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-badge {
+  position: absolute; top: 16px; left: 16px;
+  font-size: 9px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 2px;
+  background: var(--graphite); color: var(--off-white);
+}
+.show-all {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 10px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase;
+  background: #fff; color: var(--graphite);
+  border: 1px solid var(--dust); padding: 9px 22px;
+  border-radius: 2px; cursor: pointer; white-space: nowrap;
+}
+.show-all:hover { background: var(--off-white); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+}
+.gallery-cell {
+  overflow: hidden; background: #ececea;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; min-height: 0;
+}
+.gallery-cell:nth-child(2) { background: #e8e8e4; }
+.gallery-cell:nth-child(3) { background: #f0ede8; }
+.gallery-cell:nth-child(4) { background: #ebebeb; }
+.gallery-cell:hover { opacity: 0.88; }
+
+/* ── DETAILS ── */
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 44px 0 0;
+  border-top: 0.5px solid var(--rule);
+  margin-top: 4px;
+}
+
+/* LEFT */
+.product-collection {
+  font-size: 9px; font-weight: 200; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--fog); margin-bottom: 12px;
+}
+.product-name {
+  font-family: 'Libre Bodoni', serif;
+  font-style: italic; font-weight: 400;
+  font-size: 2.2rem; line-height: 1.12;
+  color: var(--graphite); letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.product-desc {
+  font-size: 14px; font-weight: 300; line-height: 1.9;
+  color: var(--slate);
+}
+.gold-rule { width: 32px; height: 1px; background: var(--gold-rule); margin: 28px 0; }
+
+/* Material panel */
+.mat-panel {
+  padding: 24px 26px;
+  background: var(--off-white);
+  border-left: 2px solid var(--gold-rule);
+  margin-top: 28px;
+}
+.mat-title {
+  font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--graphite); margin-bottom: 16px;
+}
+.mat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.mat-item-label {
+  font-size: 9px; font-weight: 200; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--fog); margin-bottom: 3px;
+}
+.mat-item-val { font-size: 13px; font-weight: 300; color: var(--graphite); }
+.mat-item-sub { font-size: 10px; font-weight: 200; color: var(--stone); line-height: 1.5; margin-top: 1px; }
+
+/* Accordions */
+.acc { border-top: 0.5px solid var(--rule); }
+.acc:last-child { border-bottom: 0.5px solid var(--rule); }
+.acc summary {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 15px 0; cursor: pointer; list-style: none;
+}
+.acc summary::-webkit-details-marker { display: none; }
+.acc-title {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--graphite);
+}
+.acc-icon { font-size: 18px; color: var(--fog); font-weight: 200; line-height: 1; }
+.acc-body {
+  font-size: 13px; font-weight: 300; color: var(--slate);
+  line-height: 1.85; padding-bottom: 16px; max-width: 480px;
+}
+
+/* RIGHT */
+.right { padding-top: 2px; }
+.product-price { font-size: 20px; font-weight: 300; color: var(--graphite); margin-bottom: 4px; }
+.price-note {
+  font-size: 10px; font-weight: 200; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fog); margin-bottom: 6px;
+}
+.price-hints {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  font-size: 11px; font-weight: 200; color: var(--ash);
+}
+.pdp-hr { border: none; border-top: 0.5px solid var(--rule); margin: 20px 0; }
+
+/* Variant label */
+.var-label {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--graphite); margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.var-guide {
+  font-weight: 200; color: var(--ember); cursor: pointer; font-size: 9px;
+  text-decoration: underline; text-decoration-color: #f0c8a8;
+}
+
+/* Swatches */
+.swatches { display: flex; gap: 10px; margin-bottom: 20px; }
+.swatch-item { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+.swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; }
+.swatch.selected { outline: 2px solid var(--graphite); outline-offset: 3px; }
+.swatch-name { font-size: 9px; font-weight: 200; color: var(--fog); letter-spacing: 0.08em; }
+.swatch-name.active { color: var(--graphite); }
+
+/* Chips */
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+.chip {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 11px; font-weight: 300; letter-spacing: 0.06em;
+  padding: 7px 16px; border: 1px solid var(--dust);
+  border-radius: 2px; cursor: pointer;
+  color: var(--charcoal); background: #ffffff;
+  user-select: none; position: relative;
+  transition: border-color 0.15s;
+}
+.chip:hover { border-color: var(--ash); }
+.chip.selected { border-color: var(--graphite); background: var(--graphite); color: var(--off-white); }
+.chip.unavail { color: var(--pebble); border-color: var(--stone-white); text-decoration: line-through; cursor: default; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+
+/* Stock */
+.stock-note { display: flex; align-items: center; gap: 7px; margin-bottom: 22px; }
+.stock-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta); flex-shrink: 0; }
+.stock-text { font-size: 10px; font-weight: 300; color: var(--terracotta); letter-spacing: 0.08em; }
+
+/* ── BUTTONS — DESIGN SYSTEM ── */
+.btn-primary {
+  width: 100%; padding: 15px 24px;
+  background: var(--graphite); color: var(--off-white);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 12px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase;
+  border: none; border-radius: 2px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 10px; transition: background 0.18s;
+}
+.btn-primary:hover { background: var(--charcoal); }
+.btn-primary:active { background: var(--slate); }
+
+.btn-secondary {
+  width: 100%; padding: 14px 24px;
+  background: transparent; color: var(--graphite);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 12px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase;
+  border: 1.5px solid var(--graphite); border-radius: 2px; cursor: pointer;
+  display: block; text-align: center;
+  margin-bottom: 10px; transition: background 0.18s;
+}
+.btn-secondary:hover { background: var(--off-white); }
+
+.btn-ghost {
+  width: 100%; padding: 13px 24px;
+  background: transparent; color: var(--stone);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 10px; font-weight: 200; letter-spacing: 0.24em; text-transform: uppercase;
+  border: 1px solid var(--dust); border-radius: 2px; cursor: pointer;
+  display: block; text-align: center;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+.btn-ghost:hover { background: var(--off-white); border-color: var(--pebble); color: var(--slate); }
+
+.btn-note {
+  font-size: 10px; font-weight: 200; color: var(--fog);
+  letter-spacing: 0.1em; text-align: center; margin-top: 10px;
+}
+
+/* Trust */
+.trust-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-top: 26px; padding-top: 22px;
+  border-top: 0.5px solid var(--rule);
+}
+.trust-title {
+  font-size: 9px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--graphite); margin-bottom: 3px;
+}
+.trust-body { font-size: 11px; font-weight: 200; color: var(--ash); line-height: 1.6; }
+
+/* ── RELATED ── */
+.related { margin-top: 72px; }
+.related-label {
+  font-size: 9px; font-weight: 200; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--fog); margin-bottom: 24px;
+}
+.related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.r-card { cursor: pointer; }
+.r-img { aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; position: relative; overflow: hidden; }
+.r-cta {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 13px;
+  background: var(--graphite);
+  transform: translateY(100%);
+  transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.r-card:hover .r-cta { transform: translateY(0); }
+.r-cta-text { font-size: 9px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--off-white); }
+.r-cta-arr { width: 12px; height: 12px; flex-shrink: 0; }
+.r-name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.r-name { font-size: 12px; font-weight: 400; color: var(--graphite); line-height: 1.45; }
+.r-price { font-size: 12px; font-weight: 300; color: var(--graphite); white-space: nowrap; flex-shrink: 0; }
+.r-meta { font-size: 9px; font-weight: 200; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fog); }
+</style>
+</head>
+<body>
+
+<div class="pdp">
+
+  <!-- NAV -->
+  <div class="pdp-nav">
+    <div class="nav-logo">
+      <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1a1a18"/>
+        <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1a1a18"/>
+        <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#c85c28"/>
+      </svg>
+    </div>
+    <div class="nav-right">
+      <span class="nav-link">Rings</span>
+      <span class="nav-link">Earrings</span>
+      <span class="nav-link">Necklaces</span>
+      <span class="nav-link">About</span>
+      <button class="nav-bag">Bag (0)</button>
+    </div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <span class="bc">Home</span><span class="bc-sep">/</span>
+    <span class="bc">Rings</span><span class="bc-sep">/</span>
+    <span class="bc">Wires</span><span class="bc-sep">/</span>
+    <span class="bc bc-active">Hammered band, oxidized finish</span>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="noa-gallery">
+    <div class="gallery-hero">
+      <svg width="130" height="130" viewBox="0 0 130 130" fill="none">
+        <circle cx="65" cy="65" r="52" stroke="#c8c8c0" stroke-width="11" fill="none"/>
+        <circle cx="65" cy="65" r="26" stroke="#ddddd8" stroke-width="4" fill="none"/>
+        <circle cx="65" cy="65" r="7" fill="#e4e4e0"/>
+      </svg>
+      <div class="gallery-badge">New</div>
+      <button class="show-all">View all photos</button>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-cell"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="22" stroke="#b8b8b0" stroke-width="6" fill="none"/></svg></div>
+      <div class="gallery-cell"><svg width="44" height="60" viewBox="0 0 44 60" fill="none"><ellipse cx="22" cy="30" rx="14" ry="22" stroke="#b8b8b4" stroke-width="2" fill="none"/><line x1="22" y1="8" x2="22" y2="3" stroke="#b8b8b4" stroke-width="2"/><circle cx="22" cy="2" r="2.5" fill="#b8b8b4"/></svg></div>
+      <div class="gallery-cell"><svg width="72" height="32" viewBox="0 0 72 32" fill="none"><rect x="4" y="4" width="64" height="24" rx="12" stroke="#c0c0b8" stroke-width="2.5" fill="none"/></svg></div>
+      <div class="gallery-cell"><svg width="52" height="52" viewBox="0 0 52 52" fill="none"><rect x="8" y="8" width="36" height="36" stroke="#c0c0b8" stroke-width="2.5" fill="none"/><rect x="16" y="16" width="20" height="20" stroke="#d0d0c8" stroke-width="2" fill="none"/></svg></div>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="details">
+
+    <!-- LEFT -->
+    <div>
+      <div class="product-collection">Wires Collection</div>
+      <div class="product-name">Hammered band,<br>oxidized finish</div>
+      <div class="product-desc">Each ring is formed by hand from recycled sterling silver. The oxidized finish deepens over time with wear — darkening in the recesses, brightening on the high points. No two pieces age identically. Finished slowly, never rushed.</div>
+      <div class="gold-rule"></div>
+      <div class="mat-panel">
+        <div class="mat-title">Material</div>
+        <div class="mat-grid">
+          <div><div class="mat-item-label">Metal</div><div class="mat-item-val">Sterling Silver</div><div class="mat-item-sub">Recycled · 925</div></div>
+          <div><div class="mat-item-label">Finish</div><div class="mat-item-val">Oxidized</div><div class="mat-item-sub">Deepens with wear</div></div>
+          <div><div class="mat-item-label">Weight</div><div class="mat-item-val">Medium</div><div class="mat-item-sub">Solid presence</div></div>
+        </div>
+      </div>
+      <div style="margin-top:24px;">
+        <details class="acc"><summary><span class="acc-title">Care &amp; storage</span><span class="acc-icon">+</span></summary><div class="acc-body">Store in a dry place away from moisture. Polish occasionally with a soft cloth to lift the high points. The oxidized finish will deepen naturally — this is part of the piece's character, not a flaw.</div></details>
+        <details class="acc"><summary><span class="acc-title">Ring sizing guide</span><span class="acc-icon">+</span></summary><div class="acc-body">Measure your finger at its widest point. Ring sizes run true. If between sizes, size up. Custom sizing available — contact the studio before ordering.</div></details>
+        <details class="acc"><summary><span class="acc-title">Shipping &amp; returns</span><span class="acc-icon">+</span></summary><div class="acc-body">Ships within 3–5 business days from Tel Aviv. Free shipping on orders over ₪400. Returns accepted within 14 days for unworn pieces in original condition.</div></details>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="product-price">₪480</div>
+      <div class="price-note">Free shipping over ₪400</div>
+      <div class="price-hints">
+        <span>2 rings — ₪880</span>
+        <span>3 rings — ₪1,260</span>
+        <span>4 rings — ₪1,600</span>
+      </div>
+      <div class="pdp-hr"></div>
+
+      <div style="margin-bottom:20px;">
+        <div class="var-label">Metal finish</div>
+        <div class="swatches">
+          <div class="swatch-item" onclick="selectSwatch(this)"><div class="swatch" style="background:#e0e0d8;"></div><span class="swatch-name">Silver</span></div>
+          <div class="swatch-item" onclick="selectSwatch(this)"><div class="swatch selected" style="background:#1a1a18;"></div><span class="swatch-name active">Oxidized</span></div>
+          <div class="swatch-item" onclick="selectSwatch(this)"><div class="swatch" style="background:#b89a6a;"></div><span class="swatch-name">Gold</span></div>
+          <div class="swatch-item" onclick="selectSwatch(this)"><div class="swatch" style="background:#c87850;"></div><span class="swatch-name">Copper</span></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div class="var-label">Ring size <span class="var-guide">Size guide</span></div>
+        <div class="chips">
+          <label class="chip" onclick="selectChip(this)"><input type="radio" name="size"><span>48</span></label>
+          <label class="chip" onclick="selectChip(this)"><input type="radio" name="size"><span>50</span></label>
+          <label class="chip selected"><input type="radio" name="size" checked><span>52</span></label>
+          <label class="chip" onclick="selectChip(this)"><input type="radio" name="size"><span>54</span></label>
+          <label class="chip" onclick="selectChip(this)"><input type="radio" name="size"><span>56</span></label>
+          <label class="chip unavail"><span>58</span></label>
+          <label class="chip" onclick="selectChip(this)"><input type="radio" name="size"><span>60</span></label>
+        </div>
+      </div>
+
+      <div class="stock-note">
+        <div class="stock-dot"></div>
+        <span class="stock-text">Only 3 left</span>
+      </div>
+
+      <button class="btn-primary" id="add-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span id="add-text">Add to bag</span>
+      </button>
+
+      <button class="btn-secondary">Save to wishlist</button>
+
+      <button class="btn-ghost">More payment options</button>
+
+      <div class="btn-note">Handmade · Ships in 3–5 days · Free returns</div>
+
+      <div class="trust-grid">
+        <div><div class="trust-title">Handmade</div><div class="trust-body">Each piece made by hand in Tel Aviv.</div></div>
+        <div><div class="trust-title">One of a kind</div><div class="trust-body">No two pieces are exactly alike.</div></div>
+        <div><div class="trust-title">Unisex</div><div class="trust-body">Designed and worn by everyone.</div></div>
+        <div><div class="trust-title">Free returns</div><div class="trust-body">14-day returns, unworn pieces.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <div class="related">
+    <hr style="border:none;border-top:0.5px solid #e8e8e4;margin-bottom:36px;">
+    <div class="related-label">You might also like</div>
+    <div class="related-grid">
+      <div class="r-card">
+        <div class="r-img" style="background:#f0efed;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="18" stroke="#c8c8c0" stroke-width="5" fill="none"/></svg>
+          <div class="r-cta"><span class="r-cta-text">Add to bag</span><svg class="r-cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="r-name-row"><div class="r-name">Wire twist ring,<br>fine silver</div><span class="r-price">₪320</span></div>
+        <div class="r-meta">Sterling Silver · Wires</div>
+      </div>
+      <div class="r-card">
+        <div class="r-img" style="background:#ececea;">
+          <svg width="44" height="60" viewBox="0 0 44 60" fill="none"><ellipse cx="22" cy="30" rx="14" ry="20" stroke="#c8c8c0" stroke-width="2" fill="none"/><line x1="22" y1="10" x2="22" y2="5" stroke="#c8c8c0" stroke-width="2"/><circle cx="22" cy="4" r="2.5" fill="#c8c8c0"/></svg>
+          <div class="r-cta"><span class="r-cta-text">Add to bag</span><svg class="r-cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="r-name-row"><div class="r-name">Spiral drop earrings,<br>oxidized silver</div><span class="r-price">₪420</span></div>
+        <div class="r-meta">Sterling Silver · Spirals</div>
+      </div>
+      <div class="r-card">
+        <div class="r-img" style="background:#e8e8e4;">
+          <svg width="72" height="32" viewBox="0 0 72 32" fill="none"><rect x="4" y="4" width="64" height="24" rx="12" stroke="#c0c0b8" stroke-width="2.5" fill="none"/></svg>
+          <div class="r-cta"><span class="r-cta-text">Add to bag</span><svg class="r-cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="r-name-row"><div class="r-name">Grid cuff,<br>brass</div><span class="r-price">₪560</span></div>
+        <div class="r-meta">Brass · Grid</div>
+      </div>
+      <div class="r-card">
+        <div class="r-img" style="background:#f4f2ef;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="10" y="10" width="28" height="28" stroke="#c0c0b8" stroke-width="2.5" fill="none"/><rect x="16" y="16" width="16" height="16" stroke="#d0d0c8" stroke-width="2" fill="none"/></svg>
+          <div class="r-cta"><span class="r-cta-text">Add to bag</span><svg class="r-cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="r-name-row"><div class="r-name">Flat-top signet,<br>sterling silver</div><span class="r-price">₪480</span></div>
+        <div class="r-meta">Sterling Silver · Signets</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function selectChip(el) {
+  if (el.classList.contains('unavail')) return;
+  el.closest('.chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectSwatch(el) {
+  const group = el.closest('.swatches');
+  group.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
+  group.querySelectorAll('.swatch-name').forEach(n => n.classList.remove('active'));
+  el.querySelector('.swatch').classList.add('selected');
+  el.querySelector('.swatch-name').classList.add('active');
+}
+document.getElementById('add-btn').addEventListener('click', function() {
+  const txt = document.getElementById('add-text');
+  txt.textContent = 'Added ✓';
+  this.style.background = '#2d6a4f';
+  setTimeout(() => { txt.textContent = 'Add to bag'; this.style.background = ''; }, 1800);
+});
+</script>
+
+</body>
+</html>

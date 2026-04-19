@@ -1,0 +1,130 @@
+<section class="cart-page">
+  <div class="cart-page__head">
+    <p class="section-kicker">Your bag</p>
+    <h1 class="cart-page__title">{{ settings.cart_heading | default: 'Cart' }}</h1>
+  </div>
+
+  <div class="cart-page__empty" {% if cart.item_count > 0 %}hidden{% endif %} data-cart-empty>
+    <p class="cart-empty">{{ settings.cart_empty_text | default: 'Your cart is currently empty.' }}</p>
+    <a class="button button--solid" href="{{ routes.all_products_collection_url }}">{{ settings.cart_continue_label | default: 'Continue shopping' }}</a>
+  </div>
+
+  <form class="cart-page__grid" action="{{ routes.cart_url }}" method="post" novalidate {% if cart.item_count == 0 %}hidden{% endif %} data-cart-content>
+    <div class="cart-page__lines" data-cart-lines>
+      {% for item in cart.items %}
+        <article class="cart-line cart-line--page" data-line-item data-line-key="{{ item.key }}">
+          <a class="cart-line__thumb" href="{{ item.url }}" aria-label="{{ item.product.title }}">
+            {% if item.image != blank %}
+              {{
+                item.image
+                | image_url: width: 240
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '120, 180, 240',
+                  sizes: '88px',
+                  alt: item.image.alt | default: item.product.title
+              }}
+            {% endif %}
+          </a>
+          <div class="cart-line__body">
+            <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+            {% unless item.variant.title == 'Default Title' %}
+              <p class="cart-line__meta">{{ item.variant.title }}</p>
+            {% endunless %}
+            <div class="cart-steppers">
+              <button class="cart-step" type="button" data-cart-change data-line="{{ forloop.index }}" data-quantity="{{ item.quantity | minus: 1 }}" aria-label="Decrease quantity">−</button>
+              <input class="cart-step__input" type="number" value="{{ item.quantity }}" min="0" data-cart-quantity-input data-line="{{ forloop.index }}" aria-label="Quantity">
+              <button class="cart-step" type="button" data-cart-change data-line="{{ forloop.index }}" data-quantity="{{ item.quantity | plus: 1 }}" aria-label="Increase quantity">+</button>
+              <button class="cart-remove" type="button" data-cart-change data-line="{{ forloop.index }}" data-quantity="0">{{ 'cart.general.remove' | t | default: 'Remove' }}</button>
+            </div>
+          </div>
+          <p class="cart-line__price" data-line-price>{{ item.final_line_price | money }}</p>
+        </article>
+      {% endfor %}
+    </div>
+
+    <aside class="cart-page__summary">
+      <h2 class="cart-page__summary-title">Summary</h2>
+      <div class="cart-total-row">
+        <span>{{ 'cart.general.subtotal' | t | default: 'Subtotal' }}</span>
+        <strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <p class="cart-page__note">Shipping &amp; taxes calculated at checkout.</p>
+      <button class="button button--solid" type="submit" name="checkout">{{ 'cart.general.checkout' | t | default: 'Checkout' }}</button>
+      <a class="button button--ghost" href="{{ routes.all_products_collection_url }}">{{ settings.cart_continue_label | default: 'Continue shopping' }}</a>
+    </aside>
+  </form>
+</section>
+
+<script>
+  (function() {
+    const cartLines = document.querySelector('[data-cart-lines]');
+    if (!cartLines) return;
+
+    const emptyState = document.querySelector('[data-cart-empty]');
+    const content = document.querySelector('[data-cart-content]');
+    const subtotalNode = document.querySelector('[data-cart-subtotal]');
+
+    async function refreshCart() {
+      const cartResponse = await fetch('/cart.js');
+      const cart = await cartResponse.json();
+      if (window.FolioTheme && window.FolioTheme.updateCartCount) {
+        window.FolioTheme.updateCartCount(cart.item_count);
+      }
+      if (subtotalNode) subtotalNode.textContent = window.FolioTheme.formatMoney(cart.total_price);
+
+      if (cart.item_count === 0) {
+        if (content) content.hidden = true;
+        if (emptyState) emptyState.hidden = false;
+        cartLines.innerHTML = '';
+        return;
+      }
+      if (emptyState) emptyState.hidden = true;
+      if (content) content.hidden = false;
+
+      cart.items.forEach((item, index) => {
+        const row = cartLines.children[index];
+        if (!row) return;
+        const priceNode = row.querySelector('[data-line-price]');
+        if (priceNode) priceNode.textContent = window.FolioTheme.formatMoney(item.final_line_price);
+        const input = row.querySelector('[data-cart-quantity-input]');
+        if (input) {
+          input.value = item.quantity;
+          input.dataset.line = index + 1;
+        }
+        row.querySelectorAll('[data-cart-change]').forEach((button) => {
+          button.dataset.line = index + 1;
+          const delta = button.textContent.trim();
+          if (delta === '−') button.dataset.quantity = Math.max(item.quantity - 1, 0);
+          if (delta === '+') button.dataset.quantity = item.quantity + 1;
+        });
+      });
+
+      while (cartLines.children.length > cart.items.length) {
+        cartLines.lastElementChild.remove();
+      }
+    }
+
+    async function changeQuantity(line, quantity) {
+      await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ line: Number(line), quantity: Number(quantity) })
+      });
+      await refreshCart();
+    }
+
+    document.addEventListener('click', function(event) {
+      const button = event.target.closest('[data-cart-change]');
+      if (!button) return;
+      event.preventDefault();
+      changeQuantity(button.dataset.line, button.dataset.quantity);
+    });
+
+    document.addEventListener('change', function(event) {
+      const input = event.target.closest('[data-cart-quantity-input]');
+      if (!input) return;
+      changeQuantity(input.dataset.line, Math.max(Number(input.value || 0), 0));
+    });
+  })();
+</script>

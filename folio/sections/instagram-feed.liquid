@@ -1,0 +1,85 @@
+<section class="social-grid">
+  <div class="section-head">
+    <div>
+      {% if section.settings.handle != blank %}
+        <p class="section-kicker">{{ section.settings.handle }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    {% assign fallback_heroes = 'hero-03.jpg,hero-04.jpg,hero-06.jpg,hero-07.jpg,hero-08.jpg,hero-02.jpg' | split: ',' %}
+    {% assign tile_mods = 'one,two,three,four,five,six' | split: ',' %}
+    <div class="social-grid__items">
+      {% for block in section.blocks %}
+        {% assign fallback_src = fallback_heroes[forloop.index0] | default: 'hero-03.jpg' %}
+        {% assign tile_mod = tile_mods[forloop.index0] | default: 'one' %}
+        {% if block.settings.link != blank %}
+          <a class="social-tile social-tile--{{ tile_mod }}" href="{{ block.settings.link }}" {{ block.shopify_attributes }}
+            {% if block.settings.image != blank %}
+              style="background-image:url('{{ block.settings.image | image_url: width: 720 }}');"
+            {% else %}
+              style="background-image:url('{{ fallback_src | asset_url }}');"
+            {% endif %}
+            aria-label="{{ block.settings.alt_text }}"></a>
+        {% else %}
+          <div class="social-tile social-tile--{{ tile_mod }}" {{ block.shopify_attributes }}
+            {% if block.settings.image != blank %}
+              style="background-image:url('{{ block.settings.image | image_url: width: 720 }}');"
+            {% else %}
+              style="background-image:url('{{ fallback_src | asset_url }}');"
+            {% endif %}
+            aria-label="{{ block.settings.alt_text }}"></div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "handle",
+      "label": "Handle / kicker",
+      "default": "On Instagram"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Studio moments & new pieces — @noa.shechter"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt_text", "label": "Alt text", "default": "Social image" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Instagram feed",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

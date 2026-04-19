@@ -1,0 +1,45 @@
+{% if section.settings.show_announcement and section.settings.announcement_text != blank %}
+  <div class="announcement-bar">
+    <div class="announcement-inner">
+      {% if section.settings.announcement_link != blank %}
+        <a href="{{ section.settings.announcement_link }}">{{ section.settings.announcement_text }}</a>
+      {% else %}
+        <span>{{ section.settings.announcement_text }}</span>
+      {% endif %}
+      {% if section.settings.show_close %}
+        <button class="announcement-close" type="button" aria-label="Dismiss announcement" data-close-announcement>Close</button>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Free shipping on orders over ₪500 · Handmade in Tel Aviv"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close",
+      "label": "Show close button",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

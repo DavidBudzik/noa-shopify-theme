@@ -1,0 +1,127 @@
+<section class="noa-page noa-size-guide">
+  <div class="noa-page__head">
+    <p class="section-kicker">Fit guide</p>
+    <h1 class="noa-page__title">{{ page.title | default: 'Size Guide' }}</h1>
+  </div>
+
+  {% if page.content != blank %}
+    <div class="noa-size-guide__intro rte">{{ page.content }}</div>
+  {% else %}
+    <p class="noa-size-guide__intro">Finding the right fit ensures your piece is comfortable and wearable every day. Use the guides below to measure accurately before ordering.</p>
+  {% endif %}
+
+  <div class="noa-size-guide__sections">
+
+    <!-- Ring sizing -->
+    <div class="noa-size-guide__section">
+      <h2 class="noa-size-guide__section-title">Rings</h2>
+      <div class="noa-size-guide__method">
+        <div>
+          <h3 class="noa-size-guide__method-title">How to measure</h3>
+          <ol class="noa-size-guide__steps">
+            <li>Cut a thin strip of paper approximately 1cm wide and 10cm long.</li>
+            <li>Wrap it snugly around the base of the intended finger — not too tight, not too loose.</li>
+            <li>Mark where the paper overlaps.</li>
+            <li>Lay the strip flat and measure the length in millimetres.</li>
+            <li>This measurement is your circumference. Match it to the table below.</li>
+          </ol>
+          <p class="noa-size-guide__tip"><strong>Tip:</strong> Measure in the evening — fingers tend to swell slightly throughout the day.</p>
+        </div>
+      </div>
+
+      <div class="noa-size-guide__table-wrap">
+        <table class="noa-size-guide__table">
+          <thead>
+            <tr>
+              <th>EU Size</th>
+              <th>US / Canada</th>
+              <th>UK / Australia</th>
+              <th>Diameter (mm)</th>
+              <th>Circumference (mm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>46</td><td>4</td><td>H</td><td>14.6</td><td>46</td></tr>
+            <tr><td>48</td><td>4½</td><td>I</td><td>15.3</td><td>48</td></tr>
+            <tr><td>50</td><td>5</td><td>K</td><td>15.9</td><td>50</td></tr>
+            <tr><td>52</td><td>6</td><td>L½</td><td>16.6</td><td>52</td></tr>
+            <tr><td>54</td><td>7</td><td>N</td><td>17.2</td><td>54</td></tr>
+            <tr><td>56</td><td>7½</td><td>O½</td><td>17.8</td><td>56</td></tr>
+            <tr><td>58</td><td>8½</td><td>Q</td><td>18.5</td><td>58</td></tr>
+            <tr><td>60</td><td>9</td><td>R½</td><td>19.1</td><td>60</td></tr>
+            <tr><td>62</td><td>10</td><td>T</td><td>19.7</td><td>62</td></tr>
+            <tr><td>64</td><td>11</td><td>V</td><td>20.4</td><td>64</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bracelet sizing -->
+    <div class="noa-size-guide__section">
+      <h2 class="noa-size-guide__section-title">Bracelets &amp; Cuffs</h2>
+      <div class="noa-size-guide__method">
+        <div>
+          <h3 class="noa-size-guide__method-title">How to measure</h3>
+          <ol class="noa-size-guide__steps">
+            <li>Wrap a soft tape measure or strip of paper around your wrist, just below the wrist bone.</li>
+            <li>Add 1–2 cm for a comfortable fit, or 0.5 cm for a snug fit.</li>
+            <li>Match your wrist measurement to the table below.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="noa-size-guide__table-wrap">
+        <table class="noa-size-guide__table">
+          <thead>
+            <tr>
+              <th>Size label</th>
+              <th>Wrist circumference</th>
+              <th>Bracelet length</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>13–14 cm</td><td>15.5 cm</td></tr>
+            <tr><td>S</td><td>14–15.5 cm</td><td>17 cm</td></tr>
+            <tr><td>M</td><td>15.5–17 cm</td><td>18.5 cm</td></tr>
+            <tr><td>L</td><td>17–19 cm</td><td>20 cm</td></tr>
+            <tr><td>XL</td><td>19–21 cm</td><td>22 cm</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Necklace sizing -->
+    <div class="noa-size-guide__section">
+      <h2 class="noa-size-guide__section-title">Necklaces &amp; Chains</h2>
+      <div class="noa-size-guide__chain-lengths">
+        <div class="noa-size-guide__chain-item">
+          <span class="noa-size-guide__chain-len">38 cm / 15"</span>
+          <span class="noa-size-guide__chain-pos">Choker — sits at the base of the neck</span>
+        </div>
+        <div class="noa-size-guide__chain-item">
+          <span class="noa-size-guide__chain-len">42 cm / 16.5"</span>
+          <span class="noa-size-guide__chain-pos">Princess — collarbone length, most common</span>
+        </div>
+        <div class="noa-size-guide__chain-item">
+          <span class="noa-size-guide__chain-len">45 cm / 18"</span>
+          <span class="noa-size-guide__chain-pos">Matinée — just below the collarbone</span>
+        </div>
+        <div class="noa-size-guide__chain-item">
+          <span class="noa-size-guide__chain-len">50 cm / 20"</span>
+          <span class="noa-size-guide__chain-pos">Opera — mid-chest</span>
+        </div>
+        <div class="noa-size-guide__chain-item">
+          <span class="noa-size-guide__chain-len">60 cm / 24"</span>
+          <span class="noa-size-guide__chain-pos">Rope — lower chest or layering piece</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="noa-faq__cta">
+    <p>Not sure which size to order?</p>
+    <a class="noa-btn-cart" href="{{ routes.root_url }}pages/contact" style="display:inline-block;text-decoration:none;padding:15px 40px;">Ask us</a>
+  </div>
+
+</section>

@@ -1,0 +1,151 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .wrap { padding: 2rem; background: #ffffff; }
+
+  .section-label { font-family: 'Instrument Sans', sans-serif; font-size: 9px; font-weight: 200; letter-spacing: 0.28em; text-transform: uppercase; color: #a8a8a0; margin-bottom: 24px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+  .card { cursor: pointer; }
+
+  .card-img {
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Hover CTA slides up from image bottom */
+  .card-cta {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 11px 14px;
+    background: #1a1a18;
+    transform: translateY(100%);
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card:hover .card-cta { transform: translateY(0); }
+  .cta-label {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #f7f6f4;
+  }
+  .cta-arr { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* Info block — tight, no orphan */
+  .card-info {
+    padding: 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .card-name {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px; font-weight: 400;
+    color: #1a1a18; line-height: 1.5;
+    letter-spacing: 0.01em;
+    margin-bottom: 5px;
+  }
+
+  /* Meta + price on same line — solves orphan */
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card-meta {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #6a6a64;
+  }
+
+  .card-price {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px; font-weight: 300; color: #1a1a18;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>
+
+<h2 class="sr-only">Refined related product cards with meta and price on same line.</h2>
+
+<div class="wrap">
+  <div class="section-label">You might also like</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img" style="background:#f0efed;">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="18" stroke="#c8c8c0" stroke-width="5" fill="none"/></svg>
+        <div class="card-cta">
+          <span class="cta-label">Add to bag</span>
+          <svg class="cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Wire twist ring,<br>fine silver</div>
+        <div class="card-bottom">
+          <span class="card-meta">Sterling Silver · Wires</span>
+          <span class="card-price">₪320</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img" style="background:#ececea;">
+        <svg width="44" height="60" viewBox="0 0 44 60" fill="none"><ellipse cx="22" cy="30" rx="14" ry="20" stroke="#c8c8c0" stroke-width="2" fill="none"/><line x1="22" y1="10" x2="22" y2="5" stroke="#c8c8c0" stroke-width="2"/><circle cx="22" cy="4" r="2.5" fill="#c8c8c0"/></svg>
+        <div class="card-cta">
+          <span class="cta-label">Add to bag</span>
+          <svg class="cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Spiral drop earrings,<br>oxidized silver</div>
+        <div class="card-bottom">
+          <span class="card-meta">Silver · Spirals</span>
+          <span class="card-price">₪420</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img" style="background:#e8e8e4;">
+        <svg width="72" height="32" viewBox="0 0 72 32" fill="none"><rect x="4" y="4" width="64" height="24" rx="12" stroke="#c0c0b8" stroke-width="2.5" fill="none"/></svg>
+        <div class="card-cta">
+          <span class="cta-label">Add to bag</span>
+          <svg class="cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Grid cuff,<br>oxidized brass</div>
+        <div class="card-bottom">
+          <span class="card-meta">Brass · Grid</span>
+          <span class="card-price">₪560</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img" style="background:#f4f2ef;">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="10" y="10" width="28" height="28" stroke="#c0c0b8" stroke-width="2.5" fill="none"/><rect x="16" y="16" width="16" height="16" stroke="#d0d0c8" stroke-width="2" fill="none"/></svg>
+        <div class="card-cta">
+          <span class="cta-label">Add to bag</span>
+          <svg class="cta-arr" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#f7f6f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Flat-top signet,<br>sterling silver</div>
+        <div class="card-bottom">
+          <span class="card-meta">Silver · Signets</span>
+          <span class="card-price">₪480</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

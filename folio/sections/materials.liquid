@@ -1,0 +1,83 @@
+{% if section.blocks.size > 0 %}
+  <section>
+    {% assign materials_fallbacks = 'hero-03.jpg,hero-06.jpg,hero-08.jpg,hero-04.jpg,hero-07.jpg,hero-02.jpg' | split: ',' %}
+    <div class="materials-grid">
+      {% for block in section.blocks %}
+        {% assign mat_fallback = materials_fallbacks[forloop.index0] | default: 'hero-03.jpg' %}
+        <a class="material-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '480, 720, 960, 1200',
+                sizes: '(min-width: 1024px) 33vw, 100vw',
+                class: 'material-card-bg-image',
+                alt: block.settings.title
+            }}
+          {% else %}
+            <img class="material-card-bg-image" src="{{ mat_fallback | asset_url }}" alt="{{ block.settings.title | strip_html }}" loading="lazy">
+          {% endif %}
+          <div class="material-card-overlay">
+            <div class="material-card-label">{{ block.settings.label }}</div>
+            <div class="material-card-title">{{ block.settings.title }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Materials",
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Material"
+        },
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Title",
+          "default": "Sterling<br>Silver"
+        },
+        {
+          "type": "text",
+          "id": "fallback_gradient",
+          "label": "Fallback gradient",
+          "default": "linear-gradient(145deg, #c8cfd8 0%, #9aa5b4 100%)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Materials",
+      "blocks": [
+        { "type": "card", "settings": { "label": "Material", "title": "Sterling<br>Silver 925", "fallback_gradient": "linear-gradient(145deg, #cfcfcf 0%, #8a8a8a 100%)" } },
+        { "type": "card", "settings": { "label": "Material", "title": "Solid<br>Brass", "fallback_gradient": "linear-gradient(145deg, #d4bc96 0%, #b89a6a 100%)" } },
+        { "type": "card", "settings": { "label": "Finish", "title": "Hand<br>Oxidized", "fallback_gradient": "linear-gradient(145deg, #4a4a4a 0%, #1c1c1c 100%)" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

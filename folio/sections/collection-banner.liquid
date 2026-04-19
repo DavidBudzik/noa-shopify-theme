@@ -1,0 +1,141 @@
+{%- comment -%}
+  Resolve the image: section override → collection image → hero image per handle
+{%- endcomment -%}
+{% assign banner_image = blank %}
+{% assign banner_image_asset_url = blank %}
+{% if section.settings.image != blank %}
+  {% assign banner_image = section.settings.image %}
+{% elsif section.settings.collection != blank and section.settings.collection.image != blank %}
+  {% assign banner_image = section.settings.collection.image %}
+{% elsif section.settings.collection != blank and section.settings.collection.products.first.featured_image != blank %}
+  {% assign banner_image = section.settings.collection.products.first.featured_image %}
+{% elsif collection.image != blank %}
+  {% assign banner_image = collection.image %}
+{% endif %}
+{% if section.settings.image_asset != blank %}
+  {% assign banner_image_asset_url = section.settings.image_asset | asset_url %}
+{% elsif banner_image == blank %}
+  {% case collection.handle %}
+    {% when 'rings' %}
+      {% assign banner_image_asset_url = 'hero-04.jpg' | asset_url %}
+    {% when 'earrings' %}
+      {% assign banner_image_asset_url = 'hero-06.jpg' | asset_url %}
+    {% when 'necklaces' %}
+      {% assign banner_image_asset_url = 'hero-02.jpg' | asset_url %}
+    {% when 'bracelets' %}
+      {% assign banner_image_asset_url = 'hero-07.jpg' | asset_url %}
+    {% else %}
+      {% assign banner_image_asset_url = 'hero-01.jpg' | asset_url %}
+  {% endcase %}
+{% endif %}
+
+{% assign banner_title = collection.title %}
+{% if section.settings.heading_override != blank %}
+  {% assign banner_title = section.settings.heading_override %}
+{% elsif section.settings.collection != blank %}
+  {% assign banner_title = section.settings.collection.title %}
+{% endif %}
+
+{% assign banner_kicker = settings.collection_heading_prefix | default: 'Browse the' %}
+{% if section.settings.kicker_override != blank %}
+  {% assign banner_kicker = section.settings.kicker_override %}
+{% endif %}
+
+{% assign nav_handles = 'rings,earrings,necklaces,bracelets' | split: ',' %}
+{% assign nav_labels = 'Rings,Earrings,Necklaces,Bracelets' | split: ',' %}
+{% assign current_nav_idx = -1 %}
+{% for h in nav_handles %}
+  {% if h == collection.handle %}
+    {% assign current_nav_idx = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+{% assign nav_size = nav_handles | size %}
+{% if current_nav_idx >= 0 %}
+  {% assign prev_nav_idx = current_nav_idx | minus: 1 %}
+  {% assign next_nav_idx = current_nav_idx | plus: 1 %}
+  {% if prev_nav_idx < 0 %}{% assign prev_nav_idx = nav_size | minus: 1 %}{% endif %}
+  {% if next_nav_idx >= nav_size %}{% assign next_nav_idx = 0 %}{% endif %}
+  {% assign prev_nav_handle = nav_handles[prev_nav_idx] %}
+  {% assign next_nav_handle = nav_handles[next_nav_idx] %}
+  {% assign prev_nav_label = nav_labels[prev_nav_idx] %}
+  {% assign next_nav_label = nav_labels[next_nav_idx] %}
+{% endif %}
+
+<div class="collection-banner">
+  <div class="collection-banner__inner">
+    {% if banner_image != blank %}
+      {{
+        banner_image
+        | image_url: width: 1800
+        | image_tag:
+          loading: 'eager',
+          widths: '720, 1200, 1800',
+          sizes: 'min(85rem, 100vw)',
+          class: 'collection-banner__img',
+          alt: banner_title
+      }}
+    {% elsif banner_image_asset_url != blank %}
+      <img class="collection-banner__img"
+        src="{{ banner_image_asset_url }}"
+        alt="{{ banner_title }}"
+        loading="eager">
+    {% endif %}
+    <div class="collection-banner__overlay">
+      <p class="section-kicker">{{ banner_kicker }}</p>
+      <h1 class="collection-banner__title">{{ banner_title }}</h1>
+    </div>
+    {% if current_nav_idx >= 0 %}
+      <a class="collection-banner__nav collection-banner__nav--prev"
+         href="/collections/{{ prev_nav_handle }}"
+         aria-label="Previous collection: {{ prev_nav_label }}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M13 16L7 10L13 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+        <span class="collection-banner__nav-label">{{ prev_nav_label }}</span>
+      </a>
+      <a class="collection-banner__nav collection-banner__nav--next"
+         href="/collections/{{ next_nav_handle }}"
+         aria-label="Next collection: {{ next_nav_label }}">
+        <span class="collection-banner__nav-label">{{ next_nav_label }}</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection (overrides page collection for image + title)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Custom image (overrides collection image)"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Theme asset filename (e.g. banner-collection.jpg)",
+      "info": "Used when no image_picker image is set. Lowest priority fallback."
+    },
+    {
+      "type": "text",
+      "id": "heading_override",
+      "label": "Heading override (leave blank to use collection title)"
+    },
+    {
+      "type": "text",
+      "id": "kicker_override",
+      "label": "Kicker override (leave blank for default)"
+    }
+  ],
+  "presets": [{ "name": "Collection banner" }]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{% if section.blocks.size > 0 %}
+  <section class="marquee">
+    <div class="marquee-track" aria-label="{{ section.settings.accessibility_label }}">
+      {% for _ in (1..2) %}
+        {% for block in section.blocks %}
+          <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {% unless forloop.last and forloop.parentloop.last %}
+            <span aria-hidden="true">·</span>
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Marquee",
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Store highlights"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Crafted in small batches"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Sterling silver" } },
+        { "type": "item", "settings": { "text": "Solid brass" } },
+        { "type": "item", "settings": { "text": "14k gold" } },
+        { "type": "item", "settings": { "text": "Oxidized finishes" } },
+        { "type": "item", "settings": { "text": "Mixed metals" } },
+        { "type": "item", "settings": { "text": "Hand-forged in Tel Aviv" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

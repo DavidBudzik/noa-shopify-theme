@@ -1,0 +1,297 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+{%- comment -%} Build a JSON map of variant option combos → IDs for JS chip resolver {%- endcomment -%}
+<script>
+  window.NoaProduct = {
+    variants: [
+      {% for v in product.variants %}
+        {
+          id: {{ v.id }},
+          available: {{ v.available }},
+          price: {{ v.price }},
+          options: {{ v.options | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    selectedVariantId: {{ current_variant.id }},
+    optionNames: {{ product.options | json }}
+  };
+</script>
+
+<!-- Breadcrumb -->
+<nav class="noa-breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <a href="{{ routes.all_products_collection_url }}">Shop</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>{{ product.title }}</span>
+</nav>
+
+<!-- Gallery -->
+<div class="noa-gallery">
+
+  <!-- Hero (first image) -->
+  <div class="noa-gallery__hero">
+    {% if product.images.size > 0 %}
+      {{ product.images[0]
+        | image_url: width: 1600
+        | image_tag:
+          loading: 'eager',
+          widths: '800, 1200, 1600',
+          sizes: '(min-width: 900px) 55vw, 100vw',
+          id: 'Noa_GalleryHero',
+          alt: product.images[0].alt | default: product.title
+      }}
+    {% else %}
+      <div style="width:100%;height:100%;background:#d4cac0;"></div>
+    {% endif %}
+  </div>
+
+  <!-- 2×2 grid (images 2–5) -->
+  <div class="noa-gallery__grid">
+    {% for i in (1..4) %}
+      <div class="noa-gallery__cell"
+        {% if forloop.index == 4 %} id="Noa_LastCell"{% endif %}>
+        {% assign img = product.images[i] %}
+        {% if img %}
+          <button class="noa-gallery__thumb-btn" data-noa-thumb data-src="{{ img | image_url: width: 1600 }}"
+            style="width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;">
+            {{ img
+              | image_url: width: 800
+              | image_tag:
+                loading: 'lazy',
+                widths: '400, 800',
+                sizes: '25vw',
+                alt: img.alt | default: product.title
+            }}
+          </button>
+        {% endif %}
+        {% if forloop.index == 4 and product.images.size > 4 %}
+          <button class="noa-show-all" type="button" onclick="document.getElementById('Noa_AllPhotos').hidden=false">
+            Show All Photos
+          </button>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<!-- All photos lightbox (hidden by default) -->
+{% if product.images.size > 4 %}
+  <div id="Noa_AllPhotos" hidden
+    style="position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;overflow-y:auto;padding:48px 24px;">
+    <button onclick="document.getElementById('Noa_AllPhotos').hidden=true"
+      style="position:fixed;top:20px;right:24px;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;z-index:1001;"
+      aria-label="Close">&#x2715;</button>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:4px;max-width:1200px;margin:0 auto;">
+      {% for img in product.images %}
+        {{ img | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600, 1200', alt: img.alt | default: product.title, style: 'width:100%;display:block;' }}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+<!-- Details -->
+<div class="noa-details">
+
+  <!-- Left: story -->
+  <div class="noa-details__left">
+    {% if product.type != blank %}
+      <p class="noa-subtitle">{{ product.type }}</p>
+    {% elsif product.vendor != blank %}
+      <p class="noa-subtitle">{{ product.vendor }}</p>
+    {% endif %}
+    <h1 class="noa-title">{{ product.title }}</h1>
+    {% if product.metafields.custom.subtitle != blank %}
+      <p class="noa-subtitle" style="margin-top:0.5rem;">{{ product.metafields.custom.subtitle }}</p>
+    {% endif %}
+    {% if product.description != blank %}
+      <div class="noa-description">{{ product.description }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Right: purchase -->
+  <div class="noa-details__right">
+
+    <p class="noa-price" id="Noa_Price">{{ current_variant.price | money }}</p>
+    <p class="noa-shipping-note">Free shipping on orders over ₪500 · Worldwide</p>
+
+    <div class="noa-bundle-hints">
+      <span class="noa-bundle-hint">Handmade</span>
+      <span class="noa-bundle-hint">Tel Aviv Studio</span>
+      <span class="noa-bundle-hint">Ships in 3–5 days</span>
+    </div>
+
+    <hr class="noa-hr">
+
+    <form data-product-form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="Noa_VariantId" value="{{ current_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          <div class="noa-option">
+            <span class="noa-option__label">{{ option.name }}</span>
+            <div class="noa-chips" data-option-index="{{ forloop.index0 }}">
+              {% for value in option.values %}
+                {% assign chip_id = 'NOption_' | append: forloop.parentloop.index0 | append: '_' | append: forloop.index0 %}
+                <label class="noa-chip {% if current_variant.options[forloop.parentloop.index0] == value %}noa-chip--selected{% endif %}">
+                  <input type="radio"
+                    name="noa_option_{{ forloop.parentloop.index0 }}"
+                    value="{{ value | escape }}"
+                    id="{{ chip_id }}"
+                    data-option-index="{{ forloop.parentloop.index0 }}"
+                    {% if current_variant.options[forloop.parentloop.index0] == value %}checked{% endif %}
+                  >
+                  <span>{{ value }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endunless %}
+
+      <div class="noa-cta">
+        <button class="noa-btn-cart" type="submit" id="Noa_CartBtn"
+          {% unless current_variant.available %}disabled{% endunless %}>
+          {% if current_variant.available %}
+            {{ settings.quick_add_label | default: 'Add to Cart' }}
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      </div>
+    </form>
+
+    <hr class="noa-hr">
+
+    <!-- Accordions -->
+    <details class="noa-accordion" open>
+      <summary>Details</summary>
+      <div class="noa-accordion__body">
+        <p>Hand-finished in our Tel Aviv studio. Each piece completed individually. Variations in surface texture and patina are intrinsic to the work.</p>
+      </div>
+    </details>
+    <details class="noa-accordion">
+      <summary>Materials &amp; care</summary>
+      <div class="noa-accordion__body">
+        <p>Sterling silver 925, solid brass, copper, or recycled 14k gold. Polish gently with a soft cloth. Store dry. Avoid saltwater, perfume, and chemicals.</p>
+      </div>
+    </details>
+    <details class="noa-accordion">
+      <summary>Shipping &amp; returns</summary>
+      <div class="noa-accordion__body">
+        <p>Free shipping on orders over ₪500. Worldwide shipping available. Exchanges within 14 days for unworn items in original condition.</p>
+      </div>
+    </details>
+    <details class="noa-accordion">
+      <summary>Size guide</summary>
+      <div class="noa-accordion__body">
+        <p>Rings: measure your finger with a strip of paper. Our sizes follow EU/US standard ring sizing. <a href="{{ routes.root_url }}pages/size-guide" style="color:#1c1c1c;text-decoration:underline;">View full guide →</a></p>
+      </div>
+    </details>
+
+  </div><!-- /.noa-details__right -->
+
+</div><!-- /.noa-details -->
+
+<!-- Mobile sticky CTA -->
+<div class="noa-sticky" id="Noa_Sticky" aria-hidden="true">
+  <span class="noa-sticky__price" id="Noa_StickyPrice">{{ current_variant.price | money }}</span>
+  <button class="noa-sticky__btn" id="Noa_StickyBtn"
+    {% unless current_variant.available %}disabled{% endunless %}>
+    {% if current_variant.available %}
+      {{ settings.quick_add_label | default: 'Add to Cart' }}
+    {% else %}
+      Sold Out
+    {% endif %}
+  </button>
+</div>
+
+<script>
+(function () {
+  var np = window.NoaProduct;
+  if (!np) return;
+
+  // Current selections per option index
+  var selections = [];
+  np.variants.forEach(function(v, i) {
+    if (v.id === np.selectedVariantId) {
+      selections = v.options.slice();
+    }
+  });
+
+  function findVariant() {
+    return np.variants.find(function(v) {
+      return v.options.every(function(o, i) { return o === selections[i]; });
+    });
+  }
+
+  function updateUI(variant) {
+    var priceNode = document.getElementById('Noa_Price');
+    var stickyPrice = document.getElementById('Noa_StickyPrice');
+    var idInput = document.getElementById('Noa_VariantId');
+    var cartBtn = document.getElementById('Noa_CartBtn');
+    var stickyBtn = document.getElementById('Noa_StickyBtn');
+
+    if (!variant) {
+      if (cartBtn) { cartBtn.disabled = true; cartBtn.textContent = 'Unavailable'; }
+      if (stickyBtn) { stickyBtn.disabled = true; stickyBtn.textContent = 'Unavailable'; }
+      return;
+    }
+
+    if (idInput) idInput.value = variant.id;
+
+    var formatted = window.FolioTheme && window.FolioTheme.formatMoney
+      ? window.FolioTheme.formatMoney(variant.price)
+      : variant.price / 100;
+
+    if (priceNode) priceNode.textContent = formatted;
+    if (stickyPrice) stickyPrice.textContent = formatted;
+
+    var label = variant.available
+      ? (window.FolioTheme && '{{ settings.quick_add_label | default: "Add to Cart" }}' || 'Add to Cart')
+      : 'Sold Out';
+    if (cartBtn) { cartBtn.disabled = !variant.available; cartBtn.textContent = label; }
+    if (stickyBtn) { stickyBtn.disabled = !variant.available; stickyBtn.textContent = label; }
+  }
+
+  // Chip radio change
+  document.addEventListener('change', function(e) {
+    var radio = e.target.closest('[data-option-index]');
+    if (!radio || radio.type !== 'radio') return;
+    var idx = parseInt(radio.getAttribute('data-option-index'), 10);
+    selections[idx] = radio.value;
+
+    // Update selected chip styling
+    var group = radio.closest('.noa-chips');
+    if (group) {
+      group.querySelectorAll('.noa-chip').forEach(function(chip) {
+        chip.classList.remove('noa-chip--selected');
+      });
+      radio.closest('.noa-chip').classList.add('noa-chip--selected');
+    }
+
+    updateUI(findVariant());
+  });
+
+  // Thumbnail swap
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-noa-thumb]');
+    if (!btn) return;
+    var src = btn.getAttribute('data-src');
+    var hero = document.getElementById('Noa_GalleryHero');
+    if (hero && src) hero.src = src;
+  });
+
+  // Sticky CTA triggers main form submit
+  var stickyBtn = document.getElementById('Noa_StickyBtn');
+  if (stickyBtn) {
+    stickyBtn.addEventListener('click', function() {
+      var form = document.querySelector('[data-product-form]');
+      if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    });
+  }
+})();
+</script>

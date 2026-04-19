@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Noa — Handmade Unisex Jewelry, Tel Aviv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./folio-mockup.css">
+  </head>
+  <body>
+    <div class="announcement-bar">
+      <div class="announcement-inner">
+        <span>Free shipping on orders over ₪500 · Handmade in Tel Aviv</span>
+        <button class="announcement-close" type="button" aria-label="Dismiss announcement" data-close-announcement>Close</button>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" data-mobile-toggle>Menu</button>
+
+        <nav class="site-nav" aria-label="Primary">
+          <button class="nav-link is-active" data-route="home" type="button">Home</button>
+          <button class="nav-link" data-route="shop" type="button">Shop</button>
+          <button class="nav-link" data-route="about" type="button">About</button>
+          <button class="nav-link" data-route="contact" type="button">Contact</button>
+        </nav>
+
+        <button class="brand-lockup" data-route="home" type="button" aria-label="Noa — home">
+          <svg class="brand-logo" viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1c1c1c"/>
+            <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1c1c1c"/>
+            <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#1c1c1c"/>
+          </svg>
+          <span class="brand-tagline">Handmade unisex jewelry · Tel Aviv studio</span>
+        </button>
+
+        <div class="site-actions">
+          <button class="site-action site-action--icon" type="button" data-open-search aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          <button class="site-action site-action--icon cart-trigger" type="button" data-open-cart aria-label="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span class="cart-badge" data-cart-count>0</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu" hidden>
+        <button class="mobile-link is-active" data-route="home" type="button">Home</button>
+        <button class="mobile-link" data-route="shop" type="button">Shop</button>
+        <button class="mobile-link" data-route="about" type="button">About</button>
+        <button class="mobile-link" data-route="contact" type="button">Contact</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-panel route-panel is-active" data-panel="home">
+        <div class="hero-media">
+          <div class="hero-orbital hero-orbital--one"></div>
+          <div class="hero-orbital hero-orbital--two"></div>
+          <div class="hero-figure">
+            <div class="hero-figure__ring hero-figure__ring--outer"></div>
+            <div class="hero-figure__ring hero-figure__ring--inner"></div>
+            <div class="hero-figure__axis hero-figure__axis--vertical"></div>
+            <div class="hero-figure__axis hero-figure__axis--horizontal"></div>
+          </div>
+        </div>
+
+        <div class="hero-copy">
+          <p class="section-kicker">New in the studio</p>
+          <h1 class="hero-title">Unisex jewelry, made by hand in Tel Aviv.</h1>
+          <p class="hero-text">
+            Quiet forms, mixed metals, and one-of-a-kind pieces. Hand-finished in the studio on Nahalat Binyamin.
+          </p>
+          <div class="hero-actions">
+            <button class="button button--solid" data-route="shop" type="button">Shop the collection</button>
+            <button class="button button--ghost" data-route="about" type="button">The studio</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="marquee">
+        <div class="marquee-track">
+          <span>Sterling silver</span><span>·</span>
+          <span>Solid brass</span><span>·</span>
+          <span>14k gold</span><span>·</span>
+          <span>Oxidized finishes</span><span>·</span>
+          <span>Mixed metals</span><span>·</span>
+          <span>Hand-forged in Tel Aviv</span><span>·</span>
+          <span>Sterling silver</span><span>·</span>
+          <span>Solid brass</span><span>·</span>
+          <span>14k gold</span><span>·</span>
+          <span>Oxidized finishes</span><span>·</span>
+          <span>Mixed metals</span><span>·</span>
+          <span>Hand-forged in Tel Aviv</span>
+        </div>
+      </section>
+
+      <section class="featured-gallery route-panel is-active" data-panel="home">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Collections</p>
+            <h2 class="section-title">Browse by <em>category</em>.</h2>
+          </div>
+          <button class="button button--text" type="button" data-route="shop">View all</button>
+        </div>
+        <div class="categories-grid" id="categoriesGrid"></div>
+      </section>
+
+      <section class="collection-hero route-panel" data-panel="shop">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <button class="breadcrumb__link" type="button" data-route="home">Home</button>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current" id="mockupCollectionTitle">Rings</span>
+        </nav>
+        <div class="collection-banner">
+          <div class="collection-banner__inner">
+            <img class="collection-banner__img" id="mockupBannerImg" src="folio/assets/hero-04.jpg" alt="Rings" loading="eager">
+            <div class="collection-banner__overlay">
+              <p class="section-kicker">Browse the</p>
+              <h1 class="collection-banner__title" id="mockupBannerTitle">Rings</h1>
+            </div>
+            <a class="collection-banner__nav collection-banner__nav--prev" href="#" id="mockupNavPrev" aria-label="Previous collection">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13 16L7 10L13 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+              </svg>
+              <span class="collection-banner__nav-label" id="mockupPrevLabel">Bracelets</span>
+            </a>
+            <a class="collection-banner__nav collection-banner__nav--next" href="#" id="mockupNavNext" aria-label="Next collection">
+              <span class="collection-banner__nav-label" id="mockupNextLabel">Earrings</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-index route-panel" data-panel="shop">
+        <div class="section-head section-head--plain">
+          <div>
+            <p class="section-kicker">Shop</p>
+            <h2 class="section-title">All pieces</h2>
+          </div>
+        </div>
+        <div class="collection-toolbar">
+          <div class="collection-toolbar__filters">
+            <button class="collection-chip is-active" type="button" data-collection-filter="all">All</button>
+            <button class="collection-chip" type="button" data-collection-filter="Rings">Rings</button>
+            <button class="collection-chip" type="button" data-collection-filter="Earrings">Earrings</button>
+            <button class="collection-chip" type="button" data-collection-filter="Necklaces">Necklaces</button>
+            <button class="collection-chip" type="button" data-collection-filter="Bracelets">Bracelets</button>
+          </div>
+          <div class="collection-toolbar__sort">
+            <label class="sr-only" for="sortSelect">Sort</label>
+            <select id="sortSelect" class="sort-select" data-sort>
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to high</option>
+              <option value="price-desc">Price: High to low</option>
+              <option value="title-asc">Alphabetical A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+
+      <section class="featured-gallery route-panel is-active" data-panel="home">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Featured</p>
+            <h2 class="section-title">Curated <em>picks</em>.</h2>
+          </div>
+          <button class="button button--text" type="button" data-route="shop">View all</button>
+        </div>
+        <div class="featured-grid" id="featuredGrid"></div>
+      </section>
+
+      <section class="story-panel route-panel is-active" data-panel="home">
+        <div class="story-panel__media">
+          <div class="story-figure">
+            <div class="story-figure__circle story-figure__circle--outer"></div>
+            <div class="story-figure__circle story-figure__circle--inner"></div>
+          </div>
+        </div>
+        <div class="story-panel__copy">
+          <p class="section-kicker">The studio</p>
+          <h2 class="section-title section-title--light">Handmade in Tel Aviv, one piece at a time.</h2>
+          <p class="story-quote">"Unisex jewelry should feel quiet, considered, and built to last."</p>
+          <p class="story-body">
+            Noa Shechter works out of a small studio on Nahalat Binyamin. Each ring, cuff, and pendant is hand-forged in sterling silver, brass, and 14k gold — mixed metals, considered forms, no two pieces exactly alike.
+          </p>
+          <button class="button button--outline-light" type="button" data-route="about">Read the story</button>
+        </div>
+      </section>
+
+      <section class="social-grid route-panel is-active" data-panel="home">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">On Instagram</p>
+            <h2 class="section-title">Studio moments &amp; new pieces — @noa.shechter</h2>
+          </div>
+        </div>
+        <div class="social-grid__items">
+          <div class="social-tile social-tile--one"></div>
+          <div class="social-tile social-tile--two"></div>
+          <div class="social-tile social-tile--three"></div>
+          <div class="social-tile social-tile--four"></div>
+          <div class="social-tile social-tile--five"></div>
+          <div class="social-tile social-tile--six"></div>
+        </div>
+      </section>
+
+      <section class="newsletter-banner route-panel is-active" data-panel="home">
+        <div class="newsletter-banner__visual" aria-hidden="true">
+          <div class="newsletter-banner__rings">
+            <span class="newsletter-banner__ring newsletter-banner__ring--outer"></span>
+            <span class="newsletter-banner__ring newsletter-banner__ring--mid"></span>
+            <span class="newsletter-banner__ring newsletter-banner__ring--inner"></span>
+          </div>
+          <span class="newsletter-banner__badge">10<sup>%</sup><em>off</em></span>
+        </div>
+        <div class="newsletter-banner__copy">
+          <p class="section-kicker">Studio Letter</p>
+          <h2 class="newsletter-banner__title">10% off your first piece.</h2>
+          <p class="newsletter-banner__text">Join the studio letter for new releases, private pieces, and a welcome discount on your first order. Quiet notes, a few times a year.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <label class="sr-only" for="newsletterEmail">Email address</label>
+            <input id="newsletterEmail" class="newsletter-input" type="email" placeholder="name@example.com" required>
+            <button class="button button--solid-alt" type="submit">Claim 10% off</button>
+          </form>
+          <p class="newsletter-feedback" id="newsletterFeedback" aria-live="polite"></p>
+          <p class="newsletter-banner__fineprint">No noise. Unsubscribe anytime.</p>
+        </div>
+      </section>
+
+      <section class="product-page route-panel" data-panel="product">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <button class="breadcrumb__link" type="button" data-route="home">Home</button>
+          <span class="breadcrumb__sep">/</span>
+          <button class="breadcrumb__link" type="button" data-route="shop">Shop</button>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current" id="productPageCrumb">Product</span>
+        </nav>
+
+        <div class="product-page__gallery">
+          <div class="product-page__main" id="productPageMain"></div>
+          <div class="product-page__thumbs" id="productPageThumbs"></div>
+        </div>
+
+        <div class="product-page__body">
+          <div class="product-page__info">
+            <p class="section-kicker" id="productPageCollection"></p>
+            <h1 class="product-page__title" id="productPageTitle"></h1>
+            <p class="product-page__subtitle" id="productPageSubtitle"></p>
+            <p class="product-page__price" id="productPagePrice"></p>
+            <p class="product-page__description" id="productPageDescription"></p>
+          </div>
+          <div class="product-page__form">
+            <label class="product-label" for="productPageVariant">Finish</label>
+            <select id="productPageVariant" class="product-select"></select>
+
+            <label class="product-label" for="productPageQuantity">Quantity</label>
+            <input id="productPageQuantity" class="product-quantity" type="number" min="1" value="1">
+
+            <div class="product-page__actions">
+              <button class="button button--solid" id="productPageAddButton" type="button">Add to cart</button>
+              <button class="button button--ghost" type="button" data-route="shop">Keep browsing</button>
+            </div>
+
+            <div class="product-page__meta">
+              <details class="product-accordion" open>
+                <summary>Details</summary>
+                <p>Hand-finished in Tel Aviv. Each piece completed individually. Variations in surface and patina are intrinsic.</p>
+              </details>
+              <details class="product-accordion">
+                <summary>Materials &amp; care</summary>
+                <p>Sterling silver 925, solid brass, copper, or recycled 14k gold. Polish gently with a soft cloth. Avoid saltwater and chemicals.</p>
+              </details>
+              <details class="product-accordion">
+                <summary>Shipping &amp; returns</summary>
+                <p>Free shipping on orders over ₪500. Worldwide shipping available. Exchanges within 14 days for unworn items.</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-page route-panel" data-panel="about">
+
+        <!-- Full-bleed hero -->
+        <div class="about-hero">
+          <div class="about-hero__media"></div>
+          <div class="about-hero__copy">
+            <p class="section-kicker">The Studio</p>
+            <h1 class="about-hero__title">Quiet forms,<br>mixed metals.</h1>
+          </div>
+        </div>
+
+        <!-- Philosophy statement -->
+        <div class="about-statement">
+          <blockquote class="about-quote">"Jewelry should feel like a second skin — weightless, personal, and built to outlast trends."</blockquote>
+          <p class="about-statement__attr">— Noa Shechter</p>
+        </div>
+
+        <!-- Maker story -->
+        <div class="about-story">
+          <div class="about-story__copy">
+            <p class="section-kicker">The Maker</p>
+            <h2 class="section-title about-story__heading">Noa Shechter</h2>
+            <div class="about-story__body">
+              <p>Noa works out of a small studio on Nahalat Binyamin, Tel Aviv. Each piece begins with raw material — sterling silver 925, solid brass, copper, or 14k gold — and is shaped entirely by hand.</p>
+              <p>There are no moulds, no mass production. Every ring, cuff, and pendant carries the trace of the maker: a slight asymmetry, a hand-hammered surface, a finish that deepens with time.</p>
+              <p>The work is unisex by intention. Good jewelry should belong to the person wearing it — not to a category.</p>
+            </div>
+            <button class="button button--text about-story__cta" type="button" data-route="contact">Enquire about custom work</button>
+          </div>
+          <div class="about-story__visual"></div>
+        </div>
+
+        <!-- Materials trio -->
+        <div class="about-materials">
+          <div class="about-materials__inner">
+            <div class="about-materials__head">
+              <p class="section-kicker">Materials</p>
+              <h2 class="section-title">Sourced with care.<br>Finished by hand.</h2>
+            </div>
+            <div class="about-materials__grid">
+              <div class="about-material-card about-material-card--silver">
+                <div class="about-material-card__visual"></div>
+                <p class="about-material-card__num">01</p>
+                <h3 class="about-material-card__title">Sterling Silver 925</h3>
+                <p class="about-material-card__desc">Hard-wearing, bright, and oxidizes beautifully over time. The studio workhorse — used in most daily-wear and stacking pieces.</p>
+              </div>
+              <div class="about-material-card about-material-card--brass">
+                <div class="about-material-card__visual"></div>
+                <p class="about-material-card__num">02</p>
+                <h3 class="about-material-card__title">Solid Brass</h3>
+                <p class="about-material-card__desc">Warm, heavy, and ages into a rich patina. Frequently paired with silver for contrast — a metal that tells stories.</p>
+              </div>
+              <div class="about-material-card about-material-card--gold">
+                <div class="about-material-card__visual"></div>
+                <p class="about-material-card__num">03</p>
+                <h3 class="about-material-card__title">14k Gold</h3>
+                <p class="about-material-card__desc">Reserved for heirloom-grade commissions. Pure, lasting, and made entirely to order with extended lead times.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market / find us -->
+        <div class="about-market">
+          <div class="about-market__inner">
+            <div class="about-market__copy">
+              <p class="section-kicker">Find Noa</p>
+              <h2 class="section-title section-title--light">Nahalat Binyamin.<br>Every Tue &amp; Fri.</h2>
+              <p class="about-market__text">The studio also ships worldwide. Custom and engraved pieces are made to order — reach out for details and lead times.</p>
+              <button class="button button--outline-light" type="button" data-route="contact">Get in touch</button>
+            </div>
+            <div class="about-market__visual"></div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+      <section class="contact-page route-panel" data-panel="contact">
+        <div class="contact-page__inner">
+
+          <div class="contact-page__head">
+            <p class="section-kicker">Get in touch</p>
+            <h1 class="section-title contact-page__title">Studio enquiries<br>&amp; custom orders.</h1>
+            <p class="contact-page__sub">Whether you have a question about a piece, want to commission something custom, or are interested in press and wholesale — we'd love to hear from you.</p>
+          </div>
+
+          <div class="contact-page__body">
+
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="contact-form__row">
+                <label class="product-label" for="contactName">Your name</label>
+                <input class="product-select" type="text" id="contactName" name="name" placeholder="First &amp; last name" autocomplete="name" required>
+              </div>
+              <div class="contact-form__row">
+                <label class="product-label" for="contactEmail">Email address</label>
+                <input class="product-select" type="email" id="contactEmail" name="email" placeholder="name@example.com" autocomplete="email" required>
+              </div>
+              <div class="contact-form__row">
+                <label class="product-label" for="contactSubject">Enquiry type</label>
+                <select class="product-select" id="contactSubject" name="subject">
+                  <option value="">Select a topic…</option>
+                  <option value="general">General enquiry</option>
+                  <option value="custom">Custom &amp; commission work</option>
+                  <option value="order">Existing order question</option>
+                  <option value="press">Press &amp; collaboration</option>
+                  <option value="wholesale">Wholesale</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="product-label" for="contactMessage">Message</label>
+                <textarea class="contact-form__textarea" id="contactMessage" name="message" rows="6" placeholder="Tell us about your project, question, or idea…" required></textarea>
+              </div>
+              <div class="contact-form__actions">
+                <button class="button button--solid" type="submit">Send message</button>
+                <p class="contact-form__feedback" id="contactFeedback" aria-live="polite"></p>
+              </div>
+            </form>
+
+            <aside class="contact-info" aria-label="Studio information">
+              <div class="contact-info__block">
+                <p class="contact-info__label">Studio</p>
+                <p class="contact-info__text">Nahalat Binyamin, Tel Aviv<br>By appointment only</p>
+              </div>
+              <div class="contact-info__block">
+                <p class="contact-info__label">Market</p>
+                <p class="contact-info__text">Nahalat Binyamin Arts &amp; Crafts Fair<br>Tuesday &amp; Friday — 10:00 to 18:00</p>
+              </div>
+              <div class="contact-info__block">
+                <p class="contact-info__label">Email</p>
+                <a href="mailto:studio@noashechter.com" class="footer-link">studio@noashechter.com</a>
+              </div>
+              <div class="contact-info__block">
+                <p class="contact-info__label">Instagram</p>
+                <a href="https://instagram.com/noa.shechter" target="_blank" rel="noopener" class="footer-link">@noa.shechter</a>
+              </div>
+              <div class="contact-info__block contact-info__block--note">
+                <p class="contact-info__label">Custom orders</p>
+                <p class="contact-info__text">Lead time is typically 3–6 weeks. A 50% deposit secures your commission. Engraving, mixed metals, and custom sizing are all available. We'll confirm details and pricing before any work begins.</p>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </section>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <button class="brand-lockup brand-lockup--footer" type="button" data-route="home" aria-label="Noa — home">
+            <svg class="brand-logo" viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1c1c1c"/>
+              <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1c1c1c"/>
+              <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#1c1c1c"/>
+            </svg>
+          </button>
+          <p class="site-footer__tagline">Handmade unisex jewelry from a small studio on Nahalat Binyamin, Tel Aviv.</p>
+        </div>
+
+        <nav class="site-footer__columns" aria-label="Footer">
+          <div class="footer-col">
+            <p class="footer-col__title">Shop</p>
+            <button class="footer-link" data-category-link="Rings" type="button">Rings</button>
+            <button class="footer-link" data-category-link="Earrings" type="button">Earrings</button>
+            <button class="footer-link" data-category-link="Necklaces" type="button">Necklaces</button>
+            <button class="footer-link" data-category-link="Bracelets" type="button">Bracelets</button>
+            <button class="footer-link" data-route="shop" type="button">All pieces</button>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col__title">Studio</p>
+            <button class="footer-link" data-route="home" type="button">Home</button>
+            <button class="footer-link" data-route="about" type="button">About</button>
+            <button class="footer-link" data-route="shop" type="button">Collection</button>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col__title">Support</p>
+            <button class="footer-link" data-open-search type="button">Search</button>
+            <button class="footer-link" data-open-cart type="button">Cart</button>
+            <button class="footer-link" type="button" data-route="contact">Contact</button>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col__title">Follow</p>
+            <a class="footer-link" href="https://instagram.com/noa.shechter" target="_blank" rel="noopener">Instagram</a>
+            <a class="footer-link" href="https://wa.me/972000000000" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="site-footer__base">
+        <p class="site-footer__copy">© 2026 Noa Shechter · Tel Aviv</p>
+        <p class="site-footer__note">Handmade · Free shipping over ₪500 · Worldwide delivery</p>
+      </div>
+    </footer>
+
+    <aside class="search-drawer" id="searchDrawer" hidden>
+      <div class="drawer-header">
+        <h2>Search</h2>
+        <button class="drawer-close" type="button" data-close-search>Close</button>
+      </div>
+      <label class="sr-only" for="searchInput">Search products</label>
+      <input id="searchInput" class="search-input" type="search" placeholder="Search mock products">
+      <div class="search-results" id="searchResults"></div>
+    </aside>
+
+    <aside class="cart-drawer" id="cartDrawer" hidden>
+      <div class="drawer-header">
+        <h2>Cart</h2>
+        <button class="drawer-close" type="button" data-close-cart>Close</button>
+      </div>
+      <div class="cart-lines" id="cartLines"></div>
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <strong id="cartSubtotal">$0.00</strong>
+        </div>
+        <button class="button button--solid" type="button" data-checkout>Checkout</button>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" hidden></div>
+    <div class="screen-overlay" id="screenOverlay" hidden></div>
+
+    <script src="./folio-mockup.js"></script>
+  </body>
+</html>

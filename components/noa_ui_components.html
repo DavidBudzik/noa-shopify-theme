@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noa — UI Component Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --graphite:    #1a1a18;
+  --charcoal:    #2c2c2a;
+  --slate:       #4a4a46;
+  --ash:         #6a6a64;
+  --stone:       #8a8a84;
+  --fog:         #a8a8a0;
+  --pebble:      #c8c8c0;
+  --dust:        #ddddd8;
+  --off-white:   #f7f6f4;
+  --stone-white: #efefeb;
+  --rule:        #e8e8e4;
+  --ember:       #c85c28;
+  --terracotta:  #e07840;
+  --gold:        #b89a6a;
+  --gold-rule:   #d4bc96;
+  --white:       #ffffff;
+}
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  background: var(--white);
+  color: var(--charcoal);
+  font-size: 13px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  padding: 48px;
+}
+
+/* ── DOC HEADER ── */
+.doc-header {
+  border-top: 2px solid var(--graphite);
+  padding-top: 20px;
+  margin-bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.doc-title {
+  font-size: 10px;
+  font-weight: 200;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+.doc-meta {
+  font-size: 9px;
+  font-weight: 200;
+  color: var(--fog);
+  letter-spacing: 0.1em;
+  text-align: right;
+  line-height: 1.9;
+}
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 56px;
+}
+.section-label {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--fog);
+  padding-bottom: 12px;
+  border-bottom: 0.5px solid var(--rule);
+  margin-bottom: 28px;
+}
+
+/* ── STATE LABEL ── */
+.state-label {
+  font-size: 9px;
+  font-weight: 200;
+  color: var(--fog);
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+  text-align: center;
+  display: block;
+}
+
+.row { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 16px; }
+.col { display: flex; flex-direction: column; align-items: flex-start; }
+.col-center { display: flex; flex-direction: column; align-items: center; }
+
+/* ── BUTTONS ── */
+.btn {
+  font-family: 'Instrument Sans', sans-serif;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+.btn-lg  { padding: 15px 40px; font-size: 13px; font-weight: 400; }
+.btn-md  { padding: 13px 30px; font-size: 12px; font-weight: 400; }
+.btn-sm  { padding: 9px 20px;  font-size: 11px; font-weight: 300; letter-spacing: 0.22em; }
+
+/* Primary */
+.btn-primary         { background: var(--graphite); color: var(--off-white); border: none; }
+.btn-primary:hover,
+.btn-primary-hover   { background: var(--charcoal); color: var(--off-white); border: none; }
+.btn-primary-dis     { background: var(--dust);     color: var(--pebble);   border: none; cursor: default; }
+
+/* Secondary */
+.btn-secondary       { background: transparent; color: var(--graphite); border: 1.5px solid var(--graphite); }
+.btn-secondary:hover,
+.btn-secondary-hover { background: var(--off-white); color: var(--graphite); border: 1.5px solid var(--graphite); }
+.btn-secondary-dis   { background: transparent; color: var(--pebble); border: 1.5px solid var(--dust); cursor: default; }
+
+/* Ghost */
+.btn-ghost           { background: transparent; color: var(--ash);    border: 1px solid var(--dust); }
+.btn-ghost:hover,
+.btn-ghost-hover     { background: var(--off-white); color: var(--slate); border: 1px solid var(--pebble); }
+
+/* Accent */
+.btn-accent          { background: var(--ember);  color: var(--white); border: none; }
+.btn-accent:hover    { background: #b04e20;        color: var(--white); border: none; }
+
+/* Gold */
+.btn-gold            { background: var(--gold);   color: var(--graphite); border: none; }
+
+/* ── TAGS ── */
+.tag {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 2px;
+  display: inline-block;
+}
+.tag-dark        { background: var(--graphite);    color: var(--off-white); }
+.tag-stone       { background: var(--stone-white); color: var(--charcoal); }
+.tag-muted       { background: var(--off-white);   color: var(--ash); border: 0.5px solid var(--dust); }
+.tag-terracotta  { background: var(--terracotta);  color: var(--white); }
+.tag-ember       { background: var(--ember);       color: var(--white); }
+.tag-gold        { background: #faf4ec;            color: #7a5020; border: 0.5px solid #e8d8b8; }
+.tag-outline     { background: transparent;        color: var(--slate); border: 1px solid var(--pebble); }
+
+/* ── INPUTS ── */
+.inp-wrap { display: flex; flex-direction: column; gap: 5px; min-width: 220px; }
+.inp-label {
+  font-size: 9px; font-weight: 200; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ash);
+}
+.inp {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 14px; font-weight: 300;
+  padding: 11px 14px;
+  border: 1px solid var(--dust);
+  border-radius: 2px;
+  background: var(--white);
+  color: var(--graphite);
+  outline: none;
+  width: 100%;
+}
+.inp::placeholder { color: var(--fog); }
+.inp-focus   { border-color: var(--graphite); }
+.inp-error   { border-color: var(--ember); }
+.inp-disabled { background: var(--off-white); color: var(--fog); border-color: var(--stone-white); }
+.inp-hint    { font-size: 10px; font-weight: 200; color: var(--stone); letter-spacing: 0.04em; }
+.inp-err-msg { font-size: 10px; font-weight: 300; color: var(--ember); letter-spacing: 0.04em; }
+
+/* ── VARIANT SELECTORS ── */
+.var-label-text {
+  font-size: 9px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--graphite); margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.var-guide {
+  font-weight: 200; color: var(--ember); font-size: 9px;
+  text-decoration: underline; text-decoration-color: #f0c8a8; cursor: pointer;
+}
+.chips { display: flex; gap: 7px; flex-wrap: wrap; }
+.chip {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 11px; font-weight: 300; letter-spacing: 0.06em;
+  padding: 7px 15px; border: 1px solid var(--dust); border-radius: 2px;
+  cursor: pointer; color: var(--charcoal); background: var(--white);
+  user-select: none; transition: border-color 0.15s;
+}
+.chip:hover     { border-color: var(--ash); }
+.chip.selected  { border-color: var(--graphite); background: var(--graphite); color: var(--off-white); }
+.chip.unavail   { color: var(--pebble); border-color: var(--stone-white); text-decoration: line-through; cursor: default; }
+
+.swatches { display: flex; gap: 10px; align-items: flex-end; }
+.swatch-item { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+.swatch {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid transparent;
+}
+.swatch.selected { outline: 2px solid var(--graphite); outline-offset: 3px; }
+.swatch-name { font-size: 9px; font-weight: 200; color: var(--fog); letter-spacing: 0.06em; }
+.swatch-name.active { color: var(--graphite); }
+
+/* ── UTILITY ── */
+.ann-bar {
+  background: var(--graphite); color: var(--off-white);
+  padding: 10px 24px; text-align: center;
+  font-size: 10px; font-weight: 200; letter-spacing: 0.28em; text-transform: uppercase;
+}
+.ann-dot { color: var(--gold-rule); margin: 0 10px; }
+
+.breadcrumb { display: flex; align-items: center; gap: 8px; }
+.bc { font-size: 10px; font-weight: 200; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fog); }
+.bc-active { color: var(--graphite); }
+.bc-sep { color: var(--dust); font-size: 10px; }
+
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--dust); border-radius: 2px; overflow: hidden; }
+.stepper-btn { font-size: 16px; font-weight: 200; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: var(--off-white); color: var(--graphite); border: none; cursor: pointer; font-family: 'Instrument Sans', sans-serif; }
+.stepper-val { font-size: 13px; font-weight: 300; color: var(--graphite); padding: 0 18px; border-left: 1px solid var(--dust); border-right: 1px solid var(--dust); line-height: 36px; font-family: 'Instrument Sans', sans-serif; }
+
+.toast { display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 2px; font-size: 12px; font-weight: 300; letter-spacing: 0.04em; }
+.toast-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.toast-success { background: var(--graphite); color: var(--off-white); }
+.toast-error   { background: var(--ember);    color: var(--white); }
+.toast-info    { background: var(--off-white); color: var(--charcoal); border: 0.5px solid var(--dust); }
+
+.gold-divider { width: 32px; height: 1px; background: var(--gold-rule); }
+
+/* ── GRID LAYOUTS ── */
+.btn-grid { display: grid; grid-template-columns: repeat(3, auto); gap: 12px 20px; align-items: start; justify-content: start; }
+.tag-row  { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.inp-row  { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+
+/* ── DOC FOOTER ── */
+.doc-footer {
+  margin-top: 64px;
+  padding-top: 16px;
+  border-top: 0.5px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.1em;
+  color: var(--fog);
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-title">Noa Unisex Jewelry — UI Component Library</div>
+  <div class="doc-meta">
+    v1.0 · April 2026<br>
+    Catamaran · Instrument Sans · Libre Bodoni<br>
+    Polar Hedgehog
+  </div>
+</div>
+
+<!-- ── SECTION 1: BUTTONS ── -->
+<div class="section">
+  <div class="section-label">Buttons — sizes &amp; states</div>
+
+  <!-- Sizes -->
+  <div class="row" style="margin-bottom:24px; align-items:flex-end;">
+    <div class="col-center">
+      <button class="btn btn-primary btn-lg">Add to bag</button>
+      <span class="state-label">Primary · lg</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-primary btn-md">Add to bag</button>
+      <span class="state-label">Primary · md</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-primary btn-sm">Add to bag</button>
+      <span class="state-label">Primary · sm</span>
+    </div>
+  </div>
+
+  <!-- Primary states -->
+  <div class="row" style="margin-bottom:24px; align-items:flex-end;">
+    <div class="col-center">
+      <button class="btn btn-primary btn-md">Add to bag</button>
+      <span class="state-label">Default</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-primary-hover btn-md">Add to bag</button>
+      <span class="state-label">Hover</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-primary-dis btn-md">Add to bag</button>
+      <span class="state-label">Disabled</span>
+    </div>
+  </div>
+
+  <!-- Secondary states -->
+  <div class="row" style="margin-bottom:24px; align-items:flex-end;">
+    <div class="col-center">
+      <button class="btn btn-secondary btn-md">Save to wishlist</button>
+      <span class="state-label">Secondary · default</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-secondary-hover btn-md">Save to wishlist</button>
+      <span class="state-label">Secondary · hover</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-secondary-dis btn-md">Save to wishlist</button>
+      <span class="state-label">Secondary · disabled</span>
+    </div>
+  </div>
+
+  <!-- Ghost + Accent + Gold -->
+  <div class="row" style="align-items:flex-end;">
+    <div class="col-center">
+      <button class="btn btn-ghost btn-md">Browse all</button>
+      <span class="state-label">Ghost · default</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-ghost-hover btn-md">Browse all</button>
+      <span class="state-label">Ghost · hover</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-accent btn-md">Last 2 · buy now</button>
+      <span class="state-label">Accent · ember</span>
+    </div>
+    <div class="col-center">
+      <button class="btn btn-gold btn-md">New collection</button>
+      <span class="state-label">Gold variant</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 2: TAGS ── -->
+<div class="section">
+  <div class="section-label">Tags &amp; badges</div>
+  <div class="tag-row">
+    <div class="col-center"><span class="tag tag-dark">New</span><span class="state-label">Dark</span></div>
+    <div class="col-center"><span class="tag tag-stone">Sterling Silver</span><span class="state-label">Stone</span></div>
+    <div class="col-center"><span class="tag tag-muted">Oxidized</span><span class="state-label">Muted</span></div>
+    <div class="col-center"><span class="tag tag-terracotta">Last 2</span><span class="state-label">Terracotta</span></div>
+    <div class="col-center"><span class="tag tag-ember">Sold out</span><span class="state-label">Ember</span></div>
+    <div class="col-center"><span class="tag tag-gold">Gold</span><span class="state-label">Gold</span></div>
+    <div class="col-center"><span class="tag tag-outline">Wires</span><span class="state-label">Outline</span></div>
+  </div>
+</div>
+
+<!-- ── SECTION 3: INPUTS ── -->
+<div class="section">
+  <div class="section-label">Form inputs</div>
+  <div class="inp-row">
+    <div class="inp-wrap">
+      <div class="inp-label">Ring size</div>
+      <div class="inp" style="color:var(--fog);">Select size</div>
+      <div class="inp-hint">Measure your finger at the widest point</div>
+    </div>
+    <div class="inp-wrap">
+      <div class="inp-label">Email address</div>
+      <div class="inp inp-focus">noa@example.com</div>
+      <div class="inp-hint">Focus state — border: Graphite</div>
+    </div>
+    <div class="inp-wrap">
+      <div class="inp-label">Engraving text</div>
+      <div class="inp inp-error">Too many characters</div>
+      <div class="inp-err-msg">Maximum 12 characters</div>
+    </div>
+  </div>
+  <div class="inp-row" style="margin-top:16px;">
+    <div class="inp-wrap" style="min-width:280px;">
+      <div class="inp-label">Gift note</div>
+      <div class="inp" style="min-height:72px; padding-top:10px; align-items:flex-start; display:flex;">Handmade in Tel Aviv. Made for everyone.</div>
+      <div class="inp-hint">Textarea — same border system</div>
+    </div>
+    <div class="inp-wrap">
+      <div class="inp-label">Discount code</div>
+      <div class="inp inp-disabled">DISABLED</div>
+      <div class="inp-hint">Disabled state</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 4: VARIANT SELECTORS ── -->
+<div class="section">
+  <div class="section-label">Variant selectors</div>
+
+  <div style="margin-bottom:20px;">
+    <div class="var-label-text">
+      Ring size
+      <span class="var-guide">Size guide</span>
+    </div>
+    <div class="chips">
+      <div class="chip">48</div>
+      <div class="chip">50</div>
+      <div class="chip selected">52</div>
+      <div class="chip">54</div>
+      <div class="chip">56</div>
+      <div class="chip unavail">58</div>
+      <div class="chip">60</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="var-label-text">Metal finish</div>
+    <div class="swatches">
+      <div class="swatch-item">
+        <div class="swatch" style="background:#e0e0d8;"></div>
+        <span class="swatch-name">Silver</span>
+      </div>
+      <div class="swatch-item">
+        <div class="swatch selected" style="background:#1a1a18;"></div>
+        <span class="swatch-name active">Oxidized</span>
+      </div>
+      <div class="swatch-item">
+        <div class="swatch" style="background:#b89a6a;"></div>
+        <span class="swatch-name">Gold</span>
+      </div>
+      <div class="swatch-item">
+        <div class="swatch" style="background:#c87850;"></div>
+        <span class="swatch-name">Copper</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 5: UTILITY ── -->
+<div class="section">
+  <div class="section-label">Utility components</div>
+
+  <!-- Announcement bar -->
+  <div style="margin-bottom:6px;"><span style="font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);">Announcement bar</span></div>
+  <div class="ann-bar" style="margin-bottom:24px;">
+    Free shipping on orders over ₪400 <span class="ann-dot">·</span> Handmade in Tel Aviv
+  </div>
+
+  <!-- Breadcrumb -->
+  <div style="margin-bottom:6px;"><span style="font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);">Breadcrumb</span></div>
+  <div class="breadcrumb" style="margin-bottom:24px;">
+    <span class="bc">Home</span>
+    <span class="bc-sep">/</span>
+    <span class="bc">Rings</span>
+    <span class="bc-sep">/</span>
+    <span class="bc">Wires</span>
+    <span class="bc-sep">/</span>
+    <span class="bc bc-active">Hammered band</span>
+  </div>
+
+  <!-- Stepper -->
+  <div style="margin-bottom:6px;"><span style="font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);">Quantity stepper</span></div>
+  <div style="margin-bottom:24px;">
+    <div class="stepper">
+      <button class="stepper-btn">−</button>
+      <div class="stepper-val">1</div>
+      <button class="stepper-btn">+</button>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div style="margin-bottom:6px;"><span style="font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);">Toast notifications</span></div>
+  <div class="row" style="margin-bottom:24px;">
+    <div class="toast toast-success">
+      <div class="toast-dot" style="background:var(--off-white);"></div>
+      Added to bag — Hammered band
+    </div>
+    <div class="toast toast-error">
+      <div class="toast-dot" style="background:var(--white);"></div>
+      Only 2 remaining in stock
+    </div>
+    <div class="toast toast-info">
+      <div class="toast-dot" style="background:var(--stone);"></div>
+      Saved to your wishlist
+    </div>
+  </div>
+
+  <!-- Gold divider -->
+  <div style="margin-bottom:6px;"><span style="font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);">Gold divider</span></div>
+  <div class="gold-divider"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span>noa_ui_components.html · v1.0 · Component Library</span>
+  <span>Noa Unisex Jewelry · Polar Hedgehog · April 2026</span>
+</div>
+
+</body>
+</html>

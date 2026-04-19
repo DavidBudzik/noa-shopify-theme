@@ -1,0 +1,54 @@
+<section class="hero-panel">
+  <div class="hero-media">
+    {% if section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 1800
+        | image_tag:
+          loading: 'eager',
+          widths: '720, 960, 1280, 1800',
+          sizes: '100vw',
+          class: 'hero-image-media',
+          alt: section.settings.title,
+          style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;'
+      }}
+    {% endif %}
+  </div>
+
+  <div class="hero-copy">
+    {% if section.settings.eyebrow != blank %}
+      <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    {% if section.settings.title != blank %}
+      <h1 class="hero-title">{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <p class="hero-text">{{ section.settings.text }}</p>
+    {% endif %}
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <div class="hero-actions">
+        <a class="button button--solid" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+        {% if section.settings.button_label_two != blank and section.settings.button_link_two != blank %}
+          <a class="button button--ghost" href="{{ section.settings.button_link_two }}">{{ section.settings.button_label_two }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New in the studio" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Unisex jewelry, made by hand in Tel Aviv." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Quiet forms, mixed metals, and one-of-a-kind pieces. Hand-finished in the studio on Nahalat Binyamin." },
+    { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop the collection" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "button_label_two", "label": "Secondary button label", "default": "The studio" },
+    { "type": "url", "id": "button_link_two", "label": "Secondary button link" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

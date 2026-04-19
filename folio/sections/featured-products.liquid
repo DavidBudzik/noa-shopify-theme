@@ -1,0 +1,101 @@
+{% assign source_collection = section.settings.collection %}
+{% assign products_limit = section.settings.products_to_show | default: 12 %}
+
+<section class="featured-gallery">
+  <div class="section-head">
+    <div>
+      {% if section.settings.kicker != blank %}
+        <p class="section-kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a class="button button--text" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+
+  <div class="featured-grid">
+    {% if source_collection != blank %}
+      {% for product in source_collection.products limit: products_limit %}
+        {% render 'product-card', product: product, collection_title: source_collection.title %}
+      {% endfor %}
+    {% else %}
+      {% for product in collections.all.products limit: products_limit %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        {% for index in (1..products_limit) %}
+          <article class="product-card">
+            <div class="product-card__media">
+              <div class="product-card__art" aria-hidden="true"></div>
+            </div>
+            <div class="product-card__meta">
+              <span class="product-card__collection">{{ section.settings.placeholder_collection }}</span>
+              <h3 class="product-card__title">{{ section.settings.placeholder_title }}</h3>
+              <span class="product-card__price">{{ 0 | money }}</span>
+            </div>
+          </article>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Featured"
+    },
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Title",
+      "default": "Curated <em>picks</em>."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_collection",
+      "label": "Placeholder collection label",
+      "default": "Curated selection"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_title",
+      "label": "Placeholder product title",
+      "default": "Signature piece"
+    }
+  ],
+  "presets": [
+    { "name": "Featured products" }
+  ]
+}
+{% endschema %}

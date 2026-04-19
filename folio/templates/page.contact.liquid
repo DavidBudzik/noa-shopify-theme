@@ -1,0 +1,73 @@
+<section class="noa-page noa-contact">
+  <div class="noa-page__head">
+    <p class="section-kicker">Get in touch</p>
+    <h1 class="noa-page__title">{{ page.title | default: 'Contact' }}</h1>
+  </div>
+
+  <div class="noa-contact__grid">
+
+    <!-- Info column -->
+    <div class="noa-contact__info">
+      {% if page.content != blank %}
+        <div class="noa-contact__copy rte">{{ page.content }}</div>
+      {% else %}
+        <p class="noa-contact__copy">Questions, custom orders, or just want to say hello — reach us below.</p>
+      {% endif %}
+
+      <dl class="noa-contact__details">
+        {% if settings.contact_email != blank %}
+          <dt>Email</dt>
+          <dd><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></dd>
+        {% endif %}
+        {% if settings.contact_location != blank %}
+          <dt>Studio</dt>
+          <dd>{{ settings.contact_location }}</dd>
+        {% endif %}
+        {% if settings.contact_hours != blank %}
+          <dt>Hours</dt>
+          <dd>{{ settings.contact_hours }}</dd>
+        {% endif %}
+        {% if settings.social_instagram != blank %}
+          <dt>Instagram</dt>
+          <dd><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">@noa_jewelry</a></dd>
+        {% endif %}
+      </dl>
+    </div>
+
+    <!-- Form column -->
+    <div class="noa-contact__form-col">
+      {% form 'contact', class: 'noa-contact__form' %}
+        {% if form.posted_successfully? %}
+          <p class="noa-contact__success">Message sent — we'll be in touch soon.</p>
+        {% else %}
+          {% if form.errors %}
+            <p class="noa-contact__error">{{ form.errors | default_errors }}</p>
+          {% endif %}
+
+          <div class="noa-form-row">
+            <label class="noa-form-label" for="ContactName">Name</label>
+            <input class="noa-form-input" type="text" id="ContactName" name="contact[name]"
+              placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div class="noa-form-row">
+            <label class="noa-form-label" for="ContactEmail">Email</label>
+            <input class="noa-form-input" type="email" id="ContactEmail" name="contact[email]"
+              placeholder="your@email.com" autocomplete="email" required>
+          </div>
+          <div class="noa-form-row">
+            <label class="noa-form-label" for="ContactSubject">Subject</label>
+            <input class="noa-form-input" type="text" id="ContactSubject" name="contact[subject]"
+              placeholder="Order question, custom request…">
+          </div>
+          <div class="noa-form-row">
+            <label class="noa-form-label" for="ContactMessage">Message</label>
+            <textarea class="noa-form-input noa-form-textarea" id="ContactMessage" name="contact[body]"
+              placeholder="Tell us how we can help…" rows="6" required></textarea>
+          </div>
+          <button class="noa-btn-cart" type="submit">Send message</button>
+        {% endif %}
+      {% endform %}
+    </div>
+
+  </div>
+</section>

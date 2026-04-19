@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noa Unisex Jewelry — Brand Identity Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Brand colours — monochrome minimalist (Elina Gleizer inspired) */
+    --ink-navy:      #1c1c1c;   /* logo mark — charcoal, unified with studio-black */
+    --studio-black:  #1c1c1c;   /* primary text, headings */
+    --body-text:     #1c1c1c;   /* body copy — single charcoal */
+    --secondary-text:#4a4a4a;   /* supporting text */
+    --muted-text:    #8a8a8a;   /* captions, nav links, labels */
+    --gold:          #b89a6a;   /* accent — rare use only */
+    --gold-warm:     #d4bc96;   /* secondary gold, pull quotes */
+    --parchment:     #efefef;   /* light gray surface — primary secondary bg */
+    --white:         #ffffff;   /* primary canvas */
+    --cool-surface:  #f6f6f6;   /* neutral subtle surface */
+    --rule:          #cfcfcf;   /* borders — medium gray */
+    --rule-warm:     #e0e0e0;   /* soft rule */
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 300;
+    background: var(--white);
+    color: var(--body-text);
+    font-size: 15px;
+    line-height: 1.95;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    z-index: 100;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-mark svg { height: 20px; width: auto; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: #c85c28; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .cover-eyebrow {
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 5rem;
+  }
+
+  .cover-logo { margin-bottom: 4rem; }
+  .cover-logo svg { width: min(560px, 90vw); height: auto; }
+
+  .cover-tagline {
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    margin-bottom: 7rem;
+  }
+
+  .cover-title {
+    font-family: 'Catamaran', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
+    color: #1a1a1a;
+    line-height: 1.08;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cover-sub {
+    font-size: 11px;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+  }
+
+  .cover-scroll {
+    margin-top: 6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+  }
+
+  .cover-scroll-line {
+    width: 48px;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── PAGES ── */
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 8rem 3rem 7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page:last-of-type { border-bottom: none; }
+
+  .section-tag {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 4rem;
+  }
+
+  h2 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    line-height: 1.08;
+    color: #1a1a1a;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 1.25rem;
+    margin-top: 3.5rem;
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--body-text);
+    margin-bottom: 1.25rem;
+    max-width: 540px;
+  }
+
+  .pull {
+    font-family: 'Catamaran', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2.1rem;
+    line-height: 1.45;
+    color: var(--gold);
+    margin: 4.5rem 0;
+    max-width: 520px;
+    letter-spacing: -0.01em;
+  }
+
+  .divider {
+    width: 32px;
+    height: 1px;
+    background: var(--gold-warm);
+    margin: 4rem 0;
+  }
+
+  /* ── VALUES ── */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--rule);
+    margin-top: 4rem;
+  }
+
+  .val {
+    padding: 2.25rem 1.75rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .val:nth-child(3n) { border-right: none; }
+  .val:nth-last-child(-n+3) { border-bottom: none; }
+
+  .val-word {
+    font-family: 'Catamaran', sans-serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .val-desc {
+    font-size: 12px;
+    color: var(--secondary-text);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── LOGO FIELDS ── */
+  .logo-display { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 3rem; }
+
+  .logo-field {
+    padding: 4rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .logo-field.on-white { background: #fff; border: 1px solid var(--rule); }
+  .logo-field.on-dark  { background: #1a1a1a; }
+  .logo-field.on-cream { background: var(--parchment); border: 1px solid var(--rule-warm); }
+
+  .logo-field-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    width: 80px;
+    flex-shrink: 0;
+    font-weight: 200;
+  }
+
+  .logo-field.on-dark .logo-field-label { color: #444; }
+  .logo-field svg { width: min(320px, 70vw); height: auto; }
+
+  /* ── COLOR SWATCHES ── */
+  .color-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .swatch { display: flex; flex-direction: column; gap: 0.75rem; }
+  .sw-block { height: 72px; border-radius: 2px; }
+  .sw-name { font-size: 12px; font-weight: 400; color: var(--studio-black); }
+  .sw-hex  { font-size: 10px; color: var(--muted-text); font-family: monospace; letter-spacing: 0.05em; }
+  .sw-use  { font-size: 10px; color: var(--muted-text); font-weight: 200; line-height: 1.5; }
+
+  /* ── TYPOGRAPHY ── */
+  .type-rows { margin-top: 3rem; border-top: 1px solid var(--rule); }
+
+  .type-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tr-meta { width: 130px; flex-shrink: 0; padding-top: 4px; }
+  .tr-role { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted-text); font-weight: 200; margin-bottom: 4px; }
+  .tr-spec { font-size: 10px; color: var(--muted-text); font-weight: 200; line-height: 1.5; }
+  .tr-sample { flex: 1; }
+
+  /* ── VOICE ── */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+
+  .vc { padding: 2rem 1.75rem; border: 1px solid var(--rule); }
+  .vc-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #1a1a1a; font-weight: 400; margin-bottom: 1rem; }
+  .vc p { font-size: 13px; max-width: none; margin: 0; color: var(--secondary-text); }
+
+  /* ── DO / DON'T ── */
+  .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+  .do-card, .dont-card { padding: 1.75rem; }
+  .do-card   { border-left: 2px solid #7a9a70; background: #f6f9f4; }
+  .dont-card { border-left: 2px solid #9a7a70; background: #f9f6f4; }
+  .dd-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 200; margin-bottom: 0.75rem; }
+  .do-card .dd-label   { color: #507040; }
+  .dont-card .dd-label { color: #705040; }
+  .do-card p, .dont-card p { font-size: 13px; max-width: none; margin: 0; color: var(--secondary-text); }
+
+  /* ── PHOTOGRAPHY ── */
+  .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+
+  .pp { padding: 2.25rem 1.75rem; background: var(--cool-surface); }
+  .pp-num {
+    font-family: 'Catamaran', sans-serif;
+    font-style: italic;
+    font-size: 2rem;
+    color: var(--gold-warm);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .pp-title { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: #1a1a1a; font-weight: 400; margin-bottom: 0.75rem; }
+  .pp p { font-size: 12px; max-width: none; color: var(--secondary-text); margin: 0; line-height: 1.7; }
+
+  /* ── COLLECTIONS ── */
+  .coll-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+
+  .coll-card {
+    padding: 2rem 1.5rem;
+    border-bottom: 2px solid var(--rule);
+    position: relative;
+  }
+
+  .coll-card::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 24px; height: 2px;
+    background: var(--gold);
+  }
+
+  .cc-name {
+    font-family: 'Catamaran', sans-serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .cc-desc { font-size: 12px; color: var(--secondary-text); line-height: 1.65; font-weight: 300; }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    font-weight: 200;
+    border-top: 1px solid var(--rule);
+  }
+
+  footer svg { height: 16px; width: auto; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .cover { padding: 8rem 2rem 4rem; }
+    .page { padding: 5rem 1.75rem 4rem; }
+    h2 { font-size: 2rem; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .color-row { grid-template-columns: repeat(2, 1fr); }
+    .voice-grid, .dd-grid, .photo-grid { grid-template-columns: 1fr; }
+    .coll-grid { grid-template-columns: 1fr 1fr; }
+    .type-row { flex-direction: column; gap: 1rem; }
+    .tr-meta { width: auto; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-mark">
+    <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1a1a18"/>
+      <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1a1a18"/>
+      <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#c85c28"/>
+    </svg>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#identity">Identity</a></li>
+    <li><a href="#color">Color</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#photo">Photo</a></li>
+    <li><a href="#collections">Collections</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-eyebrow">Brand Identity Guidelines · 2026</div>
+  <div class="cover-logo">
+    <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1a1a18"/>
+      <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1a1a18"/>
+      <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#c85c28"/>
+    </svg>
+  </div>
+  <div class="cover-tagline">Unisex Art Jewelry</div>
+  <h1 class="cover-title">Brand Identity<br>Guidelines</h1>
+  <div class="cover-sub">Noa Shechter · Tel Aviv · 2026</div>
+  <div class="cover-scroll">
+    <span class="cover-scroll-line"></span>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- 01 STORY -->
+<section class="page" id="story">
+  <div class="section-tag">01 — Brand Story</div>
+  <h2>Where metal<br>meets meaning</h2>
+
+  <p>Noa Unisex Jewelry is the studio practice of Noa Shechter — a Tel Aviv–based metalsmith and goldsmith who found her calling at the workbench. Starting with a single ring, she fell in love with the act of turning raw metal into something wearable, permanent, and quietly personal.</p>
+
+  <p>Every piece is conceived and finished by hand in her home studio. Twice a week, Noa brings her work to the Nahalat Binyamin Art Market — one of Tel Aviv's oldest and most beloved creative spaces — where she meets her customers face to face. Her Etsy shop extends that intimacy online.</p>
+
+  <div class="pull">"My style is a little eclectic — yet very earthy and natural, with smart designs and clean cuts. Less is more."</div>
+
+  <div class="divider"></div>
+  <h3>Brand values</h3>
+
+  <div class="values-grid">
+    <div class="val">
+      <div class="val-word">Earthy</div>
+      <div class="val-desc">Rooted in natural materials and the honesty of handwork</div>
+    </div>
+    <div class="val">
+      <div class="val-word">Unisex</div>
+      <div class="val-desc">Designed for women and men as one — beyond binary convention</div>
+    </div>
+    <div class="val">
+      <div class="val-word">Artisan</div>
+      <div class="val-desc">Made by hand, in small batches, never mass-produced</div>
+    </div>
+    <div class="val">
+      <div class="val-word">Modern</div>
+      <div class="val-desc">Contemporary in proportion and silhouette</div>
+    </div>
+    <div class="val">
+      <div class="val-word">Wearable</div>
+      <div class="val-desc">Made for every day, not just occasions</div>
+    </div>
+    <div class="val">
+      <div class="val-word">One-of-a-kind</div>
+      <div class="val-desc">Each piece carries the trace of its making</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 IDENTITY -->
+<section class="page" id="identity">
+  <div class="section-tag">02 — Logo &amp; Visual Identity</div>
+  <h2>The mark</h2>
+
+  <p>The logo is a hand-drawn calligraphic signature — the word "noa" rendered in a single gestural sweep, with the dot of the final letter forming a small star that trails off into a fine line. The mark is organic, authored, and irreproducible. It communicates craft, personality, and Tel Aviv's creative spirit in a single stroke.</p>
+
+  <p>This mark should always be used as the placed SVG file and never redrawn, retyped, or approximated in any other typeface.</p>
+
+  <div class="logo-display">
+    <!-- On white -->
+    <div class="logo-field on-white">
+      <div class="logo-field-label">On white</div>
+      <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1a1a18"/>
+        <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1a1a18"/>
+        <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#c85c28"/>
+      </svg>
+    </div>
+
+    <!-- On dark -->
+    <div class="logo-field on-dark">
+      <div class="logo-field-label">On dark</div>
+      <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#f5f0e8"/>
+        <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#f5f0e8"/>
+        <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#d4bc96"/>
+      </svg>
+    </div>
+
+    <!-- On cream -->
+    <div class="logo-field on-cream">
+      <div class="logo-field-label">On cream</div>
+      <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1a1a18"/>
+        <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1a1a18"/>
+        <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#c85c28"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="dd-grid">
+    <div class="do-card">
+      <div class="dd-label">Use</div>
+      <p>Always use the original SVG or supplied PNG. Maintain generous clear space equal to the mark's height on all sides. Use on white, cream, or deep charcoal only.</p>
+    </div>
+    <div class="dont-card">
+      <div class="dd-label">Never</div>
+      <p>Never redraw, retype, stretch, recolor, outline, or place on a busy background without a clean, uncluttered field behind the mark.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 COLOR -->
+<section class="page" id="color">
+  <div class="section-tag">03 — Color Palette</div>
+  <h2>The palette</h2>
+
+  <p>The palette is drawn directly from the materials — ink, gold, raw silver, warm paper, aged stone. Deliberately restrained. White is the primary canvas. The golds are the only accent. All supporting tones are neutral, neither warm nor cold — so the work reads as made for everyone.</p>
+
+  <div class="color-row">
+    <div class="swatch">
+      <div class="sw-block" style="background:#1c1c1c;"></div>
+      <div class="sw-name">Studio Black</div>
+      <div class="sw-hex">#1c1c1c</div>
+      <div class="sw-use">Primary ink — text, logo, buttons</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#4a4a4a;"></div>
+      <div class="sw-name">Graphite</div>
+      <div class="sw-hex">#4a4a4a</div>
+      <div class="sw-use">Secondary text</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#8a8a8a;"></div>
+      <div class="sw-name">Silver Mist</div>
+      <div class="sw-hex">#8a8a8a</div>
+      <div class="sw-use">Captions, metadata, nav</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#cfcfcf;"></div>
+      <div class="sw-name">Rule Gray</div>
+      <div class="sw-hex">#cfcfcf</div>
+      <div class="sw-use">Borders, dividers</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#efefef; border:1px solid #cfcfcf;"></div>
+      <div class="sw-name">Surface Gray</div>
+      <div class="sw-hex">#efefef</div>
+      <div class="sw-use">Secondary bg — page sections</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#ffffff; border:1px solid #cfcfcf;"></div>
+      <div class="sw-name">Pure White</div>
+      <div class="sw-hex">#ffffff</div>
+      <div class="sw-use">Primary canvas, header, cards</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#b89a6a;"></div>
+      <div class="sw-name">Heritage Gold</div>
+      <div class="sw-hex">#b89a6a</div>
+      <div class="sw-use">Rare accent — logo metal only</div>
+    </div>
+    <div class="swatch">
+      <div class="sw-block" style="background:#d4bc96;"></div>
+      <div class="sw-name">Warm Gold</div>
+      <div class="sw-hex">#d4bc96</div>
+      <div class="sw-use">Packaging, print accents</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Usage rule</h3>
+  <p>White is the primary canvas. Surface Gray (#efefef) carries secondary sections and breathing room. Studio Black is the ink for all text, the logo, and primary UI. Heritage Gold appears only as a metal reference — never as a UI accent. Borders always use Rule Gray at 1px. Radius: 0px throughout.</p>
+  <p>The palette is monochrome minimalist by design — gallery-grade, unisex, gender-balanced. Warmth comes from product photography and handwriting, never from chrome or UI.</p>
+</section>
+
+<!-- 04 TYPE -->
+<section class="page" id="type">
+  <div class="section-tag">04 — Typography</div>
+  <h2>The type</h2>
+
+  <p>Two typefaces carry the full typographic weight of the brand. Catamaran sets every display, heading, and label — uppercase, tightly tracked, structural. Instrument Sans carries all body copy and UI with a neutral, precise voice. Libre Bodoni remains as an editorial italic for long-form story moments only. The pairing is intentional: geometric sans for architecture, humanist sans for information, serif only where emotion is earned.</p>
+
+  <div class="type-rows">
+    <div class="type-row">
+      <div class="tr-meta">
+        <div class="tr-role">Display</div>
+        <div class="tr-spec">Libre Bodoni<br>Italic · 400 (editorial only)</div>
+      </div>
+      <div class="tr-sample">
+        <span style="font-family:'Libre Bodoni',serif;font-style:italic;font-weight:400;font-size:2.4rem;color:#1c1c1c;line-height:1.1;">
+          Handmade in<br>Tel Aviv
+        </span>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="tr-meta">
+        <div class="tr-role">Heading</div>
+        <div class="tr-spec">Catamaran<br>Regular · 400 · Uppercase · 0.18em</div>
+      </div>
+      <div class="tr-sample">
+        <span style="font-family:'Catamaran',sans-serif;font-weight:400;font-size:1.4rem;letter-spacing:0.18em;text-transform:uppercase;color:#1c1c1c;">
+          Each piece, one of a kind
+        </span>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="tr-meta">
+        <div class="tr-role">Label / Nav</div>
+        <div class="tr-spec">Catamaran<br>Regular · 400<br>0.18em tracked</div>
+      </div>
+      <div class="tr-sample">
+        <span style="font-family:'Catamaran',sans-serif;font-weight:400;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#1c1c1c;">
+          Signet Rings Collection
+        </span>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="tr-meta">
+        <div class="tr-role">Body</div>
+        <div class="tr-spec">Instrument Sans<br>Regular · 400<br>15px / 1.65 · 0.02em</div>
+      </div>
+      <div class="tr-sample">
+        <span style="font-family:'Instrument Sans',sans-serif;font-weight:400;font-size:15px;line-height:1.65;letter-spacing:0.02em;color:#1c1c1c;">
+          Designed to be worn every day, not saved for special occasions. The weight of real metal. The presence of something made entirely by hand.
+        </span>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="tr-meta">
+        <div class="tr-role">Caption</div>
+        <div class="tr-spec">Instrument Sans<br>Medium · 500<br>10px · 0.18em tracked</div>
+      </div>
+      <div class="tr-sample">
+        <span style="font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#8a8a8a;">
+          14k yellow gold &nbsp;·&nbsp; handcrafted &nbsp;·&nbsp; Tel Aviv
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 VOICE -->
+<section class="page" id="voice">
+  <div class="section-tag">05 — Brand Voice &amp; Messaging</div>
+  <h2>How Noa speaks</h2>
+
+  <p>The brand voice is the voice of an artist who loves her craft and trusts her customers to feel it. Quiet confidence. No performance. No exclamation marks. The work speaks for itself — the words simply open the door.</p>
+
+  <div class="pull">"Follow your heart. I found what is my real love. Now my soul is much happier."</div>
+
+  <div class="voice-grid">
+    <div class="vc">
+      <div class="vc-label">Earthy &amp; honest</div>
+      <p>Talk about materials and process plainly. Gold, silver, the flame, the hammer. Real words for real things.</p>
+    </div>
+    <div class="vc">
+      <div class="vc-label">Quietly confident</div>
+      <p>No superlatives, no exclamations. Let the work speak. Confidence comes from restraint, not volume.</p>
+    </div>
+    <div class="vc">
+      <div class="vc-label">Inclusive warmth</div>
+      <p>Unisex by design and by spirit. "Made for women and men as one." Never gender the piece or the customer.</p>
+    </div>
+    <div class="vc">
+      <div class="vc-label">Personal &amp; human</div>
+      <p>Share the process. The studio. The market stall. Authenticity is the differentiator — don't polish it away.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Copy in practice</h3>
+
+  <div class="dd-grid">
+    <div class="do-card">
+      <div class="dd-label">Write this</div>
+      <p>"Hammered from solid 14k gold. Fits like it was always there."</p>
+    </div>
+    <div class="dont-card">
+      <div class="dd-label">Not this</div>
+      <p>"STUNNING gold ring — perfect for any occasion!! You'll LOVE it!!"</p>
+    </div>
+    <div class="do-card">
+      <div class="dd-label">Write this</div>
+      <p>"Wear it on whichever finger feels right. Made for everyone."</p>
+    </div>
+    <div class="dont-card">
+      <div class="dd-label">Not this</div>
+      <p>"The perfect gift for him or the special lady in your life."</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PHOTO -->
+<section class="page" id="photo">
+  <div class="section-tag">06 — Photography Style</div>
+  <h2>The image language</h2>
+
+  <p>Photography should feel like natural light falling on a studio workbench — warm, unhurried, close. The goal is to show jewelry as it actually lives: against skin, on hands, in the context of the creative space where it was made.</p>
+
+  <div class="photo-grid">
+    <div class="pp">
+      <div class="pp-num">01</div>
+      <div class="pp-title">Natural light only</div>
+      <p>Window light or open shade. No harsh flash. Warmth and softness are non-negotiable.</p>
+    </div>
+    <div class="pp">
+      <div class="pp-num">02</div>
+      <div class="pp-title">Warm neutral grounds</div>
+      <p>Linen, raw concrete, aged wood, bare skin. Never bright white or saturated color.</p>
+    </div>
+    <div class="pp">
+      <div class="pp-num">03</div>
+      <div class="pp-title">On-body priority</div>
+      <p>Show pieces on real hands and necks. Mix product-only and worn shots at 1:2 ratio.</p>
+    </div>
+    <div class="pp">
+      <div class="pp-num">04</div>
+      <div class="pp-title">Process &amp; studio</div>
+      <p>Document the making: tools, sketches, the market stall. Authenticity is the product.</p>
+    </div>
+    <div class="pp">
+      <div class="pp-num">05</div>
+      <div class="pp-title">Shallow focus</div>
+      <p>Focus precisely on the piece. Let surroundings soften into warmth behind it.</p>
+    </div>
+    <div class="pp">
+      <div class="pp-num">06</div>
+      <div class="pp-title">Unisex casting</div>
+      <p>Feature all genders and expressions. The jewelry is for everyone — so is the imagery.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Post-processing</h3>
+  <p>Minimal editing. Lift shadows slightly for warmth. Add warmth to midranges. Never over-saturate or cool the tone. The metal should look like metal — not a rendering.</p>
+</section>
+
+<!-- 07 COLLECTIONS -->
+<section class="page" id="collections">
+  <div class="section-tag">07 — Product Collections</div>
+  <h2>The collections</h2>
+
+  <p>Each collection is built around a single technique or concept. The line holds together because every piece shares the same sensibility — not because everything matches. Collections are named directly, without marketing inflation.</p>
+
+  <div class="coll-grid">
+    <div class="coll-card">
+      <div class="cc-name">Wires</div>
+      <div class="cc-desc">Delicate wire-formed structures — rings, pendants, earrings built from drawn metal line.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Grid</div>
+      <div class="cc-desc">Geometric lattice forms. Structured, architectural, rooted in pattern and repetition.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Fold Forming</div>
+      <div class="cc-desc">Sheet metal folded cold. Each piece carries the memory of its forming process.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Color Blocks</div>
+      <div class="cc-desc">Mixed-material pieces with bold accent elements. Playful yet restrained.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Spirals</div>
+      <div class="cc-desc">Coiled and wound forms. Organic movement frozen in silver and gold.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Signet Rings</div>
+      <div class="cc-desc">Minimal flat-top signets for all genders. The most everyday piece in the line.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">One of a Kind</div>
+      <div class="cc-desc">Unique experimental works. Available only once. The purest expression of the studio.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Earrings</div>
+      <div class="cc-desc">Across all techniques. Lightweight, graphic, wearable alone or stacked.</div>
+    </div>
+    <div class="coll-card">
+      <div class="cc-name">Necklaces &amp; Bracelets</div>
+      <div class="cc-desc">Understated chains and cuffs that complement rather than compete.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Naming convention</h3>
+  <p>Name pieces by material + form + collection. Example: <em>Gold Wire Twist Ring — Wires Collection.</em> Avoid evocative names that gender or over-romanticize the work.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <svg viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="#1a1a18"/>
+    <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="#1a1a18"/>
+    <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="#c85c28"/>
+  </svg>
+  <span>Brand Identity Guidelines · 2026</span>
+  <span>Noa Shechter · Tel Aviv</span>
+</footer>
+
+</body>
+</html>

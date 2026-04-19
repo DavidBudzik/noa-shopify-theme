@@ -1,0 +1,63 @@
+{% if section.blocks.size > 0 %}
+  <section class="collections-bar">
+    <div class="collections-scroll page-width">
+      {% for block in section.blocks %}
+        {% assign linked_collection = block.settings.collection %}
+        <a class="collection-item" href="{{ linked_collection.url | default: block.settings.link }}" {{ block.shopify_attributes }}>
+          <div class="collection-icon">{{ block.settings.icon }}</div>
+          <div class="collection-name">{{ block.settings.label | default: linked_collection.title }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collections bar",
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label override",
+          "default": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon or symbol",
+          "default": "◌"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Fallback link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Collections bar",
+      "blocks": [
+        { "type": "collection", "settings": { "label": "New arrivals", "icon": "∿" } },
+        { "type": "collection", "settings": { "label": "Jewelry", "icon": "◇" } },
+        { "type": "collection", "settings": { "label": "Ceramics", "icon": "◉" } },
+        { "type": "collection", "settings": { "label": "Skincare", "icon": "✦" } },
+        { "type": "collection", "settings": { "label": "Accessories", "icon": "□" } },
+        { "type": "collection", "settings": { "label": "Limited pieces", "icon": "#" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

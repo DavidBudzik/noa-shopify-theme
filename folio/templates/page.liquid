@@ -1,0 +1,10 @@
+<!-- Default page template -->
+<section class="noa-page">
+  <div class="noa-page__head">
+    <p class="section-kicker">{{ page.metafields.custom.kicker | default: 'Noa Studio' }}</p>
+    <h1 class="noa-page__title">{{ page.title }}</h1>
+  </div>
+  <div class="noa-page__body rte">
+    {{ page.content }}
+  </div>
+</section>

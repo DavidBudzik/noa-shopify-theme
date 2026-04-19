@@ -1,0 +1,152 @@
+<section class="featured-gallery">
+  <div class="section-head">
+    <div>
+      <p class="section-kicker">{{ section.settings.kicker }}</p>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a class="button button--text" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+
+  <div class="categories-grid">
+      {% for block in section.blocks %}
+        {% assign card_image = blank %}
+        {% if block.settings.image != blank %}
+          {% assign card_image = block.settings.image %}
+        {% elsif block.settings.collection != blank and block.settings.collection.image != blank %}
+          {% assign card_image = block.settings.collection.image %}
+        {% elsif block.settings.collection != blank and block.settings.collection.products.first.featured_image != blank %}
+          {% assign card_image = block.settings.collection.products.first.featured_image %}
+        {% endif %}
+        {% assign card_image_asset = blank %}
+        {% if block.settings.image_asset != blank %}
+          {% assign card_image_asset = block.settings.image_asset | asset_url %}
+        {% endif %}
+
+        {% assign card_link = block.settings.link %}
+        {% if card_link == blank and block.settings.collection != blank %}
+          {% assign card_link = block.settings.collection.url %}
+        {% endif %}
+
+        <a class="category-card" href="{{ card_link | default: '#' }}" {{ block.shopify_attributes }} aria-label="Browse {{ block.settings.title }}">
+          {% if card_image != blank %}
+            {{ card_image | image_url: width: 1200 | image_tag:
+              loading: 'lazy',
+              widths: '480, 720, 960, 1200',
+              sizes: '(min-width: 900px) 50vw, 100vw',
+              class: 'category-card__img',
+              alt: block.settings.title
+            }}
+          {% elsif card_image_asset != blank %}
+            <img class="category-card__img" src="{{ card_image_asset }}" alt="{{ block.settings.title }}" loading="lazy">
+          {% else %}
+            <span class="category-card__img" style="background:{{ block.settings.fallback_gradient }};"></span>
+          {% endif %}
+          <span class="category-card__overlay"></span>
+          <span class="category-card__body">
+            <span>
+              <span class="category-card__label">{{ block.settings.label }}</span>
+              <span class="category-card__title">{{ block.settings.title }}</span>
+            </span>
+            <span class="category-card__cta">{{ block.settings.cta }}</span>
+          </span>
+        </a>
+      {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categories grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Collections"
+    },
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Title",
+      "default": "Browse by <em>category</em>."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme asset filename (e.g. cat-rings.jpg)"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection (fallback image + link)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Small label",
+          "default": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Rings"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "CTA text",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link override"
+        },
+        {
+          "type": "text",
+          "id": "fallback_gradient",
+          "label": "Fallback gradient",
+          "default": "linear-gradient(145deg, #cfcfcf 0%, #8a8a8a 100%)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Categories grid",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Rings", "label": "Collection", "cta": "Shop" } },
+        { "type": "card", "settings": { "title": "Earrings", "label": "Collection", "cta": "Shop" } },
+        { "type": "card", "settings": { "title": "Necklaces", "label": "Collection", "cta": "Shop" } },
+        { "type": "card", "settings": { "title": "Bracelets", "label": "Collection", "cta": "Shop" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

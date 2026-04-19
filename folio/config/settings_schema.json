@@ -1,0 +1,211 @@
+[
+  {
+    "name": "Theme identity",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "Noa"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Brand tagline",
+        "default": "Handmade unisex jewelry · Tel Aviv studio"
+      },
+      {
+        "type": "textarea",
+        "id": "brand_description",
+        "label": "Brand description",
+        "default": "Hand-forged sterling silver, brass, and 14k gold. Unisex pieces made one at a time in a small studio on Nahalat Binyamin, Tel Aviv."
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_copy",
+        "label": "Footer copyright text",
+        "default": "Noa Shechter · Nahalat Binyamin, Tel Aviv."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink",
+        "default": "#1c1c1c"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Gold",
+        "default": "#b89a6a"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_warm",
+        "label": "Warm gold",
+        "default": "#d4bc96"
+      },
+      {
+        "type": "color",
+        "id": "color_parchment",
+        "label": "Surface",
+        "default": "#efefef"
+      },
+      {
+        "type": "color",
+        "id": "color_stone",
+        "label": "Stone",
+        "default": "#8a8a8a"
+      },
+      {
+        "type": "color",
+        "id": "color_black",
+        "label": "Black",
+        "default": "#1c1c1c"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "White",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Primary menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "secondary_menu",
+        "label": "Secondary menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "Show search link",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "search_label",
+        "label": "Search label",
+        "default": "Search"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_menu_one",
+        "label": "Footer menu 1"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_two",
+        "label": "Footer menu 2"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_three",
+        "label": "Footer menu 3"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_one_title",
+        "label": "Footer menu 1 title",
+        "default": "Shop"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_two_title",
+        "label": "Footer menu 2 title",
+        "default": "Collections"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_three_title",
+        "label": "Footer menu 3 title",
+        "default": "Info"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      }
+    ]
+  },
+  {
+    "name": "Templates",
+    "settings": [
+      {
+        "type": "text",
+        "id": "collection_heading_prefix",
+        "label": "Collection heading prefix",
+        "default": "Browse the"
+      },
+      {
+        "type": "text",
+        "id": "product_badge_label",
+        "label": "Product badge label",
+        "default": "Featured"
+      },
+      {
+        "type": "text",
+        "id": "quick_add_label",
+        "label": "Quick add label",
+        "default": "Add to cart"
+      },
+      {
+        "type": "text",
+        "id": "cart_heading",
+        "label": "Cart heading",
+        "default": "Your cart"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_empty_text",
+        "label": "Empty cart text",
+        "default": "Your cart is currently empty."
+      },
+      {
+        "type": "text",
+        "id": "cart_continue_label",
+        "label": "Continue shopping label",
+        "default": "Continue shopping"
+      },
+      {
+        "type": "text",
+        "id": "about_template_eyebrow",
+        "label": "About page eyebrow",
+        "default": "Our world"
+      }
+    ]
+  }
+]

@@ -1,0 +1,105 @@
+{
+  "current": {
+    "sections": {
+      "categories-grid": {
+        "type": "categories-grid",
+        "settings": {
+          "kicker": "Collections",
+          "title": "Browse by <em>category</em>.",
+          "button_label": "View all",
+          "button_link": "/collections"
+        },
+        "blocks": {
+          "rings": {
+            "type": "card",
+            "settings": {
+              "label": "Collection",
+              "title": "Rings",
+              "cta": "Shop",
+              "link": "/collections/rings",
+              "image_asset": "cat-rings.jpg",
+              "fallback_gradient": "linear-gradient(145deg, #1c1c1c 0%, #4a4a4a 100%)"
+            }
+          },
+          "earrings": {
+            "type": "card",
+            "settings": {
+              "label": "Collection",
+              "title": "Earrings",
+              "cta": "Shop",
+              "link": "/collections/earrings",
+              "image_asset": "cat-earrings.png",
+              "fallback_gradient": "linear-gradient(145deg, #8a8a8a 0%, #4a4a4a 100%)"
+            }
+          },
+          "necklaces": {
+            "type": "card",
+            "settings": {
+              "label": "Collection",
+              "title": "Necklaces",
+              "cta": "Shop",
+              "link": "/collections/necklaces",
+              "image_asset": "cat-necklaces.png",
+              "fallback_gradient": "linear-gradient(145deg, #cfcfcf 0%, #8a8a8a 100%)"
+            }
+          },
+          "bracelets": {
+            "type": "card",
+            "settings": {
+              "label": "Collection",
+              "title": "Bracelets",
+              "cta": "Shop",
+              "link": "/collections/bracelets",
+              "image_asset": "cat-bracelets.jpg",
+              "fallback_gradient": "linear-gradient(145deg, #d4bc96 0%, #b89a6a 100%)"
+            }
+          }
+        },
+        "block_order": ["rings", "earrings", "necklaces", "bracelets"]
+      },
+      "collection-banner": {
+        "type": "collection-banner",
+        "settings": {
+          "image_asset": "banner-collection.jpg"
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "announcement_text": "Free shipping on orders over ₪500 · Handmade in Tel Aviv",
+          "announcement_link": "",
+          "show_announcement": true
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "show_tagline": true
+        }
+      }
+    },
+    "brand_name": "Noa",
+    "brand_tagline": "Handmade unisex jewelry · Tel Aviv studio",
+    "brand_description": "Hand-forged sterling silver, brass, and 14k gold. Unisex pieces made one at a time in a small studio on Nahalat Binyamin, Tel Aviv.",
+    "footer_copy": "Noa Shechter · Nahalat Binyamin, Tel Aviv.",
+    "color_ink": "#1c1c1c",
+    "color_gold": "#b89a6a",
+    "color_gold_warm": "#d4bc96",
+    "color_parchment": "#efefef",
+    "color_stone": "#8a8a8a",
+    "color_black": "#1c1c1c",
+    "color_white": "#ffffff",
+    "enable_search": true,
+    "search_label": "Search",
+    "footer_menu_one_title": "Shop",
+    "footer_menu_two_title": "Collections",
+    "footer_menu_three_title": "Info",
+    "collection_heading_prefix": "Browse the",
+    "product_badge_label": "Featured",
+    "quick_add_label": "Add to cart",
+    "cart_heading": "Your cart",
+    "cart_empty_text": "Your cart is currently empty.",
+    "cart_continue_label": "Continue shopping",
+    "about_template_eyebrow": "Our world"
+  }
+}

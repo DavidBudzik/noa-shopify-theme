@@ -1,0 +1,32 @@
+{
+  "general": {
+    "pagination": {
+      "page": "Page {{ page }}"
+    }
+  },
+  "templates": {
+    "cart": {
+      "cart": "Cart"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold out",
+      "quantity": "Quantity",
+      "product_variants": "Options"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "No products found in this collection."
+    }
+  },
+  "cart": {
+    "general": {
+      "remove": "Remove",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "checkout": "Checkout"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<section class="newsletter-banner">
+  <div class="newsletter-banner__visual" aria-hidden="true"
+    {% if section.settings.image != blank %}
+      style="background-image:url('{{ section.settings.image | image_url: width: 1600 }}');"
+    {% endif %}>
+    <span class="newsletter-banner__badge">{{ section.settings.badge_number | default: '10' }}<sup>%</sup><em>{{ section.settings.badge_label | default: 'off' }}</em></span>
+  </div>
+
+  <div class="newsletter-banner__copy">
+    {% if section.settings.eyebrow != blank %}
+      <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    {% if section.settings.title != blank %}
+      <h2 class="newsletter-banner__title">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.subtext != blank %}
+      <p class="newsletter-banner__text">{{ section.settings.subtext }}</p>
+    {% endif %}
+
+    {% form 'customer', class: 'newsletter-form', id: 'newsletterForm' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="sr-only" for="NewsletterEmail-{{ section.id }}">{{ section.settings.email_label }}</label>
+      <input
+        id="NewsletterEmail-{{ section.id }}"
+        class="newsletter-input"
+        type="email"
+        name="contact[email]"
+        value="{{ form.email }}"
+        placeholder="{{ section.settings.placeholder }}"
+        required
+        autocorrect="off"
+        autocapitalize="off"
+      >
+      <button class="button button--solid-alt" type="submit">{{ section.settings.button_label }}</button>
+
+      <p class="newsletter-feedback" aria-live="polite">
+        {% if form.posted_successfully? %}{{ section.settings.success_message }}{% endif %}
+        {% if form.errors %}{{ form.errors | default_errors }}{% endif %}
+      </p>
+    {% endform %}
+
+    {% if section.settings.fineprint != blank %}
+      <p class="newsletter-banner__fineprint">{{ section.settings.fineprint }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Visual image" },
+    { "type": "text", "id": "badge_number", "label": "Badge number", "default": "10" },
+    { "type": "text", "id": "badge_label", "label": "Badge label", "default": "off" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Studio Letter" },
+    { "type": "text", "id": "title", "label": "Title", "default": "10% off your first piece." },
+    { "type": "textarea", "id": "subtext", "label": "Text", "default": "Join the studio letter for new releases, private pieces, and a welcome discount on your first order. Quiet notes, a few times a year." },
+    { "type": "text", "id": "email_label", "label": "Email field label", "default": "Email address" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "name@example.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Claim 10% off" },
+    { "type": "text", "id": "fineprint", "label": "Fine print", "default": "No noise. Unsubscribe anytime." },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — your discount is on the way." }
+  ],
+  "presets": [{ "name": "Newsletter banner" }]
+}
+{% endschema %}

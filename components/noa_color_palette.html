@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noa — Color Palette & Tokens</title>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── PRIMITIVES ── */
+  --graphite:    #1a1a18;
+  --charcoal:    #2c2c2a;
+  --slate:       #4a4a46;
+  --ash:         #6a6a64;
+  --stone:       #8a8a84;
+  --fog:         #a8a8a0;
+  --pebble:      #c8c8c0;
+  --dust:        #ddddd8;
+  --stone-white: #efefeb;
+  --off-white:   #f7f6f4;
+  --rule:        #e8e8e4;
+  --white:       #ffffff;
+  --ember:       #c85c28;
+  --ember-hover: #b04e20;
+  --terracotta:  #e07840;
+  --gold:        #b89a6a;
+  --gold-warm:   #d4bc96;
+  --gold-bg:     #faf4ec;
+  --gold-border: #e8d8b8;
+  --gold-text:   #7a5020;
+  --success:     #2d6a4f;
+}
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  background: var(--white);
+  color: var(--charcoal);
+  font-size: 12px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.doc-header {
+  border-top: 2px solid var(--graphite);
+  padding: 24px 48px 22px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  background: var(--white);
+}
+.doc-title { font-size: 10px; font-weight: 200; letter-spacing: 0.38em; text-transform: uppercase; color: var(--graphite); }
+.doc-meta  { font-size: 9px; font-weight: 200; color: var(--fog); letter-spacing: 0.1em; text-align: right; line-height: 1.9; }
+
+/* ── SECTION ── */
+.section { padding: 0 48px 48px; }
+.section-head {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 40px 0 18px;
+  border-bottom: 0.5px solid var(--rule);
+  margin-bottom: 28px;
+}
+.s-num   { font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 13px; color: var(--gold); }
+.s-title { font-size: 9px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--graphite); }
+.s-note  { font-size: 9px; font-weight: 200; color: var(--fog); letter-spacing: 0.06em; margin-left: auto; }
+
+/* ── PRIMITIVE SWATCHES ── */
+.prim-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  margin-bottom: 4px;
+}
+.prim-swatch {
+  padding: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.prim-swatch:hover { transform: translateY(-2px); }
+.sw-color { height: 80px; position: relative; }
+.sw-copy-hint {
+  position: absolute; bottom: 6px; right: 8px;
+  font-size: 8px; font-weight: 200; letter-spacing: 0.1em;
+  opacity: 0; transition: opacity 0.15s;
+}
+.prim-swatch:hover .sw-copy-hint { opacity: 1; }
+.sw-info { padding: 10px 12px 12px; background: var(--white); border: 0.5px solid var(--rule); border-top: none; }
+.sw-name { font-size: 10px; font-weight: 400; color: var(--graphite); margin-bottom: 2px; }
+.sw-hex  { font-size: 9px; font-weight: 300; color: var(--stone); font-family: monospace; margin-bottom: 2px; }
+.sw-var  { font-size: 8px; font-weight: 200; color: var(--fog); font-family: monospace; }
+
+/* ── TOKEN TABLE ── */
+.token-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.token-group {
+  background: var(--off-white);
+  padding: 20px 20px 18px;
+  border: 0.5px solid var(--rule);
+}
+.token-group-title {
+  font-size: 8.5px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ember); margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--rule);
+}
+.token-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 0.5px solid var(--stone-white);
+  gap: 12px;
+}
+.token-row:last-child { border-bottom: none; }
+.token-left { display: flex; align-items: center; gap: 8px; }
+.token-dot  { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; border: 0.5px solid rgba(0,0,0,0.08); }
+.token-name { font-size: 9px; font-weight: 300; color: var(--slate); font-family: monospace; }
+.token-right { display: flex; align-items: center; gap: 8px; }
+.token-val  { font-size: 9px; font-weight: 200; color: var(--stone); white-space: nowrap; }
+.token-hex  { font-size: 8px; font-weight: 200; color: var(--fog); font-family: monospace; }
+
+/* ── USAGE MATRIX ── */
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 0;
+}
+.usage-card {
+  border: 0.5px solid var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.usage-preview {
+  height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+.usage-info {
+  padding: 12px 14px;
+  border-top: 0.5px solid var(--rule);
+  background: var(--white);
+}
+.usage-name { font-size: 10px; font-weight: 400; color: var(--graphite); margin-bottom: 2px; }
+.usage-desc { font-size: 9px; font-weight: 200; color: var(--stone); line-height: 1.6; }
+
+/* ── COPIED TOAST ── */
+.copy-toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--graphite); color: var(--off-white);
+  font-size: 10px; font-weight: 300; letter-spacing: 0.1em;
+  padding: 9px 20px; border-radius: 2px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 100;
+}
+.copy-toast.show { opacity: 1; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  padding: 20px 48px;
+  border-top: 0.5px solid var(--rule);
+  display: flex; justify-content: space-between;
+  font-size: 9px; font-weight: 200; color: var(--fog); letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<div class="copy-toast" id="toast">Copied to clipboard</div>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-title">Noa Unisex Jewelry — Color Palette & Design Tokens</div>
+  <div class="doc-meta">v1.0 · April 2026<br>Click any swatch to copy hex<br>Polar Hedgehog</div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- 01 — PRIMITIVES               -->
+<!-- ══════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="s-num">01</span>
+    <span class="s-title">Primitives — Raw Color Values</span>
+    <span class="s-note">19 values · Click to copy hex</span>
+  </div>
+
+  <div class="prim-grid">
+
+    <div class="prim-swatch" onclick="copyHex('#1a1a18', 'Graphite')">
+      <div class="sw-color" style="background:#1a1a18;"><span class="sw-copy-hint" style="color:#a8a8a0;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Graphite</div><div class="sw-hex">#1a1a18</div><div class="sw-var">--graphite</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#2c2c2a', 'Charcoal')">
+      <div class="sw-color" style="background:#2c2c2a;"><span class="sw-copy-hint" style="color:#a8a8a0;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Charcoal</div><div class="sw-hex">#2c2c2a</div><div class="sw-var">--charcoal</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#4a4a46', 'Slate')">
+      <div class="sw-color" style="background:#4a4a46;"><span class="sw-copy-hint" style="color:#a8a8a0;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Slate</div><div class="sw-hex">#4a4a46</div><div class="sw-var">--slate</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#6a6a64', 'Ash')">
+      <div class="sw-color" style="background:#6a6a64;"><span class="sw-copy-hint" style="color:#c8c8c0;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Ash</div><div class="sw-hex">#6a6a64</div><div class="sw-var">--ash</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#8a8a84', 'Stone')">
+      <div class="sw-color" style="background:#8a8a84;"><span class="sw-copy-hint" style="color:#ddddd8;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Stone</div><div class="sw-hex">#8a8a84</div><div class="sw-var">--stone</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#a8a8a0', 'Fog')">
+      <div class="sw-color" style="background:#a8a8a0;"><span class="sw-copy-hint" style="color:#2c2c2a;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Fog</div><div class="sw-hex">#a8a8a0</div><div class="sw-var">--fog</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#c8c8c0', 'Pebble')">
+      <div class="sw-color" style="background:#c8c8c0; border:0.5px solid #b0b0a8;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Pebble</div><div class="sw-hex">#c8c8c0</div><div class="sw-var">--pebble</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#ddddd8', 'Dust')">
+      <div class="sw-color" style="background:#ddddd8; border:0.5px solid #c8c8c0;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Dust</div><div class="sw-hex">#ddddd8</div><div class="sw-var">--dust</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#e8e8e4', 'Rule')">
+      <div class="sw-color" style="background:#e8e8e4; border:0.5px solid #c8c8c0;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Rule</div><div class="sw-hex">#e8e8e4</div><div class="sw-var">--rule</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#efefeb', 'Stone White')">
+      <div class="sw-color" style="background:#efefeb; border:0.5px solid #c8c8c0;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Stone White</div><div class="sw-hex">#efefeb</div><div class="sw-var">--stone-white</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#f7f6f4', 'Off White')">
+      <div class="sw-color" style="background:#f7f6f4; border:0.5px solid #e0e0dc;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Off White</div><div class="sw-hex">#f7f6f4</div><div class="sw-var">--off-white</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#ffffff', 'White')">
+      <div class="sw-color" style="background:#ffffff; border:0.5px solid #e0e0dc;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">White</div><div class="sw-hex">#ffffff</div><div class="sw-var">--white</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#c85c28', 'Ember')">
+      <div class="sw-color" style="background:#c85c28;"><span class="sw-copy-hint" style="color:#f0c8a8;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Ember</div><div class="sw-hex">#c85c28</div><div class="sw-var">--ember</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#b04e20', 'Ember Hover')">
+      <div class="sw-color" style="background:#b04e20;"><span class="sw-copy-hint" style="color:#f0c8a8;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Ember Hover</div><div class="sw-hex">#b04e20</div><div class="sw-var">--ember-hover</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#e07840', 'Terracotta')">
+      <div class="sw-color" style="background:#e07840;"><span class="sw-copy-hint" style="color:#f0d0b8;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Terracotta</div><div class="sw-hex">#e07840</div><div class="sw-var">--terracotta</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#b89a6a', 'Gold')">
+      <div class="sw-color" style="background:#b89a6a;"><span class="sw-copy-hint" style="color:#f0e0c8;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Gold</div><div class="sw-hex">#b89a6a</div><div class="sw-var">--gold</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#d4bc96', 'Gold Warm')">
+      <div class="sw-color" style="background:#d4bc96;"><span class="sw-copy-hint" style="color:#4a4a46;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Gold Warm</div><div class="sw-hex">#d4bc96</div><div class="sw-var">--gold-warm</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#faf4ec', 'Gold BG')">
+      <div class="sw-color" style="background:#faf4ec; border:0.5px solid #e8d8b8;"><span class="sw-copy-hint" style="color:#7a5020;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Gold BG</div><div class="sw-hex">#faf4ec</div><div class="sw-var">--gold-bg</div></div>
+    </div>
+    <div class="prim-swatch" onclick="copyHex('#2d6a4f', 'Success')">
+      <div class="sw-color" style="background:#2d6a4f;"><span class="sw-copy-hint" style="color:#a0d0b8;">Copy</span></div>
+      <div class="sw-info"><div class="sw-name">Success</div><div class="sw-hex">#2d6a4f</div><div class="sw-var">--success</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- 02 — SEMANTIC TOKENS          -->
+<!-- ══════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="s-num">02</span>
+    <span class="s-title">Semantic Tokens — Figma Variable Aliases</span>
+    <span class="s-note">Set as Aliases in Variables panel → Semantic collection</span>
+  </div>
+
+  <div class="token-section">
+
+    <div class="token-group">
+      <div class="token-group-title">Text</div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#1a1a18;"></div><span class="token-name">color.text.primary</span></div><div class="token-right"><span class="token-val">Graphite</span><span class="token-hex">#1a1a18</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#2c2c2a;"></div><span class="token-name">color.text.secondary</span></div><div class="token-right"><span class="token-val">Charcoal</span><span class="token-hex">#2c2c2a</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#4a4a46;"></div><span class="token-name">color.text.tertiary</span></div><div class="token-right"><span class="token-val">Slate</span><span class="token-hex">#4a4a46</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#6a6a64;"></div><span class="token-name">color.text.muted</span></div><div class="token-right"><span class="token-val">Ash</span><span class="token-hex">#6a6a64</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#a8a8a0;"></div><span class="token-name">color.text.placeholder</span></div><div class="token-right"><span class="token-val">Fog</span><span class="token-hex">#a8a8a0</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#f7f6f4; border-color:#ddd;"></div><span class="token-name">color.text.on-inverse</span></div><div class="token-right"><span class="token-val">Off White</span><span class="token-hex">#f7f6f4</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#c85c28;"></div><span class="token-name">color.text.accent</span></div><div class="token-right"><span class="token-val">Ember</span><span class="token-hex">#c85c28</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#7a5020;"></div><span class="token-name">color.text.gold</span></div><div class="token-right"><span class="token-val">Gold Text</span><span class="token-hex">#7a5020</span></div></div>
+    </div>
+
+    <div class="token-group">
+      <div class="token-group-title">Backgrounds</div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#ffffff; border-color:#ddd;"></div><span class="token-name">color.bg.canvas</span></div><div class="token-right"><span class="token-val">White</span><span class="token-hex">#ffffff</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#f7f6f4; border-color:#ddd;"></div><span class="token-name">color.bg.surface</span></div><div class="token-right"><span class="token-val">Off White</span><span class="token-hex">#f7f6f4</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#efefeb; border-color:#ddd;"></div><span class="token-name">color.bg.muted</span></div><div class="token-right"><span class="token-val">Stone White</span><span class="token-hex">#efefeb</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#1a1a18;"></div><span class="token-name">color.bg.inverse</span></div><div class="token-right"><span class="token-val">Graphite</span><span class="token-hex">#1a1a18</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#2c2c2a;"></div><span class="token-name">color.bg.overlay</span></div><div class="token-right"><span class="token-val">Charcoal @92%</span><span class="token-hex">#2c2c2a</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#faf4ec; border-color:#e8d8b8;"></div><span class="token-name">color.bg.gold</span></div><div class="token-right"><span class="token-val">Gold BG</span><span class="token-hex">#faf4ec</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#eaf4ef; border-color:#ddd;"></div><span class="token-name">color.bg.success</span></div><div class="token-right"><span class="token-val">Success BG</span><span class="token-hex">#eaf4ef</span></div></div>
+    </div>
+
+    <div class="token-group">
+      <div class="token-group-title">Borders</div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#ddddd8;"></div><span class="token-name">color.border.default</span></div><div class="token-right"><span class="token-val">Dust · 1px</span><span class="token-hex">#ddddd8</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#e8e8e4;"></div><span class="token-name">color.border.subtle</span></div><div class="token-right"><span class="token-val">Rule · 0.5px</span><span class="token-hex">#e8e8e4</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#c8c8c0;"></div><span class="token-name">color.border.strong</span></div><div class="token-right"><span class="token-val">Pebble · 1px</span><span class="token-hex">#c8c8c0</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#1a1a18;"></div><span class="token-name">color.border.focus</span></div><div class="token-right"><span class="token-val">Graphite · 1px</span><span class="token-hex">#1a1a18</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#1a1a18;"></div><span class="token-name">color.border.inverse</span></div><div class="token-right"><span class="token-val">Graphite · 1.5px</span><span class="token-hex">#1a1a18</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#e8d8b8;"></div><span class="token-name">color.border.gold</span></div><div class="token-right"><span class="token-val">Gold Border</span><span class="token-hex">#e8d8b8</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#c85c28;"></div><span class="token-name">color.border.accent</span></div><div class="token-right"><span class="token-val">Ember · 2–4px</span><span class="token-hex">#c85c28</span></div></div>
+    </div>
+
+    <div class="token-group">
+      <div class="token-group-title">Buttons</div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#1a1a18;"></div><span class="token-name">color.btn.primary.bg</span></div><div class="token-right"><span class="token-val">Graphite</span><span class="token-hex">#1a1a18</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#2c2c2a;"></div><span class="token-name">color.btn.primary.hover</span></div><div class="token-right"><span class="token-val">Charcoal</span><span class="token-hex">#2c2c2a</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#f7f6f4; border-color:#ddd;"></div><span class="token-name">color.btn.primary.text</span></div><div class="token-right"><span class="token-val">Off White</span><span class="token-hex">#f7f6f4</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#c85c28;"></div><span class="token-name">color.btn.accent.bg</span></div><div class="token-right"><span class="token-val">Ember</span><span class="token-hex">#c85c28</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#b04e20;"></div><span class="token-name">color.btn.accent.hover</span></div><div class="token-right"><span class="token-val">Ember Hover</span><span class="token-hex">#b04e20</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#ddddd8;"></div><span class="token-name">color.btn.disabled.bg</span></div><div class="token-right"><span class="token-val">Dust</span><span class="token-hex">#ddddd8</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#c8c8c0;"></div><span class="token-name">color.btn.disabled.text</span></div><div class="token-right"><span class="token-val">Pebble</span><span class="token-hex">#c8c8c0</span></div></div>
+    </div>
+
+    <div class="token-group">
+      <div class="token-group-title">Status</div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#c85c28;"></div><span class="token-name">color.status.error</span></div><div class="token-right"><span class="token-val">Ember</span><span class="token-hex">#c85c28</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#e07840;"></div><span class="token-name">color.status.low-stock</span></div><div class="token-right"><span class="token-val">Terracotta</span><span class="token-hex">#e07840</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#ddddd8;"></div><span class="token-name">color.status.sold-out</span></div><div class="token-right"><span class="token-val">Dust</span><span class="token-hex">#ddddd8</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#1a1a18;"></div><span class="token-name">color.status.new</span></div><div class="token-right"><span class="token-val">Graphite</span><span class="token-hex">#1a1a18</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#2d6a4f;"></div><span class="token-name">color.status.success</span></div><div class="token-right"><span class="token-val">Success</span><span class="token-hex">#2d6a4f</span></div></div>
+    </div>
+
+    <div class="token-group">
+      <div class="token-group-title">Decorative</div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#d4bc96;"></div><span class="token-name">color.gold.rule</span></div><div class="token-right"><span class="token-val">Gold Warm · 1px rule</span><span class="token-hex">#d4bc96</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#b89a6a;"></div><span class="token-name">color.gold.accent</span></div><div class="token-right"><span class="token-val">Gold · accents</span><span class="token-hex">#b89a6a</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#faf4ec; border-color:#e8d8b8;"></div><span class="token-name">color.tag.gold.bg</span></div><div class="token-right"><span class="token-val">Gold Tag BG</span><span class="token-hex">#faf4ec</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#e8d8b8;"></div><span class="token-name">color.tag.gold.border</span></div><div class="token-right"><span class="token-val">Gold Tag Border</span><span class="token-hex">#e8d8b8</span></div></div>
+      <div class="token-row"><div class="token-left"><div class="token-dot" style="background:#7a5020;"></div><span class="token-name">color.tag.gold.text</span></div><div class="token-right"><span class="token-val">Gold Tag Text</span><span class="token-hex">#7a5020</span></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- 03 — USAGE MATRIX             -->
+<!-- ══════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="s-num">03</span>
+    <span class="s-title">Usage Matrix — Color in Context</span>
+    <span class="s-note">How palette tokens apply to real components</span>
+  </div>
+
+  <div class="usage-grid">
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#1a1a18;">
+        <button style="font-family:'Instrument Sans',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;padding:12px 24px;background:#1a1a18;color:#f7f6f4;border:none;border-radius:2px;">Add to bag</button>
+      </div>
+      <div class="usage-info"><div class="usage-name">Primary Button</div><div class="usage-desc">bg: Graphite #1a1a18 · text: Off White #f7f6f4 · hover: Charcoal #2c2c2a</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#ffffff;">
+        <button style="font-family:'Instrument Sans',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.28em;text-transform:uppercase;padding:11px 24px;background:transparent;color:#1a1a18;border:1.5px solid #1a1a18;border-radius:2px;">Save to wishlist</button>
+      </div>
+      <div class="usage-info"><div class="usage-name">Secondary Button</div><div class="usage-desc">bg: transparent · text: Graphite · border: 1.5px Graphite · hover bg: Off White</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#ffffff;">
+        <button style="font-family:'Instrument Sans',sans-serif;font-size:10px;font-weight:200;letter-spacing:0.24em;text-transform:uppercase;padding:10px 24px;background:transparent;color:#8a8a84;border:1px solid #ddddd8;border-radius:2px;">More options</button>
+      </div>
+      <div class="usage-info"><div class="usage-name">Ghost Button</div><div class="usage-desc">bg: transparent · text: Stone #8a8a84 · border: 1px Dust #ddddd8</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#ffffff; gap:6px; flex-wrap:wrap;">
+        <span style="font-family:'Instrument Sans',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:2px;background:#1a1a18;color:#f7f6f4;">New</span>
+        <span style="font-family:'Instrument Sans',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:2px;background:#e07840;color:#fff;">Last 2</span>
+        <span style="font-family:'Instrument Sans',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:2px;background:#faf4ec;color:#7a5020;border:0.5px solid #e8d8b8;">Gold</span>
+        <span style="font-family:'Instrument Sans',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:2px;background:#ddddd8;color:#8a8a84;">Sold out</span>
+      </div>
+      <div class="usage-info"><div class="usage-name">Product Badges</div><div class="usage-desc">New: Graphite · Low stock: Terracotta · Gold: gold-bg/text · Sold out: Dust/Stone</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#f7f6f4; flex-direction:column; align-items:flex-start; padding:16px 20px; gap:6px;">
+        <div style="font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:#a8a8a0;font-family:'Instrument Sans',sans-serif;">Ring size</div>
+        <input style="font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:300;padding:9px 12px;border:1px solid #1a1a18;border-radius:2px;background:#fff;color:#1a1a18;width:180px;outline:none;" value="noa@example.com" readonly>
+        <div style="font-size:9px;font-weight:200;color:#8a8a84;font-family:'Instrument Sans',sans-serif;">Focus: border Graphite #1a1a18</div>
+      </div>
+      <div class="usage-info"><div class="usage-name">Form Input — Focus</div><div class="usage-desc">default border: Dust · focus border: Graphite · error border: Ember</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#1a1a18;">
+        <div style="font-family:'Instrument Sans',sans-serif;font-size:10px;font-weight:200;letter-spacing:0.28em;text-transform:uppercase;color:#f7f6f4;">Free shipping over ₪400 <span style="color:#d4bc96;margin:0 8px;">·</span> Handmade in Tel Aviv</div>
+      </div>
+      <div class="usage-info"><div class="usage-name">Announcement Bar</div><div class="usage-desc">bg: Graphite · text: Off White · separator dot: Gold Warm</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#ffffff; flex-direction:column; align-items:flex-start; padding:16px 20px; gap:0;">
+        <div style="font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:400;color:#1a1a18;line-height:1.5;margin-bottom:6px;">Wire twist ring,<br>oxidized finish</div>
+        <div style="width:32px;height:1px;background:#ddddd8;margin-bottom:8px;"></div>
+        <div style="font-family:'Instrument Sans',sans-serif;font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:#a8a8a0;">Sterling Silver · Wires</div>
+      </div>
+      <div class="usage-info"><div class="usage-name">Product Card Info</div><div class="usage-desc">name: Graphite · rule: Dust 32px · meta: Fog uppercase</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#f7f6f4; padding:16px 20px;">
+        <div style="padding:16px 18px;background:#f7f6f4;border-left:2px solid #d4bc96;width:100%;">
+          <div style="font-family:'Instrument Sans',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:#1a1a18;margin-bottom:8px;">Material</div>
+          <div style="font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:300;color:#1a1a18;">Sterling Silver</div>
+          <div style="font-family:'Instrument Sans',sans-serif;font-size:10px;font-weight:200;color:#8a8a84;">Recycled · 925</div>
+        </div>
+      </div>
+      <div class="usage-info"><div class="usage-name">Material Callout Panel</div><div class="usage-desc">bg: Off White · left border: Gold Warm 2px · title: Graphite · sub: Stone</div></div>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-preview" style="background:#2c2c2a;">
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1a1a18;border-radius:2px;">
+          <div style="width:6px;height:6px;border-radius:50%;background:#f7f6f4;"></div>
+          <span style="font-family:'Instrument Sans',sans-serif;font-size:11px;font-weight:300;color:#f7f6f4;letter-spacing:0.04em;">Added to bag — Hammered band</span>
+        </div>
+      </div>
+      <div class="usage-info"><div class="usage-name">Toast — Success</div><div class="usage-desc">bg: Graphite · text: Off White · dot: Off White · error variant: Ember bg</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span>noa_color_palette.html · v1.0 · Color Palette & Design Tokens</span>
+  <span>Noa Unisex Jewelry · Polar Hedgehog · April 2026</span>
+</div>
+
+<script>
+function copyHex(hex, name) {
+  navigator.clipboard.writeText(hex).then(() => {
+    const t = document.getElementById('toast');
+    t.textContent = `Copied ${name} ${hex}`;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  });
+}
+</script>
+</body>
+</html>

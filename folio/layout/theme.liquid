@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_white | default: '#ffffff' }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.pagination.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    {{ content_for_header }}
+    {{ 'folio.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body class="template-{{ template.name | handle }}">
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    <footer class="site-footer">
+
+      <!-- Logo zone -->
+      <div class="footer-logo-zone">
+        <a href="{{ routes.root_url }}" aria-label="{{ settings.brand_name | default: 'Noa' }} — home">
+          <svg class="footer-logo-zone__logo" viewBox="0 0 273 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M27.0774 12.0931C21.4036 14.2583 -0.720672 28.1907 0.0180719 20.6778C4.58762 15.4545 31.3728 2.37723 39.1639 7.48147C40.6871 9.7819 42.2102 11.7088 45.9344 9.70071C58.5083 1.23514 85.2859 0.720917 73.664 17.5221C80.1908 20.4775 88.7511 16.2501 95.8948 15.8983C104.036 15.1081 112.513 14.8158 118.575 10.334C124.668 5.2514 142.809 3.29739 144.561 11.4977C143.281 20.943 114.097 32.9431 106.786 21.1433C94.7905 20.445 52.0348 34.6265 66.2156 14.2583C67.4646 12.2988 65.9034 10.6696 62.9865 10.7183C46.0487 11.2596 36.4069 23.7414 22.5307 28.9972C19.8042 29.4248 15.2423 27.3734 18.7228 25.2787C23.0562 21.1758 26.1026 17.3544 27.0774 12.0931ZM128.765 11.5519C123.891 13.2082 113.175 16.8077 121.911 19.8442C127.28 17.4626 137.318 16.7481 128.765 11.5465V11.5519Z" fill="rgba(255,255,255,0.88)"/>
+            <path d="M174.91 20.1203C134.728 32.7645 142.436 12.4775 173.463 5.9659C174.887 5.27307 177.613 6.12829 175.862 7.29203C153.471 14.8699 151.788 26.1231 176.41 12.9754C172.191 12.1527 171.894 8.98623 176.296 7.90368C180.82 4.83464 182.609 7.55185 185.283 10.2907C186.989 12.9971 184.392 15.4437 187.887 17.8253C201.824 25.322 243.103 13.2244 261.168 11.0052C256.781 9.4788 253.43 7.11342 260.17 8.98623C259.903 6.44765 257.809 4.11473 258.502 1.61945C265.28 11.5194 262.028 6.56131 269.416 0.120117C271.244 3.77374 267.276 6.8103 265.928 10.6209C270.589 10.767 276.369 10.9132 268.898 13.1811C268.555 14.5397 268.418 14.583 264.854 13.3381C267.001 15.8063 266.499 19.4654 270.581 19.8334C266.712 23.2759 265.349 17.7928 263.559 15.947L261.906 18.3341C258.715 5.85224 189.829 38.5887 174.91 20.1203Z" fill="rgba(255,255,255,0.88)"/>
+            <path d="M253.628 21.4951C256.606 20.2286 259.165 17.8632 261.693 21.2353C259.705 24.824 256.035 25.5277 253.628 21.4951Z" fill="rgba(255,255,255,0.88)"/>
+          </svg>
+        </a>
+        <span class="footer-logo-zone__tagline">Handmade Unisex Jewelry · Tel Aviv Studio · Est. 2018</span>
+      </div>
+
+      <!-- Columns -->
+      <div class="footer-cols">
+
+        <!-- Shop -->
+        <div class="footer-col">
+          <p class="footer-col__label">{{ settings.footer_menu_one_title | default: 'Shop' }}</p>
+          <ul class="footer-col__links">
+            {% if settings.footer_menu_one != blank %}
+              {% for link in linklists[settings.footer_menu_one].links %}
+                <li><a class="footer-link" href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a class="footer-link" href="{{ routes.collections_url }}">All Products</a></li>
+              <li><a class="footer-link" href="{{ routes.collections_url }}">New Arrivals</a></li>
+              <li><a class="footer-link" href="{{ routes.collections_url }}">Bestsellers</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <!-- Studio -->
+        <div class="footer-col">
+          <p class="footer-col__label">{{ settings.footer_menu_two_title | default: 'Studio' }}</p>
+          <ul class="footer-col__links">
+            {% if settings.footer_menu_two != blank %}
+              {% for link in linklists[settings.footer_menu_two].links %}
+                <li><a class="footer-link" href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/about">About Us</a></li>
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/care-guide">Care Guide</a></li>
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/sustainability">Sustainability</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-col">
+          <p class="footer-col__label">{{ settings.footer_menu_three_title | default: 'Support' }}</p>
+          <ul class="footer-col__links">
+            {% if settings.footer_menu_three != blank %}
+              {% for link in linklists[settings.footer_menu_three].links %}
+                <li><a class="footer-link" href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/contact">Contact</a></li>
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/shipping">Shipping &amp; Returns</a></li>
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/faq">FAQ</a></li>
+              <li><a class="footer-link" href="{{ routes.root_url }}pages/size-guide">Size Guide</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-col">
+          <p class="footer-col__label">Newsletter</p>
+          <p class="footer-newsletter__desc">New pieces and studio notes, sent occasionally. No spam.</p>
+          {% form 'customer', class: 'footer-newsletter__form', id: 'FooterNewsletterForm' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label class="sr-only" for="FooterEmail">Email address</label>
+            <input
+              class="footer-newsletter__input"
+              type="email"
+              name="contact[email]"
+              id="FooterEmail"
+              autocomplete="email"
+              placeholder="your@email.com"
+              aria-label="Email address"
+              required
+            >
+            <button class="footer-newsletter__btn" type="submit">
+              {% if form.posted_successfully? %}
+                Thank you ✓
+              {% else %}
+                Subscribe
+              {% endif %}
+            </button>
+          {% endform %}
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="site-footer__base">
+        <span class="site-footer__copy">{{ settings.footer_copy | default: '© 2026 Noa · All rights reserved' }}</span>
+        <nav class="site-footer__base-links" aria-label="Legal">
+          <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a>
+          <a href="{{ routes.root_url }}policies/terms-of-service">Terms</a>
+          {% if settings.social_instagram != blank %}
+            <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a>
+          {% endif %}
+        </nav>
+      </div>
+
+    </footer>
+
+    <div class="toast" id="toast" aria-live="polite" hidden></div>
+
+    <script>
+      window.FolioTheme = {
+        moneyFormat: {{ shop.money_format | json }}
+      };
+
+      window.FolioTheme.formatMoney = function(cents) {
+        if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
+          return window.Shopify.formatMoney(cents, window.FolioTheme.moneyFormat);
+        }
+        const normalized = Number(cents || 0) / 100;
+        return normalized.toLocaleString(undefined, { style: 'currency', currency: {{ cart.currency.iso_code | default: shop.currency | json }} });
+      };
+
+      window.FolioTheme.showToast = function(message, isError) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.hidden = false;
+        toast.classList.toggle('is-error', Boolean(isError));
+        clearTimeout(window.FolioTheme.toastTimer);
+        window.FolioTheme.toastTimer = setTimeout(() => {
+          toast.hidden = true;
+        }, 2800);
+      };
+
+      window.FolioTheme.updateCartCount = function(count) {
+        document.querySelectorAll('[data-cart-count]').forEach((node) => {
+          node.textContent = count;
+        });
+      };
+
+      window.FolioTheme.addToCart = async function(form) {
+        const formData = new FormData(form);
+        const submit = form.querySelector('[type="submit"]');
+        if (submit) submit.disabled = true;
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: formData
+          });
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.description || 'Unable to add this item.');
+          }
+          await response.json();
+          const cartResponse = await fetch('/cart.js');
+          const cartData = await cartResponse.json();
+          window.FolioTheme.updateCartCount(cartData.item_count);
+          window.FolioTheme.showToast({{ settings.quick_add_label | default: 'Added to cart' | append: '.' | json }});
+          document.dispatchEvent(new CustomEvent('folio:cart-updated', { detail: cartData }));
+        } catch (error) {
+          window.FolioTheme.showToast(error.message, true);
+        } finally {
+          if (submit) submit.disabled = false;
+        }
+      };
+
+      document.addEventListener('submit', function(event) {
+        const productForm = event.target.closest('[data-product-form]');
+        if (!productForm) return;
+        event.preventDefault();
+        window.FolioTheme.addToCart(productForm);
+      });
+
+      document.addEventListener('click', function(event) {
+        const closeBtn = event.target.closest('[data-close-announcement]');
+        if (closeBtn) {
+          const bar = document.querySelector('.announcement-bar');
+          if (bar) bar.hidden = true;
+        }
+        const mobileToggle = event.target.closest('[data-mobile-toggle]');
+        if (mobileToggle) {
+          const menu = document.getElementById('mobileMenu');
+          const next = mobileToggle.getAttribute('aria-expanded') !== 'true';
+          mobileToggle.setAttribute('aria-expanded', String(next));
+          if (menu) menu.hidden = !next;
+        }
+      });
+    </script>
+  </body>
+</html>
