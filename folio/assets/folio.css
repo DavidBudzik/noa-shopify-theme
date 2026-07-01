@@ -381,22 +381,32 @@ a { color: inherit; text-underline-offset: 0.2em; }
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2; /* above the .hero-media::after readability overlay */
   padding: 3rem var(--gutter) 3.5rem;
   display: grid;
-  gap: 1rem;
-  justify-items: start;
+  gap: 0.85rem;
+  justify-items: center;
+  text-align: center;
   color: var(--white);
   background: none;
 }
 @media (min-width: 1000px) {
   .hero-copy {
-    max-width: 46rem;
-    padding: 3.5rem 3rem 5rem;
-    gap: 1.15rem;
+    max-width: 52rem;
+    margin-inline: auto;
+    padding: 3.5rem 3rem 5.5rem;
+    gap: 1rem;
   }
 }
-/* Full-screen cinematic hero: grander title + scroll cue */
-.hero-panel .hero-title { font-size: clamp(2.6rem, 1.5rem + 4.6vw, 4.75rem); }
+/* Full-screen cinematic hero: grander, centered title + scroll cue */
+.hero-panel .hero-title {
+  font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4.75rem);
+  letter-spacing: 0.06em;
+  line-height: 1.14; /* light-on-dark: a touch more leading */
+  max-width: 18ch;
+  margin-inline: auto;
+  text-wrap: balance;
+}
 .hero-scroll {
   position: absolute;
   left: 50%;
@@ -419,17 +429,24 @@ a { color: inherit; text-underline-offset: 0.2em; }
 }
 @media (max-width: 749px) { .hero-scroll { display: none; } }
 @media (prefers-reduced-motion: reduce) { .hero-scroll svg { animation: none; } }
-.hero-copy .section-kicker { color: rgba(255,255,255,0.75); margin-bottom: 0; }
+.hero-copy .section-kicker { color: rgba(255,255,255,0.8); letter-spacing: 0.26em; margin: 0 0 0.15rem; }
 .hero-title { color: var(--white); max-width: 16ch; }
 .hero-text {
-  font-size: var(--fs-base);
-  color: rgba(255,255,255,0.85);
-  max-width: 38ch;
-  margin: 0;
-  line-height: 1.6;
+  font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.1rem);
+  color: rgba(255,255,255,0.86);
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-block: 0;
+  line-height: 1.65; /* light-on-dark body needs more breathing room */
   letter-spacing: 0.01em;
 }
-.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.9rem;
+}
 
 /* ==========================================================================
    Buttons
