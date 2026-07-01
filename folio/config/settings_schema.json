@@ -118,6 +118,12 @@
     "name": "Footer",
     "settings": [
       {
+        "type": "textarea",
+        "id": "footer_blurb",
+        "label": "Footer brand blurb",
+        "default": "Handmade unisex jewelry crafted in our Tel Aviv studio. Each piece is one of a kind."
+      },
+      {
         "type": "link_list",
         "id": "footer_menu_one",
         "label": "Footer menu 1"
