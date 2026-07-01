@@ -12,3 +12,6 @@ folio/~/
 
 # OS
 .DS_Store
+
+# Theme package output
+dist/
