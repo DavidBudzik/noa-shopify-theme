@@ -177,94 +177,24 @@
 
     <script>
       window.FolioTheme = {
-        moneyFormat: {{ shop.money_format | json }}
-      };
-
-      window.FolioTheme.formatMoney = function(cents) {
-        if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
-          return window.Shopify.formatMoney(cents, window.FolioTheme.moneyFormat);
-        }
-        const normalized = Number(cents || 0) / 100;
-        return normalized.toLocaleString(undefined, { style: 'currency', currency: {{ cart.currency.iso_code | default: shop.currency | json }} });
-      };
-
-      window.FolioTheme.showToast = function(message, isError) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
-        toast.textContent = message;
-        toast.hidden = false;
-        toast.classList.toggle('is-error', Boolean(isError));
-        clearTimeout(window.FolioTheme.toastTimer);
-        window.FolioTheme.toastTimer = setTimeout(() => {
-          toast.hidden = true;
-        }, 2800);
-      };
-
-      window.FolioTheme.updateCartCount = function(count) {
-        document.querySelectorAll('[data-cart-count]').forEach((node) => {
-          node.textContent = count;
-        });
-      };
-
-      window.FolioTheme.addToCart = async function(form) {
-        const formData = new FormData(form);
-        const submit = form.querySelector('[type="submit"]');
-        if (submit) submit.disabled = true;
-        try {
-          const response = await fetch('/cart/add.js', {
-            method: 'POST',
-            headers: { Accept: 'application/json' },
-            body: formData
-          });
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.description || 'Unable to add this item.');
-          }
-          await response.json();
-          const cartResponse = await fetch('/cart.js');
-          const cartData = await cartResponse.json();
-          window.FolioTheme.updateCartCount(cartData.item_count);
-          window.FolioTheme.showToast({{ settings.quick_add_label | default: 'Added to cart' | append: '.' | json }});
-          document.dispatchEvent(new CustomEvent('folio:cart-updated', { detail: cartData }));
-          if (submit && submit.classList.contains('pc__quickadd')) {
-            submit.classList.add('is-added');
-            submit.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3L13 5"/></svg>';
-            setTimeout(function() {
-              submit.classList.remove('is-added');
-              submit.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>';
-            }, 1200);
-          }
-        } catch (error) {
-          window.FolioTheme.showToast(error.message, true);
-        } finally {
-          if (submit) submit.disabled = false;
+        moneyFormat: {{ shop.money_format | json }},
+        currency: {{ cart.currency.iso_code | default: shop.currency | json }},
+        strings: {
+          addedToCart: {{ 'cart.general.added' | t | json }},
+          cartLoading: {{ 'cart.general.loading' | t | json }},
+          cartEmpty: {{ 'cart.general.empty' | t | json }},
+          loadError: {{ 'cart.general.load_error' | t | json }},
+          updateError: {{ 'cart.general.update_error' | t | json }},
+          decreaseQty: {{ 'cart.general.decrease' | t | json }},
+          increaseQty: {{ 'cart.general.increase' | t | json }},
+          remove: {{ 'cart.general.remove' | t | json }},
+          searching: {{ 'general.search.searching' | t | json }},
+          noResultsFor: {{ 'general.search.no_results_for' | t | json }},
+          searchUnavailable: {{ 'general.search.unavailable' | t | json }}
         }
       };
-
-      document.addEventListener('submit', function(event) {
-        const productForm = event.target.closest('[data-product-form]');
-        if (!productForm) return;
-        event.preventDefault();
-        window.FolioTheme.addToCart(productForm);
-      });
-
-      document.addEventListener('click', function(event) {
-        const closeBtn = event.target.closest('[data-close-announcement]');
-        if (closeBtn) {
-          const bar = document.querySelector('.announcement-bar');
-          if (bar) bar.hidden = true;
-        }
-        const mobileToggle = event.target.closest('[data-mobile-toggle]');
-        if (mobileToggle) {
-          const menu = document.getElementById('mobileMenu');
-          const next = mobileToggle.getAttribute('aria-expanded') !== 'true';
-          mobileToggle.setAttribute('aria-expanded', String(next));
-          if (menu) menu.hidden = !next;
-        }
-        // Share triggers ([data-share]) are handled by the share modal (see
-        // snippets/share-modal.liquid), which intercepts the click itself.
-      });
     </script>
+    <script src="{{ 'folio.js' | asset_url }}" defer></script>
 
     {% render 'search-drawer' %}
     {% render 'cart-drawer' %}

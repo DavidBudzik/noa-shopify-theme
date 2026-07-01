@@ -2,11 +2,33 @@
   "general": {
     "pagination": {
       "page": "Page {{ page }}"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search products…",
+      "searching": "Searching…",
+      "no_results_for": "No results for",
+      "unavailable": "Search unavailable."
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for doesn't exist or has moved.",
+      "back_to_shop": "Back to shop"
     }
   },
   "templates": {
     "cart": {
       "cart": "Cart"
+    },
+    "list_collections": {
+      "title": "Collections"
+    },
+    "search": {
+      "results_with_count": {
+        "one": "{{ count }} result for \"{{ terms }}\"",
+        "other": "{{ count }} results for \"{{ terms }}\""
+      },
+      "no_results": "No results found for \"{{ terms }}\"."
     }
   },
   "products": {
@@ -26,7 +48,25 @@
       "remove": "Remove",
       "subtotal": "Subtotal",
       "total": "Total",
-      "checkout": "Checkout"
+      "checkout": "Checkout",
+      "added": "Added to cart.",
+      "loading": "Loading cart…",
+      "empty": "Your cart is empty.",
+      "load_error": "Unable to load cart.",
+      "update_error": "Unable to update cart.",
+      "decrease": "Decrease quantity",
+      "increase": "Increase quantity"
+    },
+    "footer": {
+      "newsletter_eyebrow": "Stay in touch",
+      "newsletter_heading": "New pieces, studio notes & offers",
+      "newsletter_success": "You're subscribed.",
+      "newsletter_email_label": "Email address",
+      "newsletter_placeholder": "your@email.com",
+      "subscribe": "Subscribe",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "accessibility": "Accessibility"
     }
   }
 }
