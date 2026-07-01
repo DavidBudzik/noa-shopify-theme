@@ -29,7 +29,7 @@
       </div>
       <h4>General questions</h4>
       <p>About a piece, sizing, availability or anything else. We answer within a day.</p>
-      <span class="noa-topic-card__email">{{ settings.contact_email | default: 'studio@noaplus.com' }}</span>
+      <span class="noa-topic-card__email">{{ settings.contact_email | default: 'n.shechter@gmail.com' }}</span>
     </a>
     <a href="#noa-contact-form" class="noa-topic-card">
       <div class="noa-topic-card__icon" aria-hidden="true">
@@ -37,7 +37,7 @@
       </div>
       <h4>Custom commissions</h4>
       <p>Describe what you have in mind. We'll book a call and sketch a direction within a week.</p>
-      <span class="noa-topic-card__email">commissions@noaplus.com</span>
+      <span class="noa-topic-card__email">n.shechter@gmail.com</span>
     </a>
     <a href="#noa-contact-form" class="noa-topic-card">
       <div class="noa-topic-card__icon" aria-hidden="true">
@@ -45,7 +45,7 @@
       </div>
       <h4>Press &amp; wholesale</h4>
       <p>Editorial features, stockists and trade enquiries — we open a small number each season.</p>
-      <span class="noa-topic-card__email">press@noaplus.com</span>
+      <span class="noa-topic-card__email">n.shechter@gmail.com</span>
     </a>
   </div>
 </div>
@@ -140,15 +140,15 @@
     <div class="noa-contact-info__block">
       <h4 class="noa-contact-info__label">Email</h4>
       <div class="noa-contact-info__primary">
-        <a href="mailto:{{ settings.contact_email | default: 'studio@noaplus.com' }}">
-          {{- settings.contact_email | default: 'studio@noaplus.com' -}}
+        <a href="mailto:{{ settings.contact_email | default: 'n.shechter@gmail.com' }}">
+          {{- settings.contact_email | default: 'n.shechter@gmail.com' -}}
         </a>
       </div>
       <p class="noa-contact-info__text">We answer within 24 hours on weekdays, Tel Aviv time.</p>
     </div>
     <div class="noa-contact-info__block">
       <h4 class="noa-contact-info__label">Studio · Florentin</h4>
-      <div class="noa-contact-info__primary">Levontin 12, Tel Aviv</div>
+      <div class="noa-contact-info__primary">Yechezkel Shtreichman 11, Tel Aviv</div>
       <p class="noa-contact-info__text">Visits by appointment, Monday–Thursday. Email to book a slot.</p>
     </div>
     <div class="noa-contact-info__block">
@@ -165,9 +165,18 @@
         Sun · closed
       </p>
     </div>
-    <div class="noa-contact-map" role="img" aria-label="Map placeholder: Florentin, Tel Aviv">
-      map · florentin, tel aviv
+    <div class="noa-contact-map">
+      <iframe
+        title="Studio location — Yechezkel Shtreichman 11, Tel Aviv"
+        src="https://maps.google.com/maps?q=Yechezkel%20Shtreichman%2011%2C%20Tel%20Aviv&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        allowfullscreen></iframe>
     </div>
+    <a class="noa-contact-map__link"
+       href="https://www.google.com/maps/search/?api=1&query=Yechezkel%20Shtreichman%2011%2C%20Tel%20Aviv"
+       target="_blank" rel="noopener">
+      Open in Google Maps ↗
+    </a>
   </aside>
 
 </div>

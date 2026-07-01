@@ -1413,7 +1413,6 @@ a { color: inherit; text-underline-offset: 0.2em; }
   background: rgba(0,0,0,0.4);
   z-index: 50;
 }
-.cart-drawer,
 .search-drawer {
   position: fixed;
   top: 0;
@@ -1425,6 +1424,21 @@ a { color: inherit; text-underline-offset: 0.2em; }
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--rule);
+}
+/* Cart is a centered modal, not a side drawer */
+.cart-drawer {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(600px, calc(100% - 2rem));
+  height: fit-content;
+  max-height: 84vh;
+  background: var(--white);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ink);
+  box-shadow: 0 24px 60px rgba(20, 20, 20, 0.18);
 }
 .search-drawer {
   width: 100%;
@@ -3986,17 +4000,32 @@ a { color: inherit; text-underline-offset: 0.2em; }
 .noa-contact-map {
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: linear-gradient(160deg, #e8e2da 0%, #c4b8ae 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--surface-soft);
+}
+.noa-contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+.noa-contact-map:hover iframe { filter: none; }
+.noa-contact-map__link {
+  display: inline-block;
+  margin-top: 10px;
   font-family: var(--font-body);
   font-size: 10px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.25);
-  margin-top: 20px;
+  color: var(--graphite);
+  text-decoration: none;
 }
+.noa-contact-map__link:hover { color: var(--ink); }
 
 /* Responsive: contact */
 @media (max-width: 1024px) {
