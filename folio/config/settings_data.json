@@ -16,15 +16,23 @@
             "type": "hotspot",
             "settings": {
               "product": "gid://shopify/Product/8062455808057",
-              "x_position": 72,
-              "y_position": 78
+              "x_position": 66,
+              "y_position": 74
+            }
+          },
+          "hotspot_ring": {
+            "type": "hotspot",
+            "settings": {
+              "product": "gid://shopify/Product/8062454267961",
+              "x_position": 82,
+              "y_position": 82
             }
           },
           "hotspot_cuff": {
             "type": "hotspot",
             "settings": {
               "product": "gid://shopify/Product/8062454497337",
-              "x_position": 84,
+              "x_position": 85,
               "y_position": 31
             }
           }
@@ -32,6 +40,7 @@
         "block_order": [
           "hotspot_earrings",
           "hotspot_bracelets",
+          "hotspot_ring",
           "hotspot_cuff"
         ],
         "settings": {}
@@ -101,7 +110,7 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {
-          "announcement_text": "Free shipping on orders over ₪500 · Handmade in Tel Aviv",
+          "announcement_text": "Free shipping within Israel on orders over ₪500 · Handmade in Tel Aviv",
           "announcement_link": "",
           "show_announcement": true
         }
