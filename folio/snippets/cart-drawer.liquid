@@ -1,20 +1,20 @@
-<aside class="cart-drawer" id="cartDrawer" aria-label="Cart" hidden>
+<aside class="cart-drawer" id="cartDrawer" aria-label="{{ 'templates.cart.cart' | t }}" hidden>
   <div class="drawer-header">
-    <h2 class="drawer-header__title">Cart</h2>
-    <button class="drawer-close" type="button" id="cartDrawerClose" aria-label="Close cart">
+    <h2 class="drawer-header__title">{{ 'templates.cart.cart' | t }}</h2>
+    <button class="drawer-close" type="button" id="cartDrawerClose" aria-label="{{ 'templates.cart.cart' | t }}">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
         <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
       </svg>
     </button>
   </div>
   <div class="cart-lines" id="cartLines">
-    <p style="padding:1.25rem;font-size:0.75rem;color:#8a8a8a;letter-spacing:0.1em;text-transform:uppercase;">Loading cart…</p>
+    <p class="drawer-note">{{ 'cart.general.loading' | t }}</p>
   </div>
   <div class="cart-footer" id="cartFooter" hidden>
     <div class="cart-total-row">
-      <span>Subtotal</span>
+      <span>{{ 'cart.general.subtotal' | t }}</span>
       <strong id="cartSubtotal"></strong>
     </div>
-    <a class="button button--solid" href="{{ routes.cart_url }}" style="width:100%;justify-content:center;display:flex;">Checkout</a>
+    <a class="button button--solid cart-footer__checkout" href="{{ routes.cart_url }}">{{ 'cart.general.checkout' | t }}</a>
   </div>
 </aside>
