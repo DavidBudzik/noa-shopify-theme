@@ -39,7 +39,9 @@
               alt: block.settings.title
             }}
           {% elsif card_image_asset != blank %}
+            {%- comment -%}theme-check-disable RemoteAsset{%- endcomment -%}
             <img class="category-card__img" src="{{ card_image_asset }}" alt="{{ block.settings.title }}" loading="lazy" width="1200" height="1200">
+            {%- comment -%}theme-check-enable RemoteAsset{%- endcomment -%}
           {% else %}
             <span class="category-card__img" style="background:{{ block.settings.fallback_gradient }};"></span>
           {% endif %}

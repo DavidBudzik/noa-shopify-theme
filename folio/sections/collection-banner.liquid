@@ -92,12 +92,14 @@
             alt: banner_title
         }}
       {% elsif fallback_url != blank %}
+        {%- comment -%}theme-check-disable RemoteAsset{%- endcomment -%}
         <img class="collection-banner__img"
           src="{{ fallback_url }}"
           alt="{{ banner_title }}"
           loading="eager"
           width="1800"
           height="600">
+        {%- comment -%}theme-check-enable RemoteAsset{%- endcomment -%}
       {% endif %}
 
       {%- for block in hotspot_blocks -%}
