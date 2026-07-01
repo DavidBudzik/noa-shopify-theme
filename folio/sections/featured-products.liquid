@@ -24,14 +24,12 @@
         {% render 'product-card', product: product %}
       {% else %}
         {% for index in (1..products_limit) %}
-          <article class="product-card">
-            <div class="product-card__media">
-              <div class="product-card__art" aria-hidden="true"></div>
-            </div>
-            <div class="product-card__meta">
-              <span class="product-card__collection">{{ section.settings.placeholder_collection }}</span>
-              <h3 class="product-card__title">{{ section.settings.placeholder_title }}</h3>
-              <span class="product-card__price">{{ 0 | money }}</span>
+          <article class="pc">
+            <div class="pc__media pc__photo--placeholder"></div>
+            <div class="pc__info">
+              <div class="pc__meta-top"><span>{{ section.settings.placeholder_collection }}</span></div>
+              <h3 class="pc__name">{{ section.settings.placeholder_title }}</h3>
+              <div class="pc__price-row"><div class="pc__price-group"><span class="pc__price">{{ 0 | money }}</span></div></div>
             </div>
           </article>
         {% endfor %}

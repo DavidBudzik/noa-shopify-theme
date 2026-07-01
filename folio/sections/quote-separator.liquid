@@ -1,0 +1,70 @@
+{% comment %}
+  sections/quote-separator.liquid
+  Brand pull-quote separator — white background, gold rule, Libre Bodoni display
+  Place above footer via theme.liquid or in any template
+{% endcomment %}
+
+{%- assign quote_text = section.settings.quote -%}
+{%- assign attr_name  = section.settings.attribution_name -%}
+{%- assign attr_role  = section.settings.attribution_role -%}
+{%- assign corner_lbl = section.settings.corner_label -%}
+
+<section class="qs" id="section-{{ section.id }}">
+  {%- if corner_lbl != blank -%}
+    <span class="qs__corner qs__corner--tl" aria-hidden="true">{{ corner_lbl }}</span>
+    <span class="qs__corner qs__corner--br" aria-hidden="true">{{ corner_lbl }}</span>
+  {%- endif -%}
+
+  <div class="qs__inner">
+    <span class="qs__mark" aria-hidden="true">&ldquo;</span>
+    <div class="qs__rule"></div>
+    <blockquote class="qs__quote">{{ quote_text }}</blockquote>
+    {%- if attr_name != blank or attr_role != blank -%}
+      <p class="qs__attr">
+        {%- if attr_name != blank -%}
+          <span class="qs__attr-name">{{ attr_name }}</span>
+        {%- endif -%}
+        {%- if attr_role != blank -%}{{ attr_role }}{%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quote separator",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "My style is a little eclectic — yet very earthy and natural, with smart designs and clean cuts."
+    },
+    {
+      "type": "text",
+      "id": "attribution_name",
+      "label": "Attribution name",
+      "default": "Noa Shechter"
+    },
+    {
+      "type": "text",
+      "id": "attribution_role",
+      "label": "Attribution role / title",
+      "default": "Goldsmith & Founder"
+    },
+    {
+      "type": "text",
+      "id": "corner_label",
+      "label": "Corner label",
+      "default": "Studio, Tel Aviv"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote separator"
+    }
+  ]
+}
+{% endschema %}

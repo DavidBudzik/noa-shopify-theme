@@ -136,18 +136,24 @@
         "type": "text",
         "id": "footer_menu_two_title",
         "label": "Footer menu 2 title",
-        "default": "Collections"
+        "default": "Studio"
       },
       {
         "type": "text",
         "id": "footer_menu_three_title",
         "label": "Footer menu 3 title",
-        "default": "Info"
+        "default": "Support"
       },
       {
         "type": "url",
         "id": "social_instagram",
         "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_handle",
+        "label": "Instagram handle",
+        "default": "@noa.shechter"
       },
       {
         "type": "url",
@@ -158,6 +164,42 @@
         "type": "url",
         "id": "social_tiktok",
         "label": "TikTok URL"
+      }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "whatsapp_enabled",
+        "label": "Enable WhatsApp button",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp Business number",
+        "info": "International format, digits only — e.g. 972501234567 (no +, spaces, or dashes)."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_label",
+        "label": "Button label",
+        "default": "I have a question?"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_greeting",
+        "label": "Prefilled message",
+        "info": "Sent as the draft message. On product pages the product name and link are appended automatically.",
+        "default": "Hi Noa! I have a question"
+      },
+      {
+        "type": "checkbox",
+        "id": "whatsapp_float_enabled",
+        "label": "Show floating bubble site-wide",
+        "default": true
       }
     ]
   },

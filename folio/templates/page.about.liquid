@@ -1,94 +1,164 @@
-<section class="about-page">
+{%- comment -%}
+  templates/page.about.liquid
+  About page — editorial layout from noa-about.html design spec
+{%- endcomment -%}
 
-  <!-- Full-bleed hero -->
-  <div class="about-hero">
-    <div class="about-hero__media" {% if page.metafields.custom.hero_image != blank %}style="background-image: url('{{ page.metafields.custom.hero_image | image_url: width: 1800 }}')"{% endif %}></div>
-    <div class="about-hero__copy">
-      {% if settings.about_template_eyebrow != blank %}
-        <p class="section-kicker">{{ settings.about_template_eyebrow }}</p>
-      {% endif %}
-      <h1 class="about-hero__title">{{ page.title }}</h1>
-    </div>
-  </div>
+<nav class="noa-breadcrumb noa-breadcrumb--page" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>About</span>
+</nav>
+<div class="ab-hero">
+  <h1 class="ab-hero__title">Jewelry made by hand, <em>worn every day.</em></h1>
+  <p class="ab-hero__lede">Handmade in a small studio in south Tel Aviv. Every piece is forged, finished and hallmarked by one pair of hands — mine. Nothing batched, nothing outsourced, nothing rushed.</p>
+</div>
 
-  <!-- Philosophy statement -->
-  {% if page.metafields.custom.quote != blank %}
-    <div class="about-statement">
-      <blockquote class="about-quote">{{ page.metafields.custom.quote }}</blockquote>
-      {% if page.metafields.custom.quote_attr != blank %}
-        <p class="about-statement__attr">{{ page.metafields.custom.quote_attr }}</p>
-      {% endif %}
-    </div>
-  {% endif %}
-
-  <!-- Maker story -->
-  <div class="about-story">
-    <div class="about-story__copy">
-      {% if settings.about_story_eyebrow != blank %}
-        <p class="section-kicker">{{ settings.about_story_eyebrow }}</p>
-      {% endif %}
-      {% if settings.about_story_heading != blank %}
-        <h2 class="section-title about-story__heading">{{ settings.about_story_heading }}</h2>
-      {% endif %}
-      <div class="about-story__body rte">
-        {{ page.content }}
+<div class="ab-cards">
+  <div class="ab-cards__grid">
+    <a href="#story" class="ab-topic">
+      <div class="ab-topic__icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="13" y2="14"/></svg>
       </div>
-      {% if settings.about_cta_label != blank and settings.about_cta_link != blank %}
-        <a class="button button--text" href="{{ settings.about_cta_link }}">{{ settings.about_cta_label }}</a>
-      {% endif %}
-    </div>
-    <div class="about-story__visual" {% if page.metafields.custom.feature_image != blank %}style="background-image: url('{{ page.metafields.custom.feature_image | image_url: width: 1200 }}')"{% endif %}></div>
-  </div>
-
-  <!-- Materials -->
-  <div class="about-materials">
-    <div class="about-materials__inner">
-      <div class="about-materials__head">
-        <p class="section-kicker">{{ settings.about_materials_eyebrow | default: 'Materials' }}</p>
-        <h2 class="section-title">{{ settings.about_materials_heading | default: 'Sourced with care. Finished by hand.' }}</h2>
+      <h4>Our story</h4>
+      <p>How a one-ring experiment in 2018 became a full-time studio in Florentin.</p>
+      <span class="ab-topic__link">Read ↓</span>
+    </a>
+    <a href="#process" class="ab-topic">
+      <div class="ab-topic__icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>
       </div>
-      <div class="about-materials__grid">
-        <div class="about-material-card about-material-card--silver">
-          <div class="about-material-card__visual"></div>
-          <p class="about-material-card__num">01</p>
-          <h3 class="about-material-card__title">{{ settings.about_mat1_title | default: 'Sterling Silver 925' }}</h3>
-          <p class="about-material-card__desc">{{ settings.about_mat1_desc | default: 'Hard-wearing, bright, and oxidizes beautifully over time. The studio workhorse — used in most daily-wear and stacking pieces.' }}</p>
+      <h4>How a piece is made</h4>
+      <p>Four steps from raw silver bar to hallmarked piece — 3 to 5 days of bench work.</p>
+      <span class="ab-topic__link">Read ↓</span>
+    </a>
+    <a href="#materials" class="ab-topic">
+      <div class="ab-topic__icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h4>Materials &amp; ethics</h4>
+      <p>Recycled 925 sterling and Fairmined 14k gold. Traceable, documented, never from conflict sources.</p>
+      <span class="ab-topic__link">Read ↓</span>
+    </a>
+  </div>
+</div>
+
+<div class="ab-layout">
+
+  <div class="ab-main">
+    <div class="ab-main__eyebrow" id="story">Our story</div>
+
+    <h2>It started with one ring, forged twice until it sat right on my finger.</h2>
+    <p>I'm Noa. I make jewelry in a small studio in south Tel Aviv, a few streets from the Carmel market. Every piece that leaves the bench has been shaped, finished and held by my own hands.</p>
+    <p>I don't batch, I don't outsource, and I don't use moulds. What I care about is how a piece feels after three years of being worn — the way silver softens, the way a ring records a life.</p>
+
+    {%- if page.metafields.custom.studio_image != blank -%}
+      <div class="ab-main__image-wrap">
+        {{
+          page.metafields.custom.studio_image.value
+          | image_url: width: 1200
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 1000px) 640px, 100vw',
+            class: 'ab-main__image'
+        }}
+      </div>
+    {%- else -%}
+      <div class="ab-main__placeholder" aria-hidden="true">studio — working hands on silver</div>
+    {%- endif -%}
+
+    <h2 id="process">How a piece is made.</h2>
+    <p>Every piece follows the same path — from a raw bar of silver to something you'll put on in the morning without thinking. Most pieces take three to five days of bench work.</p>
+
+    <h3>01 · Sourcing</h3>
+    <p>Recycled sterling bars and Fairmined gold arrive from a small refinery in Holon. Every batch comes with traceability documentation.</p>
+
+    <h3>02 · Forging</h3>
+    <p>Metal is heated, rolled and hammered into form. The hammer marks stay — they're not a defect, they're the point.</p>
+
+    <h3>03 · Finishing</h3>
+    <p>Filing, sanding, polishing. Each piece is finished by hand, so no two are identical.</p>
+
+    <h3>04 · Hallmarking</h3>
+    <p>Struck with the Israeli 925 stamp and our studio mark. Boxed, packed and shipped from Tel Aviv.</p>
+
+    <h2 id="materials">Materials &amp; ethics.</h2>
+
+    <div class="ab-values">
+      <div class="ab-value">
+        <div class="ab-value__num">01</div>
+        <div>
+          <h4>Made by one pair of hands</h4>
+          <p>Every ring, cuff and earring is forged at one bench in Tel Aviv. No production lines, no contractors. If there's a flaw, it's mine to answer for.</p>
         </div>
-        <div class="about-material-card about-material-card--brass">
-          <div class="about-material-card__visual"></div>
-          <p class="about-material-card__num">02</p>
-          <h3 class="about-material-card__title">{{ settings.about_mat2_title | default: 'Solid Brass' }}</h3>
-          <p class="about-material-card__desc">{{ settings.about_mat2_desc | default: 'Warm, heavy, and ages into a rich patina. Frequently paired with silver for contrast — a metal that tells stories.' }}</p>
+      </div>
+      <div class="ab-value">
+        <div class="ab-value__num">02</div>
+        <div>
+          <h4>Recycled sterling &amp; fair gold</h4>
+          <p>We work exclusively with recycled 925 sterling silver and Fairmined 14k gold. Traceable, documented, never from conflict sources.</p>
         </div>
-        <div class="about-material-card about-material-card--gold">
-          <div class="about-material-card__visual"></div>
-          <p class="about-material-card__num">03</p>
-          <h3 class="about-material-card__title">{{ settings.about_mat3_title | default: '14k Gold' }}</h3>
-          <p class="about-material-card__desc">{{ settings.about_mat3_desc | default: 'Reserved for heirloom-grade commissions. Pure, lasting, and made entirely to order with extended lead times.' }}</p>
+      </div>
+      <div class="ab-value">
+        <div class="ab-value__num">03</div>
+        <div>
+          <h4>Unisex by design</h4>
+          <p>We don't design "for women" or "for men." Pieces are shaped for a body, a wrist, a finger — whoever's attached to it.</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Find us — dark band -->
-  <div class="about-market">
-    <div class="about-market__inner">
-      <div class="about-market__copy">
-        {% if settings.about_market_eyebrow != blank %}
-          <p class="section-kicker">{{ settings.about_market_eyebrow }}</p>
-        {% endif %}
-        {% if settings.about_market_heading != blank %}
-          <h2 class="section-title section-title--light">{{ settings.about_market_heading }}</h2>
-        {% endif %}
-        {% if settings.about_market_body != blank %}
-          <p class="about-market__text">{{ settings.about_market_body }}</p>
-        {% endif %}
-        {% if settings.about_market_cta_label != blank and settings.about_market_cta_link != blank %}
-          <a class="button button--outline-light" href="{{ settings.about_market_cta_link }}">{{ settings.about_market_cta_label }}</a>
-        {% endif %}
-      </div>
-      <div class="about-market__visual" {% if page.metafields.custom.market_image != blank %}style="background-image: url('{{ page.metafields.custom.market_image | image_url: width: 1200 }}')"{% endif %}></div>
+    <div class="ab-main__signature">
+      Noa Shechter
+      <span>Founder · Silversmith</span>
     </div>
   </div>
 
-</section>
+  <aside class="ab-aside">
+    <div class="ab-aside__block">
+      <h4>Studio</h4>
+      <div class="ab-aside__primary">Levontin 12, Tel Aviv</div>
+      <p>Florentin neighborhood. Visits by appointment, Monday–Thursday. <a href="{{ routes.root_url }}pages/contact">Book a visit</a>.</p>
+    </div>
+    <div class="ab-aside__block">
+      <h4>Market day</h4>
+      <div class="ab-aside__primary">Nahalat Binyamin</div>
+      <p>Every Tuesday &amp; Friday, 10:00–17:00. Stall 64, under the trees.</p>
+    </div>
+    <div class="ab-aside__block">
+      <h4>Established</h4>
+      <div class="ab-aside__primary">2018 · Tel Aviv</div>
+      <p>One bench, one silversmith. Seven years of pieces made the same way.</p>
+    </div>
+    <div class="ab-aside__block">
+      <h4>Materials</h4>
+      <div class="ab-aside__primary">925 &amp; 14k</div>
+      <p>Recycled sterling silver · Fairmined 14k gold · Lab-grown &amp; ethical stones on request.</p>
+    </div>
+    <div class="ab-aside__block ab-aside__block--press">
+      <h4>Press</h4>
+      <div class="ab-aside__press">
+        Haaretz Gallery · 2024<br>
+        Vogue IT · 2023<br>
+        Wallpaper* Design Awards<br>
+        Cereal, Volume 27<br>
+        Kinfolk, Issue 48
+      </div>
+    </div>
+
+    {%- if page.metafields.custom.portrait_image != blank -%}
+      <div class="ab-aside__portrait-wrap">
+        {{
+          page.metafields.custom.portrait_image.value
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 1000px) 400px, 100vw',
+            class: 'ab-aside__portrait-img'
+        }}
+      </div>
+    {%- else -%}
+      <div class="ab-aside__portrait" aria-hidden="true">portrait · noa at the bench</div>
+    {%- endif -%}
+  </aside>
+
+</div>

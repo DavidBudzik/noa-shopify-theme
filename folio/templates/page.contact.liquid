@@ -1,73 +1,266 @@
-<section class="noa-page noa-contact">
-  <div class="noa-page__head">
-    <p class="section-kicker">Get in touch</p>
-    <h1 class="noa-page__title">{{ page.title | default: 'Contact' }}</h1>
-  </div>
+{% comment %}
+  templates/page.contact.liquid
+  Contact page — noa+ brand redesign
+  Design: noa-contact.html
+{% endcomment %}
 
-  <div class="noa-contact__grid">
-
-    <!-- Info column -->
-    <div class="noa-contact__info">
-      {% if page.content != blank %}
-        <div class="noa-contact__copy rte">{{ page.content }}</div>
-      {% else %}
-        <p class="noa-contact__copy">Questions, custom orders, or just want to say hello — reach us below.</p>
-      {% endif %}
-
-      <dl class="noa-contact__details">
-        {% if settings.contact_email != blank %}
-          <dt>Email</dt>
-          <dd><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></dd>
-        {% endif %}
-        {% if settings.contact_location != blank %}
-          <dt>Studio</dt>
-          <dd>{{ settings.contact_location }}</dd>
-        {% endif %}
-        {% if settings.contact_hours != blank %}
-          <dt>Hours</dt>
-          <dd>{{ settings.contact_hours }}</dd>
-        {% endif %}
-        {% if settings.social_instagram != blank %}
-          <dt>Instagram</dt>
-          <dd><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">@noa_jewelry</a></dd>
-        {% endif %}
-      </dl>
-    </div>
-
-    <!-- Form column -->
-    <div class="noa-contact__form-col">
-      {% form 'contact', class: 'noa-contact__form' %}
-        {% if form.posted_successfully? %}
-          <p class="noa-contact__success">Message sent — we'll be in touch soon.</p>
-        {% else %}
-          {% if form.errors %}
-            <p class="noa-contact__error">{{ form.errors | default_errors }}</p>
-          {% endif %}
-
-          <div class="noa-form-row">
-            <label class="noa-form-label" for="ContactName">Name</label>
-            <input class="noa-form-input" type="text" id="ContactName" name="contact[name]"
-              placeholder="Your name" autocomplete="name" required>
-          </div>
-          <div class="noa-form-row">
-            <label class="noa-form-label" for="ContactEmail">Email</label>
-            <input class="noa-form-input" type="email" id="ContactEmail" name="contact[email]"
-              placeholder="your@email.com" autocomplete="email" required>
-          </div>
-          <div class="noa-form-row">
-            <label class="noa-form-label" for="ContactSubject">Subject</label>
-            <input class="noa-form-input" type="text" id="ContactSubject" name="contact[subject]"
-              placeholder="Order question, custom request…">
-          </div>
-          <div class="noa-form-row">
-            <label class="noa-form-label" for="ContactMessage">Message</label>
-            <textarea class="noa-form-input noa-form-textarea" id="ContactMessage" name="contact[body]"
-              placeholder="Tell us how we can help…" rows="6" required></textarea>
-          </div>
-          <button class="noa-btn-cart" type="submit">Send message</button>
-        {% endif %}
-      {% endform %}
-    </div>
-
-  </div>
+<nav class="noa-breadcrumb noa-breadcrumb--page" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>{{ page.title | default: 'Contact' }}</span>
+</nav>
+<section class="noa-contact-hero">
+  <h1 class="noa-contact-hero__title">Say hello. <em>We read every message.</em></h1>
+  <p class="noa-contact-hero__lede">
+    {%- if page.content != blank -%}
+      {{ page.content | strip_html }}
+    {%- else -%}
+      You can write to the studio, drop by on market days, or book an appointment in Florentin. Whichever you prefer — we'll answer within 24 hours, Tel Aviv time.
+    {%- endif -%}
+  </p>
 </section>
+
+<!-- Topic routing cards -->
+<div class="noa-contact-cards">
+  <div class="noa-contact-cards__grid">
+    <a href="#noa-contact-form" class="noa-topic-card">
+      <div class="noa-topic-card__icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M2 7l10 7 10-7"/></svg>
+      </div>
+      <h4>General questions</h4>
+      <p>About a piece, sizing, availability or anything else. We answer within a day.</p>
+      <span class="noa-topic-card__email">{{ settings.contact_email | default: 'studio@noaplus.com' }}</span>
+    </a>
+    <a href="#noa-contact-form" class="noa-topic-card">
+      <div class="noa-topic-card__icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M8 10h8M8 14h5"/></svg>
+      </div>
+      <h4>Custom commissions</h4>
+      <p>Describe what you have in mind. We'll book a call and sketch a direction within a week.</p>
+      <span class="noa-topic-card__email">commissions@noaplus.com</span>
+    </a>
+    <a href="#noa-contact-form" class="noa-topic-card">
+      <div class="noa-topic-card__icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+      </div>
+      <h4>Press &amp; wholesale</h4>
+      <p>Editorial features, stockists and trade enquiries — we open a small number each season.</p>
+      <span class="noa-topic-card__email">press@noaplus.com</span>
+    </a>
+  </div>
+</div>
+
+<!-- Form + Info layout -->
+<div class="noa-contact-layout" id="noa-contact-form">
+
+  <!-- Contact form -->
+  {% form 'contact', class: 'noa-cf', id: 'ContactPageForm' %}
+    <div class="noa-cf__eyebrow">Send a message</div>
+
+    {%- if form.posted_successfully? -%}
+      <div class="noa-cf__success">
+        Thank you — we'll be in touch soon.
+      </div>
+    {%- else -%}
+      {%- if form.errors -%}
+        <p class="noa-cf__errors">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+
+      <div class="noa-cf__two-col">
+        <div class="noa-cf__field">
+          <label class="noa-cf__label" for="ContactPageName">Your name</label>
+          <input class="noa-cf__input" type="text" id="ContactPageName" name="contact[name]"
+            autocomplete="name" value="{{ form.name }}" required>
+        </div>
+        <div class="noa-cf__field">
+          <label class="noa-cf__label" for="ContactPageEmail">Email</label>
+          <input class="noa-cf__input" type="email" id="ContactPageEmail" name="contact[email]"
+            autocomplete="email" value="{{ form.email }}" required>
+        </div>
+      </div>
+
+      <div class="noa-cf__field" id="noa-topic-field">
+        <label class="noa-cf__label" id="noa-topic-label">Topic</label>
+        <div class="noa-dd" data-noa-dd aria-labelledby="noa-topic-label" role="combobox"
+          aria-haspopup="listbox" aria-expanded="false">
+          <button type="button" class="noa-dd__trigger" aria-haspopup="listbox" aria-expanded="false">
+            <span class="noa-dd__value noa-dd__value--placeholder">Choose a topic&hellip;</span>
+            <svg class="noa-dd__chev" width="14" height="14" viewBox="0 0 16 16" fill="none"
+              stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M3 6l5 5 5-5"/>
+            </svg>
+          </button>
+          <input type="hidden" name="contact[subject]" id="ContactPageTopic">
+          <ul class="noa-dd__menu" role="listbox" aria-label="Choose a topic">
+            <li role="none" class="noa-dd__group-label">Orders &amp; pieces</li>
+            <li class="noa-dd__opt" role="option" aria-selected="false" tabindex="-1" data-value="General question">
+              General question<span class="noa-dd__hint">Reply · 1 day</span>
+            </li>
+            <li class="noa-dd__opt" role="option" aria-selected="false" tabindex="-1" data-value="Order enquiry">
+              Order enquiry<span class="noa-dd__hint">Reply · 1 day</span>
+            </li>
+            <li class="noa-dd__opt" role="option" aria-selected="false" tabindex="-1" data-value="Repair or resize">
+              Repair or resize<span class="noa-dd__hint">Reply · 2 days</span>
+            </li>
+            <li role="none" class="noa-dd__divider" aria-hidden="true"></li>
+            <li role="none" class="noa-dd__group-label">Commissions &amp; trade</li>
+            <li class="noa-dd__opt" role="option" aria-selected="false" tabindex="-1" data-value="Custom commission">
+              Custom commission<span class="noa-dd__hint">4–8 wks</span>
+            </li>
+            <li class="noa-dd__opt" role="option" aria-selected="false" tabindex="-1" data-value="Press">
+              Press<span class="noa-dd__hint">press@</span>
+            </li>
+            <li class="noa-dd__opt" role="option" aria-selected="false" tabindex="-1" data-value="Wholesale">
+              Wholesale<span class="noa-dd__hint">seasonal</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="noa-cf__field">
+        <label class="noa-cf__label" for="ContactPageOrder">
+          Order number <span class="noa-cf__label-note">(if applicable)</span>
+        </label>
+        <input class="noa-cf__input" type="text" id="ContactPageOrder"
+          name="contact[order_number]" placeholder="e.g. NP-10428">
+      </div>
+
+      <div class="noa-cf__field">
+        <label class="noa-cf__label" for="ContactPageMessage">Message</label>
+        <textarea class="noa-cf__textarea" id="ContactPageMessage"
+          name="contact[body]" rows="6" required></textarea>
+      </div>
+
+      <button class="noa-cf__btn" type="submit">Send message</button>
+    {%- endif -%}
+  {% endform %}
+
+  <!-- Info sidebar -->
+  <aside class="noa-contact-info" aria-label="Studio information">
+    <div class="noa-contact-info__block">
+      <h4 class="noa-contact-info__label">Email</h4>
+      <div class="noa-contact-info__primary">
+        <a href="mailto:{{ settings.contact_email | default: 'studio@noaplus.com' }}">
+          {{- settings.contact_email | default: 'studio@noaplus.com' -}}
+        </a>
+      </div>
+      <p class="noa-contact-info__text">We answer within 24 hours on weekdays, Tel Aviv time.</p>
+    </div>
+    <div class="noa-contact-info__block">
+      <h4 class="noa-contact-info__label">Studio · Florentin</h4>
+      <div class="noa-contact-info__primary">Levontin 12, Tel Aviv</div>
+      <p class="noa-contact-info__text">Visits by appointment, Monday–Thursday. Email to book a slot.</p>
+    </div>
+    <div class="noa-contact-info__block">
+      <h4 class="noa-contact-info__label">Market</h4>
+      <div class="noa-contact-info__primary">Nahalat Binyamin</div>
+      <p class="noa-contact-info__text">Every Tuesday &amp; Friday, 10:00–17:00. Stall 64, near the Carmel market.</p>
+    </div>
+    <div class="noa-contact-info__block noa-contact-info__block--hours">
+      <h4 class="noa-contact-info__label">Studio hours</h4>
+      <p class="noa-contact-info__hours">
+        Mon–Thu · 10:00–18:00 <span>· by appointment</span><br>
+        Tue &amp; Fri · market day<br>
+        Sat · closed (Shabbat shalom)<br>
+        Sun · closed
+      </p>
+    </div>
+    <div class="noa-contact-map" role="img" aria-label="Map placeholder: Florentin, Tel Aviv">
+      map · florentin, tel aviv
+    </div>
+  </aside>
+
+</div>
+
+<script>
+(function () {
+  const dds = document.querySelectorAll('[data-noa-dd]');
+  dds.forEach(function (dd) {
+    const trigger = dd.querySelector('.noa-dd__trigger');
+    const valueEl = dd.querySelector('.noa-dd__value');
+    const hidden = dd.querySelector('input[type="hidden"]');
+    const opts = dd.querySelectorAll('.noa-dd__opt');
+
+    function closeDD() {
+      dd.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+    function openDD() {
+      document.querySelectorAll('[data-noa-dd].is-open').forEach(function (o) {
+        if (o !== dd) {
+          o.classList.remove('is-open');
+          o.querySelector('.noa-dd__trigger').setAttribute('aria-expanded', 'false');
+        }
+      });
+      dd.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dd.classList.contains('is-open') ? closeDD() : openDD();
+    });
+
+    trigger.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openDD();
+        var first = dd.querySelector('.noa-dd__opt.is-active') || opts[0];
+        if (first) first.focus();
+      } else if (e.key === 'Escape') {
+        closeDD();
+      }
+    });
+
+    opts.forEach(function (opt) {
+      opt.addEventListener('click', function (e) {
+        e.stopPropagation();
+        opts.forEach(function (o) {
+          o.classList.remove('is-active');
+          o.setAttribute('aria-selected', 'false');
+        });
+        opt.classList.add('is-active');
+        opt.setAttribute('aria-selected', 'true');
+        var firstText = Array.from(opt.childNodes).find(function (n) { return n.nodeType === 3; });
+        var label = firstText ? firstText.textContent.trim() : (opt.dataset.value || '');
+        valueEl.textContent = label;
+        valueEl.classList.remove('noa-dd__value--placeholder');
+        if (hidden) hidden.value = opt.dataset.value || label;
+        closeDD();
+        trigger.focus();
+      });
+
+      opt.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          opt.click();
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          var allOpts = Array.from(opts);
+          var idx = allOpts.indexOf(opt);
+          var next = allOpts[idx + 1];
+          if (next) next.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          var allOpts = Array.from(opts);
+          var idx = allOpts.indexOf(opt);
+          var prev = allOpts[idx - 1];
+          if (prev) prev.focus(); else trigger.focus();
+        } else if (e.key === 'Escape') {
+          closeDD();
+          trigger.focus();
+        }
+      });
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-noa-dd]')) {
+      document.querySelectorAll('[data-noa-dd].is-open').forEach(function (o) {
+        o.classList.remove('is-open');
+        o.querySelector('.noa-dd__trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+})();
+</script>

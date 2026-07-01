@@ -3,43 +3,144 @@
   assign current_variant = current_product.selected_or_first_available_variant
   assign collection_title = collection_title | default: current_product.collections.first.title
   assign badge_label = badge_label | default: current_product.metafields.custom.badge
+
+  assign second_image = current_product.images[1]
+
+  assign material_option = nil
+  assign material_option_position = nil
+  for option in current_product.options_with_values
+    assign opt_lower = option.name | downcase
+    if opt_lower == 'material' or opt_lower == 'metal' or opt_lower == 'finish' or opt_lower == 'color' or opt_lower == 'colour'
+      assign material_option = option
+      assign material_option_position = forloop.index
+      break
+    endif
+  endfor
+
+  assign availability_label = ''
+  if material_option_position == 1
+    assign availability_label = current_variant.option1
+  elsif material_option_position == 2
+    assign availability_label = current_variant.option2
+  elsif material_option_position == 3
+    assign availability_label = current_variant.option3
+  endif
 %}
 
-<article class="product-card">
-  <div class="product-card__media">
-    {% if current_product.featured_image != blank %}
-      <a class="product-card__art product-card__art--photo" href="{{ current_product.url }}" aria-label="Open {{ current_product.title }} details"
-        style="background-image:url('{{ current_product.featured_image | image_url: width: 900 }}');"></a>
-    {% else %}
-      <a class="product-card__art" href="{{ current_product.url }}" aria-label="Open {{ current_product.title }} details"></a>
-    {% endif %}
+<article class="pc" data-product-handle="{{ current_product.handle }}">
+  <div class="pc__media">
+    {%- if badge_label != blank -%}
+      {%- if badge_label contains 'New' or badge_label contains 'new' -%}
+        <span class="pc__badge pc__badge--new">{{ badge_label }}</span>
+      {%- elsif badge_label contains 'Low' or badge_label contains 'low' -%}
+        <span class="pc__badge pc__badge--low">{{ badge_label }}</span>
+      {%- else -%}
+        <span class="pc__badge">{{ badge_label }}</span>
+      {%- endif -%}
+    {%- endif -%}
 
-    {% if badge_label != blank %}
-      <span class="product-card__badge">{{ badge_label }}</span>
-    {% endif %}
+    <a class="pc__media-link" href="{{ current_product.url }}" aria-label="{{ current_product.title | escape }}" tabindex="-1"></a>
 
-    {% if current_variant != blank and current_variant.available %}
-      <form class="product-card__quick-form" data-product-form>
+    <button type="button" class="pc__share"
+            data-share
+            data-share-url="{{ current_product.url }}"
+            data-share-title="{{ current_product.title | escape }}"
+            aria-label="Share {{ current_product.title | escape }}" title="Share">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="3.5" r="1.8"/><circle cx="4" cy="8" r="1.8"/><circle cx="12" cy="12.5" r="1.8"/>
+        <path d="M5.6 7.1l4.8-2.6M5.6 8.9l4.8 2.6"/>
+      </svg>
+    </button>
+
+    {%- if current_product.featured_image != blank -%}
+      <img class="pc__photo"
+           src="{{ current_product.featured_image | image_url: width: 800 }}"
+           alt="{{ current_product.featured_image.alt | escape | default: current_product.title }}"
+           loading="lazy"
+           width="800"
+           height="1000">
+    {%- else -%}
+      <div class="pc__photo pc__photo--placeholder"></div>
+    {%- endif -%}
+
+    {%- if second_image != blank -%}
+      <img class="pc__photo pc__media-secondary"
+           src="{{ second_image | image_url: width: 800 }}"
+           alt="{{ second_image.alt | escape | default: current_product.title }}"
+           loading="lazy"
+           width="800"
+           height="1000">
+    {%- endif -%}
+
+    {%- if current_product.has_only_default_variant and current_variant != blank and current_variant.available -%}
+      <form class="pc__quickadd-form" data-product-form>
         <input type="hidden" name="id" value="{{ current_variant.id }}">
         <input type="hidden" name="quantity" value="1">
-        <button class="product-card__quick" type="submit">{{ settings.quick_add_label | default: 'Quick add' }}</button>
+        <button class="pc__quickadd" type="submit" aria-label="Add to cart" title="Add to cart">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M8 3v10M3 8h10"/>
+          </svg>
+        </button>
       </form>
-    {% endif %}
+    {%- endif -%}
   </div>
 
-  <div class="product-card__meta">
-    {% if collection_title != blank %}
-      <span class="product-card__collection">{{ collection_title }}</span>
-    {% endif %}
-    <h3 class="product-card__title"><a href="{{ current_product.url }}">{{ current_product.title }}</a></h3>
-    {% if current_product.metafields.custom.subtitle != blank %}
-      <span class="product-card__subtitle">{{ current_product.metafields.custom.subtitle }}</span>
-    {% endif %}
-    <span class="product-card__price">
-      {% if current_product.compare_at_price > current_product.price %}
-        <del>{{ current_product.compare_at_price | money }}</del>
-      {% endif %}
-      {{ current_product.price | money }}
-    </span>
+  <div class="pc__info">
+    <div class="pc__meta-top">
+      <span>{{ collection_title }}</span>
+      {%- if availability_label != blank -%}
+        <span>{{ availability_label }}</span>
+      {%- endif -%}
+    </div>
+
+    <a href="{{ current_product.url }}" class="pc__name-link">
+      <h3 class="pc__name">
+        <span class="pc__title-text">{{- current_product.title -}}</span>
+        {%- if current_product.metafields.custom.subtitle != blank -%}
+          <span class="pc__sub">{{ current_product.metafields.custom.subtitle }}</span>
+        {%- endif -%}
+      </h3>
+    </a>
+
+    <div class="pc__price-row">
+      <div class="pc__price-group">
+        {%- if current_product.compare_at_price > current_product.price -%}
+          <span class="pc__price pc__price--compare">{{ current_product.compare_at_price | money_without_trailing_zeros }}</span>
+        {%- endif -%}
+        <span class="pc__price">{{ current_product.price | money_without_trailing_zeros }}</span>
+      </div>
+
+      {%- if material_option != nil -%}
+        <div class="pc__swatches" aria-label="Available finishes">
+          {%- for value in material_option.values -%}
+            {%- liquid
+              assign swatch_bg = '#a8a8a0'
+              assign val_lower = value | downcase
+              if val_lower == 'silver'
+                assign swatch_bg = '#dcd6cc'
+              elsif val_lower == 'oxidized' or val_lower == 'oxidised'
+                assign swatch_bg = '#2a2622'
+              elsif val_lower == 'gold' or val_lower == '14k gold' or val_lower == '18k gold'
+                assign swatch_bg = '#c6a36a'
+              elsif val_lower == 'brass'
+                assign swatch_bg = '#b99872'
+              elsif val_lower == 'rose gold'
+                assign swatch_bg = '#d4a090'
+              endif
+
+              assign is_selected = false
+              if availability_label == value
+                assign is_selected = true
+              endif
+            -%}
+            <button class="pc__swatch{% if is_selected %} is-sel{% endif %}"
+                    style="background:{{ swatch_bg }}"
+                    aria-label="{{ value }}"
+                    data-option-value="{{ value }}"
+                    type="button"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </article>

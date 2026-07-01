@@ -1,0 +1,115 @@
+<nav class="noa-breadcrumb noa-breadcrumb--page" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>{{ page.title | default: 'Shipping & Returns' }}</span>
+</nav>
+<section class="noa-page noa-shipping">
+  <div class="noa-page__head">
+    <p class="section-kicker">Delivery &amp; returns</p>
+    <h1 class="noa-page__title">{{ page.title | default: 'Shipping &amp; Returns' }}</h1>
+  </div>
+
+  {% if page.content != blank %}
+    <div class="noa-shipping__intro rte">{{ page.content }}</div>
+  {% endif %}
+
+  <div class="noa-shipping__grid">
+
+    <div class="noa-shipping__col">
+      <h2 class="noa-shipping__section-title">Shipping</h2>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Processing time</h3>
+        <p>Most in-stock pieces ship within 1–3 business days. Made-to-order and custom pieces require 5–10 business days before dispatch. You will receive an email confirmation with tracking once your order leaves the studio.</p>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Domestic — Israel</h3>
+        <table class="noa-size-guide__table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Estimated delivery</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Standard post</td><td>3–5 business days</td><td>₪25</td></tr>
+            <tr><td>Express courier</td><td>1–2 business days</td><td>₪55</td></tr>
+            <tr><td>Free shipping</td><td>3–5 business days</td><td>Free on orders over ₪500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">International</h3>
+        <table class="noa-size-guide__table">
+          <thead>
+            <tr>
+              <th>Region</th>
+              <th>Estimated delivery</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Europe</td><td>7–10 business days</td><td>From $18 USD</td></tr>
+            <tr><td>North America</td><td>8–12 business days</td><td>From $22 USD</td></tr>
+            <tr><td>Rest of world</td><td>10–18 business days</td><td>From $25 USD</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.75rem;font-size:0.8125rem;color:#8a8a8a;">Exact rates are calculated at checkout. International customers are responsible for any import duties or taxes levied by their country.</p>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Tracking</h3>
+        <p>All orders include tracking. You will receive a tracking link by email once your parcel ships. For international orders, tracking may not update in real time once the parcel leaves Israel — this is normal.</p>
+      </div>
+    </div>
+
+    <div class="noa-shipping__col">
+      <h2 class="noa-shipping__section-title">Returns &amp; Exchanges</h2>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Return window</h3>
+        <p>We accept returns and exchanges within <strong>14 days</strong> of delivery for unworn items in original condition with original packaging. After 14 days, we cannot accept returns.</p>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Non-returnable items</h3>
+        <ul class="noa-care-guide__list">
+          <li>Custom or engraved pieces — all sales final</li>
+          <li>Made-to-order pieces — all sales final</li>
+          <li>Items showing signs of wear, damage, or alteration</li>
+          <li>Sale items</li>
+        </ul>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">How to start a return</h3>
+        <ol class="noa-size-guide__steps">
+          <li>Email us at {{ settings.contact_email | default: 'hello@noajewelry.com' }} with your order number and reason for return.</li>
+          <li>We will respond within 1–2 business days with instructions and a return address.</li>
+          <li>Pack the item securely in its original box. Return shipping costs are the customer's responsibility unless the item arrived damaged or incorrect.</li>
+          <li>Once we receive and inspect the item, we will process your refund or exchange within 5 business days.</li>
+        </ol>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Damaged or incorrect orders</h3>
+        <p>If your order arrives damaged or we sent the wrong item, please photograph the piece and packaging and contact us within <strong>48 hours</strong> of delivery. We will arrange a replacement or full refund at no cost to you.</p>
+      </div>
+
+      <div class="noa-shipping__block">
+        <h3 class="noa-shipping__block-title">Repairs</h3>
+        <p>We stand behind our craftsmanship. If a Noa piece requires repair, contact us with your order details. Most repairs are free within one year of purchase. Beyond that, we assess case by case — we rarely say no.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="noa-faq__cta">
+    <p>Need help with an order?</p>
+    <a class="noa-btn-cart" href="{{ routes.root_url }}pages/contact" style="display:inline-block;text-decoration:none;padding:15px 40px;">Contact us</a>
+  </div>
+
+</section>

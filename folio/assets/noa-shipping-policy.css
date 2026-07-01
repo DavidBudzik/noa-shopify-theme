@@ -1,0 +1,237 @@
+/* ── Noa Shipping Policy Page ── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.noa-policy-wrap {
+  --ink:       #0f1a2b;
+  --gold:      #96783e;
+  --gold-warm: #b89a6a;
+  --parchment: #f5f0e8;
+  --stone:     #4a4540;
+  --white:     #fdfaf5;
+
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+/* ── Header ── */
+.noa-policy-header {
+  text-align: center;
+  padding: 64px 24px 48px;
+  border-bottom: 1px solid var(--gold-warm);
+}
+
+.noa-policy-brand-mark {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  color: var(--stone);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.noa-policy-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.noa-policy-header h1 span {
+  display: block;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.noa-policy-header-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 24px auto 0;
+}
+
+/* ── Main layout ── */
+.noa-policy-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+/* ── Section ── */
+.policy-section {
+  margin-bottom: 56px;
+}
+
+.section-tag {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ── Bilingual grid ── */
+.bilingual {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 32px;
+  align-items: start;
+}
+
+.divider-v {
+  background: var(--gold-warm);
+  width: 1px;
+  align-self: stretch;
+}
+
+.lang-block {
+  padding: 0 8px;
+}
+
+.lang-label {
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 12px;
+}
+
+.lang-he { direction: rtl; text-align: right; }
+.lang-en { direction: ltr; text-align: left; }
+
+/* ── Shipping row cards ── */
+.shipping-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.shipping-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: start;
+  gap: 0 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(184,154,106,0.18);
+}
+
+.shipping-row:last-child { border-bottom: none; }
+
+.row-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.row-detail {
+  font-size: 16px;
+  color: #3a3530;
+  line-height: 1.7;
+}
+
+.row-price {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--gold);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.row-price-usd {
+  font-size: 18px;
+  color: var(--stone);
+  font-weight: 300;
+}
+
+.row-price-sep {
+  color: var(--gold-warm);
+  margin: 0 4px;
+}
+
+.note-box {
+  margin-top: 40px;
+  background: var(--parchment);
+  border-right: 3px solid var(--gold);
+  padding: 20px 24px;
+}
+
+.note-box.en-note {
+  border-right: none;
+  border-left: 3px solid var(--gold);
+}
+
+.note-box p {
+  font-size: 15px;
+  color: #3a3530;
+  line-height: 1.9;
+}
+
+/* ── Separator ── */
+.section-separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-warm), transparent);
+  margin: 56px 0;
+}
+
+/* ── Footer ── */
+.noa-policy-footer {
+  text-align: center;
+  padding: 40px 24px;
+  border-top: 1px solid var(--gold-warm);
+}
+
+.noa-policy-footer p {
+  font-size: 14px;
+  color: var(--stone);
+  letter-spacing: 0.12em;
+  line-height: 2;
+}
+
+.noa-policy-footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.row-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--gold);
+}
+
+.row-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .bilingual {
+    grid-template-columns: 1fr;
+    gap: 32px 0;
+  }
+
+  .divider-v { display: none; }
+
+  .lang-he, .lang-en { padding: 0; }
+
+  .lang-en {
+    border-top: 1px solid var(--gold-warm);
+    padding-top: 24px;
+  }
+}

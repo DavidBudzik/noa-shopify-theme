@@ -1,0 +1,14 @@
+# Secrets & env
+.env
+*.env
+
+# Editor / session tooling
+folio/.claude/
+.claude/
+
+# Stray junk
+folio/~/
+~/
+
+# OS
+.DS_Store

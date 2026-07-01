@@ -39,7 +39,7 @@
               alt: block.settings.title
             }}
           {% elsif card_image_asset != blank %}
-            <img class="category-card__img" src="{{ card_image_asset }}" alt="{{ block.settings.title }}" loading="lazy">
+            <img class="category-card__img" src="{{ card_image_asset }}" alt="{{ block.settings.title }}" loading="lazy" width="1200" height="800">
           {% else %}
             <span class="category-card__img" style="background:{{ block.settings.fallback_gradient }};"></span>
           {% endif %}

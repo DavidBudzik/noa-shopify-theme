@@ -1,0 +1,180 @@
+{%- comment -%}
+  Share modal — opens from any [data-share] trigger (reads data-share-url,
+  data-share-title). Lets the visitor add an optional personal note and pick
+  a channel. Rendered once, globally, from layout/theme.liquid.
+{%- endcomment -%}
+
+<div class="share-modal" id="ShareModal" hidden>
+  <div class="share-modal__backdrop" data-share-close></div>
+
+  <div class="share-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="ShareModalTitle">
+    <button class="share-modal__close" type="button" data-share-close aria-label="Close share dialog">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 4l8 8M12 4l-8 8"/>
+      </svg>
+    </button>
+
+    <p class="section-kicker share-modal__kicker">Share</p>
+    <div class="share-modal__preview">
+      <img class="share-modal__thumb" data-share-image alt="" width="72" height="72" hidden>
+      <h2 class="share-modal__title" id="ShareModalTitle" data-share-heading>Share this piece</h2>
+    </div>
+
+    <label class="share-modal__note-label" for="ShareModalNote">Add a note <span>(optional)</span></label>
+    <textarea
+      class="share-modal__note"
+      id="ShareModalNote"
+      rows="2"
+      maxlength="280"
+      placeholder="Thought you'd love this…"></textarea>
+
+    <div class="share-modal__channels" role="group" aria-label="Choose where to share">
+      <button class="share-channel" type="button" data-channel="whatsapp">
+        <svg class="share-channel__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.34-.5.04-.5.4-3.15-.66-2.66-1.06-4.32-3.79-4.45-3.97-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.9.91-2.17.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.82 2 .89 2.14.07.13.12.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.53.15.26.66 1.09 1.42 1.76.98.87 1.8 1.14 2.06 1.27.26.13.41.11.56-.07.15-.18.65-.76.82-1.02.17-.26.35-.22.59-.13.24.09 1.52.72 1.78.85.26.13.44.19.5.3.06.11.06.64-.18 1.31z"/></svg>
+        <span>WhatsApp</span>
+      </button>
+
+      <button class="share-channel" type="button" data-channel="facebook">
+        <svg class="share-channel__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.33-.04-1.55-.14-2.85-.14C11.93 2 10 3.66 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+        <span>Facebook</span>
+      </button>
+
+      <button class="share-channel" type="button" data-channel="pinterest">
+        <svg class="share-channel__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.64 7.86 6.36 9.32-.09-.79-.17-2.01.03-2.88.19-.8 1.2-5.09 1.2-5.09s-.31-.61-.31-1.52c0-1.42.83-2.48 1.86-2.48.88 0 1.3.66 1.3 1.45 0 .88-.56 2.2-.85 3.42-.24 1.02.51 1.86 1.52 1.86 1.83 0 3.23-1.93 3.23-4.71 0-2.46-1.77-4.18-4.29-4.18-2.93 0-4.64 2.19-4.64 4.45 0 .88.34 1.83.76 2.34.08.1.09.19.07.29-.08.32-.25 1.02-.29 1.16-.05.19-.15.23-.35.14-1.3-.6-2.11-2.5-2.11-4.02 0-3.28 2.38-6.29 6.87-6.29 3.6 0 6.41 2.57 6.41 6 0 3.58-2.26 6.47-5.39 6.47-1.05 0-2.04-.55-2.38-1.19l-.65 2.47c-.23.91-.86 2.04-1.29 2.74.97.3 2 .46 3.07.46 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+        <span>Pinterest</span>
+      </button>
+
+      <button class="share-channel" type="button" data-channel="x">
+        <svg class="share-channel__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.22-6.82-5.97 6.82H1.66l7.73-8.83L1.24 2.25H8.1l4.71 6.23 5.43-6.23zm-1.16 17.52h1.83L7.02 4.13H5.06l12.02 15.64z"/></svg>
+        <span>X</span>
+      </button>
+
+      <button class="share-channel" type="button" data-channel="email">
+        <svg class="share-channel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></svg>
+        <span>Email</span>
+      </button>
+
+      <button class="share-channel" type="button" data-channel="copy">
+        <svg class="share-channel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 13.5a3.5 3.5 0 0 0 5 0l3-3a3.54 3.54 0 0 0-5-5l-1 1"/><path d="M14.5 10.5a3.5 3.5 0 0 0-5 0l-3 3a3.54 3.54 0 0 0 5 5l1-1"/></svg>
+        <span>Copy link</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var modal = document.getElementById('ShareModal');
+    if (!modal) return;
+
+    var dialog  = modal.querySelector('.share-modal__dialog');
+    var noteEl  = modal.querySelector('#ShareModalNote');
+    var heading = modal.querySelector('[data-share-heading]');
+    var thumb   = modal.querySelector('.share-modal__thumb');
+    var current = { url: '', title: '' };
+    var lastTrigger = null;
+
+    function lockScroll(lock) { document.body.style.overflow = lock ? 'hidden' : ''; }
+
+    function open(trigger) {
+      lastTrigger = trigger;
+      var path = trigger.getAttribute('data-share-url') || '';
+      current.url   = path ? new URL(path, window.location.origin).href : window.location.href;
+      current.title = trigger.getAttribute('data-share-title') || document.title;
+      if (heading) heading.textContent = current.title;
+      if (thumb) {
+        var img = trigger.getAttribute('data-share-image');
+        if (img) {
+          thumb.src = img;
+          thumb.alt = current.title;
+          thumb.hidden = false;
+        } else {
+          thumb.removeAttribute('src');
+          thumb.hidden = true;
+        }
+      }
+      noteEl.value = '';
+      modal.hidden = false;
+      lockScroll(true);
+      // let display apply before transition
+      requestAnimationFrame(function () { modal.classList.add('is-open'); });
+      setTimeout(function () { noteEl.focus(); }, 60);
+    }
+
+    function close() {
+      modal.classList.remove('is-open');
+      lockScroll(false);
+      var done = function () {
+        modal.hidden = true;
+        modal.removeEventListener('transitionend', done);
+      };
+      modal.addEventListener('transitionend', done);
+      // fallback if no transition fires
+      setTimeout(function () { if (modal.classList.contains('is-open') === false) modal.hidden = true; }, 320);
+      if (lastTrigger && typeof lastTrigger.focus === 'function') lastTrigger.focus();
+    }
+
+    function shareTo(channel) {
+      var note  = noteEl.value.trim();
+      var url   = current.url;
+      var title = current.title;
+      var enc   = encodeURIComponent;
+      var target;
+
+      switch (channel) {
+        case 'whatsapp':
+          target = 'https://wa.me/?text=' + enc((note ? note + ' — ' : '') + url);
+          break;
+        case 'facebook':
+          target = 'https://www.facebook.com/sharer/sharer.php?u=' + enc(url) +
+                   (note ? '&quote=' + enc(note) : '');
+          break;
+        case 'pinterest':
+          target = 'https://pinterest.com/pin/create/button/?url=' + enc(url) +
+                   '&description=' + enc(note || title);
+          break;
+        case 'x':
+          target = 'https://twitter.com/intent/tweet?url=' + enc(url) +
+                   '&text=' + enc(note || title);
+          break;
+        case 'email':
+          target = 'mailto:?subject=' + enc(title) +
+                   '&body=' + enc((note ? note + '\n\n' : '') + url);
+          window.location.href = target;
+          close();
+          return;
+        case 'copy':
+          var payload = (note ? note + ' ' : '') + url;
+          var toast = window.FolioTheme && window.FolioTheme.showToast;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(payload).then(function () {
+              if (toast) toast('Link copied to clipboard.');
+            }).catch(function () { window.prompt('Copy this link:', payload); });
+          } else {
+            window.prompt('Copy this link:', payload);
+          }
+          close();
+          return;
+      }
+
+      window.open(target, '_blank', 'noopener,noreferrer,width=600,height=560');
+      close();
+    }
+
+    // Open — intercept share triggers
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-share]');
+      if (trigger) { e.preventDefault(); open(trigger); return; }
+
+      var closer = e.target.closest('[data-share-close]');
+      if (closer && modal.contains(closer)) { close(); return; }
+
+      var chan = e.target.closest('.share-channel');
+      if (chan && modal.contains(chan)) { shareTo(chan.getAttribute('data-channel')); }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  })();
+</script>

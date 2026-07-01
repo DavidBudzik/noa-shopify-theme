@@ -1,0 +1,63 @@
+<nav class="noa-breadcrumb noa-breadcrumb--page" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>{{ page.title | default: 'Sustainability' }}</span>
+</nav>
+<section class="noa-page noa-sustainability">
+  <div class="noa-page__head">
+    <p class="section-kicker">Our commitment</p>
+    <h1 class="noa-page__title">{{ page.title | default: 'Sustainability' }}</h1>
+  </div>
+
+  {% if page.content != blank %}
+    <div class="noa-sustainability__intro rte">{{ page.content }}</div>
+  {% else %}
+    <p class="noa-sustainability__intro">We believe jewelry should last a lifetime — and leave as little behind as possible. Here is how we try to do better.</p>
+  {% endif %}
+
+  <div class="noa-sustainability__pillars">
+
+    <div class="noa-sustainability__pillar">
+      <p class="noa-sustainability__pillar-num">01</p>
+      <h2 class="noa-sustainability__pillar-title">Responsible Sourcing</h2>
+      <p class="noa-sustainability__pillar-body">We source sterling silver, brass, and copper from certified suppliers who meet European RoHS environmental standards. Our 14k gold is recycled where possible. We do not use conflict minerals and require full chain-of-custody documentation from all metal suppliers.</p>
+    </div>
+
+    <div class="noa-sustainability__pillar">
+      <p class="noa-sustainability__pillar-num">02</p>
+      <h2 class="noa-sustainability__pillar-title">Made to Last</h2>
+      <p class="noa-sustainability__pillar-body">The most sustainable piece of jewelry is one you never throw away. We design for durability, not trend cycles. Every Noa piece is made to be worn daily, repaired if damaged, and passed on. We offer lifetime repair service on all original pieces.</p>
+    </div>
+
+    <div class="noa-sustainability__pillar">
+      <p class="noa-sustainability__pillar-num">03</p>
+      <h2 class="noa-sustainability__pillar-title">Low-Waste Studio</h2>
+      <p class="noa-sustainability__pillar-body">Metal scraps from our Tel Aviv studio are collected and returned to our suppliers for recycling. We do not operate with overstock — most pieces are made in small batches or to order, which means near-zero unsold inventory. Offcuts and failed castings are never landfilled.</p>
+    </div>
+
+    <div class="noa-sustainability__pillar">
+      <p class="noa-sustainability__pillar-num">04</p>
+      <h2 class="noa-sustainability__pillar-title">Packaging</h2>
+      <p class="noa-sustainability__pillar-body">Our signature matte black box is made from FSC-certified recycled cardboard. Inner tissue paper is acid-free and compostable. We use paper tape — no plastic. Shipping mailers are padded with recycled paper fill, not bubble wrap. We are working to eliminate all single-use plastics from our supply chain by end of 2026.</p>
+    </div>
+
+    <div class="noa-sustainability__pillar">
+      <p class="noa-sustainability__pillar-num">05</p>
+      <h2 class="noa-sustainability__pillar-title">Fair Studio Practices</h2>
+      <p class="noa-sustainability__pillar-body">Noa is a small team. Everyone who works in the studio is paid a living wage, works regular hours, and has access to health coverage. We do not subcontract to unknown workshops. Every piece you buy was made by someone we know by name.</p>
+    </div>
+
+    <div class="noa-sustainability__pillar">
+      <p class="noa-sustainability__pillar-num">06</p>
+      <h2 class="noa-sustainability__pillar-title">Where We Are Going</h2>
+      <p class="noa-sustainability__pillar-body">We are not perfect, and we won't pretend otherwise. Current goals: switch to 100% recycled metals by 2027, offset studio energy use with solar by 2026, and publish a full supplier list for transparency. We will update this page as we make progress — or miss targets.</p>
+    </div>
+
+  </div>
+
+  <div class="noa-faq__cta">
+    <p>Questions about our practices?</p>
+    <a class="noa-btn-cart" href="{{ routes.root_url }}pages/contact" style="display:inline-block;text-decoration:none;padding:15px 40px;">Get in touch</a>
+  </div>
+
+</section>

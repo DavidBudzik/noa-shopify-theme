@@ -1,0 +1,85 @@
+{% comment %}
+  sections/shoppable-product-hero.liquid
+  Optional shoppable hero banner for product pages.
+  Enable via "Show hero banner" in the theme editor for each product template.
+{% endcomment %}
+
+{%- if section.settings.show_hero -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} .shoppable-image {
+      min-height: {{ section.settings.section_height | default: '75vh' }};
+    }
+  {%- endstyle -%}
+
+  <div class="shoppable-hero">
+    <div class="shoppable-image">
+      {%- assign hero_img = section.settings.hero_image | default: product.featured_image -%}
+      {%- if hero_img -%}
+        {{
+          hero_img
+          | image_url: width: 1800
+          | image_tag:
+            class: 'shoppable-image__media',
+            loading: 'eager',
+            widths: '800, 1200, 1600, 1800',
+            sizes: '100vw',
+            alt: hero_img.alt
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'shoppable-image__media shoppable-image__placeholder' }}
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'hotspot' -%}
+          {%- render 'shoppable-hotspot', block: block -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Hero Banner",
+  "tag": "div",
+  "class": "shoppable-product-hero-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show hero banner",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (defaults to product featured image)"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "Section height",
+      "options": [
+        { "value": "60vh", "label": "Medium (60vh)" },
+        { "value": "75vh", "label": "Large (75vh)" },
+        { "value": "90vh", "label": "Full (90vh)" }
+      ],
+      "default": "75vh"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "limit": 5,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "range", "id": "x_position", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Horizontal position", "default": 50 },
+        { "type": "range", "id": "y_position", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Vertical position", "default": 50 },
+        { "type": "select", "id": "tooltip_style", "label": "Tooltip style", "options": [{ "value": "card", "label": "Card" }, { "value": "compact", "label": "Compact" }], "default": "card" }
+      ]
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

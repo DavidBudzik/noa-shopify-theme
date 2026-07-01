@@ -1,0 +1,152 @@
+{% comment %}
+  Shoppable Hotspot Snippet — noa+ redesign v2
+  Usage: {% render 'shoppable-hotspot', block: block %}
+  Requires: block.settings.product, block.settings.x_position, block.settings.y_position
+  Optional: block.settings.tooltip_style — "card" (default) | "compact"
+{% endcomment %}
+
+{%- assign hs_product = block.settings.product -%}
+{%- assign hs_tooltip_style = block.settings.tooltip_style | default: 'card' -%}
+{%- if hs_product and hs_product != blank -%}
+  {%- assign hs_variant = hs_product.selected_or_first_available_variant -%}
+  {%- assign hs_collection = hs_product.collections.first -%}
+
+  {%- comment -%} Detect material / finish option for subtitle {%- endcomment -%}
+  {%- assign hs_material_label = '' -%}
+  {%- for option in hs_product.options_with_values -%}
+    {%- assign opt_lower = option.name | downcase -%}
+    {%- if opt_lower == 'material' or opt_lower == 'metal' or opt_lower == 'finish' or opt_lower == 'color' or opt_lower == 'colour' -%}
+      {%- if forloop.index == 1 -%}{%- assign hs_material_label = hs_variant.option1 -%}
+      {%- elsif forloop.index == 2 -%}{%- assign hs_material_label = hs_variant.option2 -%}
+      {%- elsif forloop.index == 3 -%}{%- assign hs_material_label = hs_variant.option3 -%}
+      {%- endif -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div
+    class="hs-hotspot"
+    style="left: {{ block.settings.x_position }}%; top: {{ block.settings.y_position }}%;"
+    {{ block.shopify_attributes }}>
+
+    <button
+      class="hs-pin"
+      type="button"
+      aria-label="View {{ hs_product.title | escape }}"
+      aria-expanded="false">
+      <svg class="hs-pin__icon-plus" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M8 3v10M3 8h10"/>
+      </svg>
+      <svg class="hs-pin__icon-x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 4l8 8M12 4l-8 8"/>
+      </svg>
+    </button>
+
+    {%- if hs_tooltip_style == 'compact' -%}
+
+      <article
+        class="hs-tip-c"
+        role="dialog"
+        aria-label="{{ hs_product.title | escape }}"
+        aria-modal="false">
+
+        <div class="hs-tip-c__thumb">
+          {%- if hs_product.featured_image -%}
+            <img
+              src="{{ hs_product.featured_image | image_url: width: 104 }}"
+              alt="{{ hs_product.featured_image.alt | escape | default: hs_product.title }}"
+              width="52"
+              height="52"
+              loading="lazy">
+          {%- endif -%}
+        </div>
+
+        <div class="hs-tip-c__text">
+          <span class="hs-tip-c__name">{{ hs_product.title }}</span>
+          <div class="hs-tip-c__meta">
+            {%- if hs_material_label != blank -%}{{ hs_material_label }} ·{%- endif -%}
+            <em>{{ hs_product.price | money_without_trailing_zeros }}</em>
+          </div>
+        </div>
+
+        <a class="hs-tip-c__arrow" href="{{ hs_product.url }}" aria-label="View {{ hs_product.title | escape }}">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+
+      </article>
+
+    {%- else -%}
+
+      <article
+        class="hs-tip"
+        role="dialog"
+        aria-label="{{ hs_product.title | escape }}"
+        aria-modal="false">
+
+        {%- if hs_product.featured_image -%}
+          <div class="hs-tip__media">
+            <img
+              src="{{ hs_product.featured_image | image_url: width: 560 }}"
+              alt="{{ hs_product.featured_image.alt | escape | default: hs_product.title }}"
+              width="560"
+              height="420"
+              loading="lazy">
+          </div>
+        {%- endif -%}
+
+        <div class="hs-tip__body">
+          <div class="hs-tip__eyebrow">
+            <span>{{ hs_collection.title }}</span>
+            {%- if hs_variant.available -%}
+              <em>In stock</em>
+            {%- else -%}
+              <em>Out of stock</em>
+            {%- endif -%}
+          </div>
+
+          <h3 class="hs-tip__name">{{ hs_product.title }}</h3>
+
+          {%- if hs_material_label != blank -%}
+            <div class="hs-tip__sub">{{ hs_material_label }}</div>
+          {%- endif -%}
+
+          <div class="hs-tip__price-row">
+            <div>
+              {%- if hs_product.compare_at_price > hs_product.price -%}
+                <span class="hs-tip__price hs-tip__price--compare">{{ hs_product.compare_at_price | money_without_trailing_zeros }}</span>
+              {%- endif -%}
+              <span class="hs-tip__price">{{ hs_product.price | money_without_trailing_zeros }}</span>
+            </div>
+          </div>
+
+          <div class="hs-tip__cta-row">
+            <a class="hs-tip__cta" href="{{ hs_product.url }}">
+              View product
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </a>
+            {%- if hs_variant != blank and hs_variant.available and hs_product.variants.size == 1 -%}
+              <button
+                class="hs-tip__cta hs-tip__cta--ghost hs-tip__add-to-cart"
+                type="button"
+                data-variant-id="{{ hs_variant.id }}"
+                aria-label="Add {{ hs_product.title | escape }} to cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+              </button>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </article>
+
+    {%- endif -%}
+
+  </div>
+{%- endif -%}

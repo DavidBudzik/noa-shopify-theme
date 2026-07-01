@@ -1,0 +1,41 @@
+{%- comment -%}
+  WhatsApp contact button.
+  Params:
+    style   — 'float' (fixed site-wide bubble) or 'inline' (in-page button). Default 'inline'.
+    product — optional product object; when present, its title + URL are appended to the message.
+  Number + copy come from theme settings (WhatsApp group).
+{%- endcomment -%}
+
+{%- liquid
+  assign wa_style = style | default: 'inline'
+  assign wa_number = settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+  assign wa_label = settings.whatsapp_label | default: 'I have a question?'
+  assign wa_msg = settings.whatsapp_greeting | default: 'Hi Noa! I have a question'
+
+  if product
+    assign prod_url = shop.url | append: product.url
+    assign wa_msg = wa_msg | append: ' about ' | append: product.title | append: ' — ' | append: prod_url
+  endif
+-%}
+
+{%- if settings.whatsapp_enabled and wa_number != blank -%}
+  {%- assign wa_text = wa_msg | url_encode -%}
+  {%- assign wa_href = 'https://wa.me/' | append: wa_number | append: '?text=' | append: wa_text -%}
+
+  {%- if wa_style == 'float' -%}
+    <a class="wa-float" href="{{ wa_href }}" target="_blank" rel="noopener" aria-label="{{ wa_label | escape }} on WhatsApp">
+      <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4h.2c6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.6.7.7-3.5-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.7-9.8 9.7zm5.4-7.3c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1.8-.9-2.9-1.6-4.1-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7 2 .8 2.7.9 3.7.8.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/>
+      </svg>
+      <span class="wa-float__label">{{ wa_label }}</span>
+    </a>
+
+  {%- else -%}
+    <a class="wa-inline" href="{{ wa_href }}" target="_blank" rel="noopener" aria-label="{{ wa_label | escape }} on WhatsApp">
+      <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4h.2c6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.6.7.7-3.5-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.7-9.8 9.7zm5.4-7.3c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1.8-.9-2.9-1.6-4.1-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7 2 .8 2.7.9 3.7.8.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/>
+      </svg>
+      <span>{{ wa_label }}</span>
+    </a>
+  {%- endif -%}
+{%- endif -%}

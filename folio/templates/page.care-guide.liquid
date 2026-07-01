@@ -1,0 +1,82 @@
+<nav class="noa-breadcrumb noa-breadcrumb--page" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
+  <span>{{ page.title | default: 'Care Guide' }}</span>
+</nav>
+<section class="noa-page noa-care-guide">
+  <div class="noa-page__head">
+    <p class="section-kicker">Keep it beautiful</p>
+    <h1 class="noa-page__title">{{ page.title | default: 'Care Guide' }}</h1>
+  </div>
+
+  {% if page.content != blank %}
+    <div class="noa-care-guide__intro rte">{{ page.content }}</div>
+  {% else %}
+    <p class="noa-care-guide__intro">Handmade jewelry rewards a little attention. Follow these guidelines to keep your Noa pieces looking their best for years to come.</p>
+  {% endif %}
+
+  <div class="noa-care-guide__sections">
+
+    <div class="noa-care-guide__card">
+      <div class="noa-care-guide__card-num">01</div>
+      <div class="noa-care-guide__card-body">
+        <h2 class="noa-care-guide__card-title">Sterling Silver 925</h2>
+        <p>Silver tarnishes naturally when exposed to air and moisture — this is not a defect, it's chemistry. To slow tarnish, store silver in an airtight pouch or box when not wearing it.</p>
+        <ul class="noa-care-guide__list">
+          <li>Polish gently with a soft silver cloth to restore shine.</li>
+          <li>For deeper cleaning, soak briefly in warm water with a drop of dish soap, then rinse and pat dry.</li>
+          <li>Avoid contact with chlorine, perfume, and lotions — put your jewelry on last.</li>
+          <li>Tarnish that develops over time can be removed at any Noa studio appointment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="noa-care-guide__card">
+      <div class="noa-care-guide__card-num">02</div>
+      <div class="noa-care-guide__card-body">
+        <h2 class="noa-care-guide__card-title">Solid Brass</h2>
+        <p>Brass develops a natural patina over time — a rich, warm darkening that many wearers come to love. If you prefer a brighter finish, brass responds well to gentle polishing.</p>
+        <ul class="noa-care-guide__list">
+          <li>Use a soft cloth with a small amount of brass polish or a lemon-and-salt paste.</li>
+          <li>Rinse thoroughly after polishing and dry completely.</li>
+          <li>Brass may leave a slight green tint on skin during heavy wear — this is harmless and washes off easily.</li>
+          <li>Store in a dry place away from direct sunlight.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="noa-care-guide__card">
+      <div class="noa-care-guide__card-num">03</div>
+      <div class="noa-care-guide__card-body">
+        <h2 class="noa-care-guide__card-title">General Tips for All Pieces</h2>
+        <ul class="noa-care-guide__list">
+          <li>Remove jewelry before swimming, bathing, or exercising.</li>
+          <li>Apply perfume and hairspray before putting on your pieces.</li>
+          <li>Store each piece separately to prevent scratching.</li>
+          <li>Avoid ultrasonic cleaners — they can loosen settings and damage finishes.</li>
+          <li>Bring pieces in for a free polish at the studio once or twice a year.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="noa-care-guide__card">
+      <div class="noa-care-guide__card-num">04</div>
+      <div class="noa-care-guide__card-body">
+        <h2 class="noa-care-guide__card-title">Oxidized &amp; Hand-Finished Pieces</h2>
+        <p>Some Noa pieces feature intentional oxidation — a dark patina applied to create depth and contrast. These finishes are more delicate than polished metal.</p>
+        <ul class="noa-care-guide__list">
+          <li>Clean with only a dry soft cloth — do not use silver polish or cleaning solutions.</li>
+          <li>Avoid submerging oxidized pieces in water.</li>
+          <li>Some lightening of the oxidized finish is natural with wear and adds character.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="noa-faq__cta">
+    <p>Have a care question about a specific piece?</p>
+    <a class="noa-btn-cart" href="{{ routes.root_url }}pages/contact" style="display:inline-block;text-decoration:none;padding:15px 40px;">Contact us</a>
+  </div>
+
+</section>

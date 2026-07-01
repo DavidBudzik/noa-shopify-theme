@@ -17,7 +17,7 @@
                 alt: block.settings.title
             }}
           {% else %}
-            <img class="material-card-bg-image" src="{{ mat_fallback | asset_url }}" alt="{{ block.settings.title | strip_html }}" loading="lazy">
+            <img class="material-card-bg-image" src="{{ mat_fallback | asset_url }}" alt="{{ block.settings.title | strip_html }}" loading="lazy" width="1200" height="900">
           {% endif %}
           <div class="material-card-overlay">
             <div class="material-card-label">{{ block.settings.label }}</div>

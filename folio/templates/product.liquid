@@ -19,13 +19,15 @@
 </script>
 
 <!-- Breadcrumb -->
-<nav class="noa-breadcrumb" aria-label="Breadcrumb">
+<nav class="noa-breadcrumb noa-breadcrumb--page" aria-label="Breadcrumb">
   <a href="{{ routes.root_url }}">Home</a>
   <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
   <a href="{{ routes.all_products_collection_url }}">Shop</a>
   <span class="noa-breadcrumb__sep" aria-hidden="true">/</span>
   <span>{{ product.title }}</span>
 </nav>
+
+{% section 'shoppable-product-hero' %}
 
 <!-- Gallery -->
 <div class="noa-gallery">
@@ -164,6 +166,21 @@
       </div>
     </form>
 
+    <button type="button" class="noa-share"
+            data-share
+            data-share-url="{{ product.url }}"
+            data-share-title="{{ product.title | escape }}"
+            {% if product.featured_image %}data-share-image="{{ product.featured_image | image_url: width: 200 }}"{% endif %}
+            aria-label="Share this product">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="3.5" r="1.8"/><circle cx="4" cy="8" r="1.8"/><circle cx="12" cy="12.5" r="1.8"/>
+        <path d="M5.6 7.1l4.8-2.6M5.6 8.9l4.8 2.6"/>
+      </svg>
+      <span>Share</span>
+    </button>
+
+    {% render 'whatsapp-button', style: 'inline', product: product %}
+
     <hr class="noa-hr">
 
     <!-- Accordions -->
@@ -251,7 +268,7 @@
     if (stickyPrice) stickyPrice.textContent = formatted;
 
     var label = variant.available
-      ? (window.FolioTheme && '{{ settings.quick_add_label | default: "Add to Cart" }}' || 'Add to Cart')
+      ? (window.FolioTheme && {{ settings.quick_add_label | default: 'Add to Cart' | json }} || 'Add to Cart')
       : 'Sold Out';
     if (cartBtn) { cartBtn.disabled = !variant.available; cartBtn.textContent = label; }
     if (stickyBtn) { stickyBtn.disabled = !variant.available; stickyBtn.textContent = label; }
@@ -276,13 +293,16 @@
     updateUI(findVariant());
   });
 
-  // Thumbnail swap
+  // Thumbnail swap — clear srcset so browser uses the explicit src
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('[data-noa-thumb]');
     if (!btn) return;
     var src = btn.getAttribute('data-src');
     var hero = document.getElementById('Noa_GalleryHero');
-    if (hero && src) hero.src = src;
+    if (hero && src) {
+      hero.srcset = '';
+      hero.src = src;
+    }
   });
 
   // Sticky CTA triggers main form submit
@@ -292,6 +312,18 @@
       var form = document.querySelector('[data-product-form]');
       if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
+  }
+
+  // Show sticky bar when main add-to-cart scrolls out of view
+  var mainCartBtn = document.getElementById('Noa_CartBtn');
+  var stickyBar = document.getElementById('Noa_Sticky');
+  if (mainCartBtn && stickyBar && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      var visible = entries[0].isIntersecting;
+      stickyBar.hidden = visible;
+      stickyBar.setAttribute('aria-hidden', String(visible));
+    }, { threshold: 0 });
+    observer.observe(mainCartBtn);
   }
 })();
 </script>

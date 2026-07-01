@@ -7,7 +7,7 @@
     {%- comment -%}theme-check-disable RemoteAsset{%- endcomment -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Bodoni:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     {%- comment -%}theme-check-enable RemoteAsset{%- endcomment -%}
     <title>
       {{ page_title }}
@@ -94,7 +94,7 @@
               <circle cx="12" cy="12" r="4"/>
               <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
             </svg>
-            <span>@noa.shechter</span>
+            <span>{{ settings.social_instagram_handle | default: '@noa.shechter' }}</span>
           </a>
         </div>
 
@@ -155,8 +155,12 @@
       <div class="noa-footer__bottom">
         <span class="noa-footer__copy">{{ settings.footer_copy | default: '© 2026 noa · Tel Aviv' }}</span>
         <ul class="noa-footer__legal">
-          <li><a href="{{ routes.root_url }}pages/privacy-policy">Privacy</a></li>
-          <li><a href="{{ routes.root_url }}pages/terms">Terms</a></li>
+          {% if shop.privacy_policy != blank %}
+            <li><a href="{{ shop.privacy_policy.url }}">Privacy</a></li>
+          {% endif %}
+          {% if shop.terms_of_service != blank %}
+            <li><a href="{{ shop.terms_of_service.url }}">Terms</a></li>
+          {% endif %}
           <li><a href="{{ routes.root_url }}pages/accessibility">Accessibility</a></li>
         </ul>
       </div>
@@ -216,6 +220,14 @@
           window.FolioTheme.updateCartCount(cartData.item_count);
           window.FolioTheme.showToast({{ settings.quick_add_label | default: 'Added to cart' | append: '.' | json }});
           document.dispatchEvent(new CustomEvent('folio:cart-updated', { detail: cartData }));
+          if (submit && submit.classList.contains('pc__quickadd')) {
+            submit.classList.add('is-added');
+            submit.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3L13 5"/></svg>';
+            setTimeout(function() {
+              submit.classList.remove('is-added');
+              submit.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>';
+            }, 1200);
+          }
         } catch (error) {
           window.FolioTheme.showToast(error.message, true);
         } finally {
@@ -243,11 +255,17 @@
           mobileToggle.setAttribute('aria-expanded', String(next));
           if (menu) menu.hidden = !next;
         }
+        // Share triggers ([data-share]) are handled by the share modal (see
+        // snippets/share-modal.liquid), which intercepts the click itself.
       });
     </script>
 
     {% render 'search-drawer' %}
     {% render 'cart-drawer' %}
+    {% render 'share-modal' %}
+    {%- if settings.whatsapp_float_enabled -%}
+      {% render 'whatsapp-button', style: 'float' %}
+    {%- endif -%}
 
     <script>
       (function () {
@@ -319,12 +337,45 @@
                 '<span style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;">' + item.product_title + '</span>' +
                 (item.variant_title && item.variant_title !== 'Default Title' ? '<span style="font-size:0.6875rem;color:#8a8a8a;">' + item.variant_title + '</span>' : '') +
                 '<span style="font-size:0.75rem;">' + window.FolioTheme.formatMoney(item.line_price) + '</span>' +
+                '<div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.25rem;">' +
+                  '<button class="cart-qty-btn" data-key="' + item.key + '" data-qty="' + (item.quantity - 1) + '" style="width:22px;height:22px;border:1px solid #d4d4d4;background:none;cursor:pointer;font-size:0.875rem;line-height:1;display:flex;align-items:center;justify-content:center;" aria-label="Decrease quantity">−</button>' +
+                  '<span style="font-size:0.75rem;min-width:16px;text-align:center;">' + item.quantity + '</span>' +
+                  '<button class="cart-qty-btn" data-key="' + item.key + '" data-qty="' + (item.quantity + 1) + '" style="width:22px;height:22px;border:1px solid #d4d4d4;background:none;cursor:pointer;font-size:0.875rem;line-height:1;display:flex;align-items:center;justify-content:center;" aria-label="Increase quantity">+</button>' +
+                  '<button class="cart-remove-btn" data-key="' + item.key + '" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:0.6875rem;color:#8a8a8a;letter-spacing:0.05em;text-transform:uppercase;padding:0;" aria-label="Remove ' + item.product_title + '">Remove</button>' +
+                '</div>' +
               '</div>' +
             '</div>';
           }).join('');
           if (cartSubtotal) cartSubtotal.textContent = window.FolioTheme.formatMoney(cart.total_price);
           if (cartFooter) cartFooter.hidden = false;
           if (window.FolioTheme && window.FolioTheme.updateCartCount) window.FolioTheme.updateCartCount(cart.item_count);
+        }
+
+        function updateCartItem(key, qty) {
+          fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ id: key, quantity: qty })
+          })
+            .then(function (r) { return r.json(); })
+            .then(renderCart)
+            .catch(function () {
+              window.FolioTheme && window.FolioTheme.showToast('Unable to update cart.', true);
+            });
+        }
+
+        if (cartLines) {
+          cartLines.addEventListener('click', function (e) {
+            var qtyBtn = e.target.closest('.cart-qty-btn');
+            if (qtyBtn) {
+              updateCartItem(qtyBtn.getAttribute('data-key'), parseInt(qtyBtn.getAttribute('data-qty'), 10));
+              return;
+            }
+            var removeBtn = e.target.closest('.cart-remove-btn');
+            if (removeBtn) {
+              updateCartItem(removeBtn.getAttribute('data-key'), 0);
+            }
+          });
         }
 
         document.addEventListener('click', function (e) {
