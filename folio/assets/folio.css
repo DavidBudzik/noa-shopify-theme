@@ -331,6 +331,17 @@ a { color: inherit; text-underline-offset: 0.2em; }
     radial-gradient(circle at 30% 40%, rgba(255,255,255,0.35), transparent 55%),
     linear-gradient(145deg, #2c2c2c 0%, #1c1c1c 60%, #0f0f0f 100%);
 }
+/* Readability overlay on the hero image: bottom + left weighted for lower-left copy */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.26) 34%, rgba(0,0,0,0) 66%),
+    linear-gradient(to right, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0) 52%);
+}
 .hero-image-media {
   object-fit: cover;
   /* Keep the jewelry cluster in frame when the wide 16:9 shot is cropped to a tall hero */
@@ -375,7 +386,7 @@ a { color: inherit; text-underline-offset: 0.2em; }
   gap: 1rem;
   justify-items: start;
   color: var(--white);
-  background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.3) 30%, transparent 62%);
+  background: none;
 }
 @media (min-width: 1000px) {
   .hero-copy {
