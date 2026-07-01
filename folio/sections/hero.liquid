@@ -19,6 +19,15 @@
             alt: section.settings.title,
             style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;'
         }}
+      {% else %}
+        <img
+          class="hero-image-media"
+          src="{{ 'home-page-hero-hot-spots.jpeg' | asset_url }}"
+          alt="{{ section.settings.title }}"
+          loading="eager"
+          width="2560"
+          height="1429"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       {% endif %}
     </div>
     {%- for block in section.blocks -%}

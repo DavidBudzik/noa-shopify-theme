@@ -331,6 +331,15 @@ a { color: inherit; text-underline-offset: 0.2em; }
     radial-gradient(circle at 30% 40%, rgba(255,255,255,0.35), transparent 55%),
     linear-gradient(145deg, #2c2c2c 0%, #1c1c1c 60%, #0f0f0f 100%);
 }
+.hero-image-media {
+  object-fit: cover;
+  /* Keep the jewelry cluster in frame when the wide 16:9 shot is cropped to a tall hero */
+  object-position: 50% 45%;
+}
+@media (max-width: 700px) {
+  /* Bias toward the ring + bracelet cluster (center-right) on narrow portrait crops */
+  .hero-image-media { object-position: 58% 45%; }
+}
 .hero-orbital {
   position: absolute;
   border: 1px solid rgba(255,255,255,0.12);

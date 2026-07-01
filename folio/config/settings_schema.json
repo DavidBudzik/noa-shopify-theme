@@ -26,6 +26,12 @@
         "label": "Logo image"
       },
       {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32×32 px recommended. Falls back to the bundled favicon.svg if empty."
+      },
+      {
         "type": "textarea",
         "id": "footer_copy",
         "label": "Footer copyright text",
