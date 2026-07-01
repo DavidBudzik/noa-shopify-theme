@@ -8,38 +8,29 @@
             "type": "hotspot",
             "settings": {
               "product": "gid://shopify/Product/8062453514297",
-              "x_position": 21,
-              "y_position": 58
-            }
-          },
-          "hotspot_ring": {
-            "type": "hotspot",
-            "settings": {
-              "product": "gid://shopify/Product/8062454267961",
-              "x_position": 37,
-              "y_position": 76
+              "x_position": 20,
+              "y_position": 54
             }
           },
           "hotspot_bracelets": {
             "type": "hotspot",
             "settings": {
               "product": "gid://shopify/Product/8062455808057",
-              "x_position": 56,
-              "y_position": 72
+              "x_position": 72,
+              "y_position": 78
             }
           },
           "hotspot_cuff": {
             "type": "hotspot",
             "settings": {
               "product": "gid://shopify/Product/8062454497337",
-              "x_position": 80,
-              "y_position": 42
+              "x_position": 84,
+              "y_position": 31
             }
           }
         },
         "block_order": [
           "hotspot_earrings",
-          "hotspot_ring",
           "hotspot_bracelets",
           "hotspot_cuff"
         ],
