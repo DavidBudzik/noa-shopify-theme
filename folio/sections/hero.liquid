@@ -1,7 +1,8 @@
 <section class="hero-panel">
   {%- style -%}
     #shopify-section-{{ section.id }} .hero-panel {
-      height: {{ section.settings.section_height | default: '75vh' }};
+      height: {{ section.settings.section_height | default: '100svh' }};
+      min-height: 34rem;
     }
   {%- endstyle -%}
 
@@ -56,6 +57,15 @@
       </div>
     {% endif %}
   </div>
+
+  {% if section.settings.show_scroll_cue %}
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3v15M3 13l5 5 5-5"/>
+      </svg>
+    </div>
+  {% endif %}
 </section>
 
 {% schema %}
@@ -75,12 +85,13 @@
       "id": "section_height",
       "label": "Section height",
       "options": [
-        { "value": "60vh", "label": "Medium (60vh)" },
-        { "value": "75vh", "label": "Large (75vh)" },
-        { "value": "90vh", "label": "Full (90vh)" }
+        { "value": "70vh", "label": "Medium (70vh)" },
+        { "value": "85vh", "label": "Tall (85vh)" },
+        { "value": "100svh", "label": "Full screen" }
       ],
-      "default": "75vh"
-    }
+      "default": "100svh"
+    },
+    { "type": "checkbox", "id": "show_scroll_cue", "label": "Show scroll indicator", "default": true }
   ],
   "blocks": [
     {
